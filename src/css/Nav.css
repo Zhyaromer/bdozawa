@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+@font-face {
+    font-family: 'kurdish'; 
+    src: url('../../public/K24KurdishBold-Bold.ttf') format('truetype');
+    font-weight: normal; 
+    font-style: normal;  
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'kurdish', sans-serif;
+}
+
+.nav {
+    background-color: #272c39;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+.container {
+    width: 100%;
+}
+
+.accoun-icon{
+    margin-right: 10px;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.logodiv {
+    width: 120px;
+    text-align: right;
+}
+
+.account {
+    width: 120px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: #333;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    display: none;
+    min-width: 175px;
+    text-align: right;
+    z-index: 1000;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu a {
+    padding: 0.75rem 1rem;
+    display: block;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid #444;
+}
+
+.dropdown-menu a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu a:hover {
+    background-color: #48c9b0;
+}
+
+/* Zhyar Dropdown Button */
+.dropdown-btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-btn:hover {
+    background-color: #48c9b0;
+}
+
+.user-dropdown {
+    display: flex;
+    align-items: center;
+}
+
+.logout :hover {
+    background-color: #FF0000 !important;
+    color: white;
+}
+
+.accountName {
+    color: white;
+    font-size: 16px;
+    transition: color 0.5s ease;
+}
+
+.accountName:hover {
+    color: #48c9b0;
+}
+
+.logo {
+    color: #2ecc71;
+    font-size: 28px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.nav-list {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    flex: 1;
+    height: auto;
+}
+
+.nav-list li {
+    margin: 0px 25px;
+}
+
+.nav-list li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-item a:hover {
+    color: #48c9b0;
+}
+
+.nav-item a::before {
+    content: "";
+    position: absolute;
+    bottom: -7px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #48c9b0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.nav-item a:hover::before {
+    opacity: 1;
+    color: #48c9b0;
+}
+
+.hamburger {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: none;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px;
+}
+
+.sidebar-container {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #272c39;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out;
+    z-index: 1000;
+}
+
+.sidebar-container.open {
+    transform: translateX(0);
+}
+
+.nav-list-sidebar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0;
+}
+
+.nav-item-sidebar {
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.nav-item-sidebar a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 20px 0px;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.nav-item-sidebar a:hover {
+    background-color: #48c9b0;
+}
+
+.close {
+    position: absolute;
+    top: 30px;
+    color: white;
+    right: 30px;
+    z-index: 100;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.close.hidden {
+    display: none;
+}
+
+.close.visible {
+    display: block;
+    cursor: pointer;
+}
+
+@media (min-width: 350px) and (max-width: 849.99px) {
+    .nav-list {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+        margin-left: 10px;
+    }
+
+    .account {
+        width: 120px;
+        text-align: right;
+        margin-right: 14px;
+    }
+
+    .logodiv {
+        width: 0px;
+        text-align: center;
+    }
+}
+
+@media(min-width: 850px) and (max-width: 991.98px) {
+    .nav-list li {
+        margin: 0px 10px;
+    }
+}
+
+@media (min-width: 991px) and (max-width: 1200.98px) {
+    .nav-list li {
+        margin: 0px 15px;
+    }
+}
