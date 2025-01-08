@@ -5,6 +5,8 @@ import Login from './Login.jsx';
 import Signup from './Signupform.jsx';
 import Emailverification from './Emailverification.jsx'
 import Jobs from './Jobs.jsx';
+import JobDetails from './JobDetails.jsx';
+import Test from './Test.jsx';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/emailverification" element={<Emailverification />} />
         <Route path="/jobs" element={<Jobs />} />
+        <Route path="/jobs/jobdetails" element={<JobDetails />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
     </Router>
   );

@@ -14,11 +14,9 @@ const Jobs = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
-    const [collapsedSections, setCollapsedSections] = useState({});
     const [filterclose, setFilterclose] = useState(false);
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
-    const [isFiltersApplied, setIsFiltersApplied] = useState(false);
     const [filters, setFilters] = useState({
         location: [],
         title: '',
@@ -114,7 +112,7 @@ const Jobs = () => {
             try {
                 let url = 'http://localhost:3500/?';
                 Object.keys(filters).forEach((key) => {
-                    if (filters[key] && (filters[key].length > 0 || (key === 'minSalary' || key === 'maxSalary'))) {
+                    if (filters[key] && (filters[key].length > 0)) {
                         if (Array.isArray(filters[key])) {
                             url += `${key}=${filters[key].join(',')}&`;
                         } else {
@@ -123,6 +121,7 @@ const Jobs = () => {
                     }
                 });
                 url = url.slice(0, -1);
+                console.log(url);
 
                 const response = await fetch(url);
                 if (!response.ok) {
@@ -181,78 +180,6 @@ const Jobs = () => {
         }
     };
 
-    const filterOptions = {
-        location: [
-            { value: 'سلێمانی', label: 'سلێمانی' },
-            { value: 'هەولێر', label: 'هەولێر' },
-            { value: 'هەڵەبجە', label: 'هەڵەبجە' },
-            { value: 'دهۆک', label: 'دهۆک' },
-            { value: 'کەرکووک', label: 'کەرکووک' },
-            { value: 'چەمچەماڵ', label: 'چەمچەماڵ' },
-            { value: 'ڕانیە', label: 'ڕانیە' },
-            { value: 'زاخۆ', label: 'زاخۆ' },
-            { value: 'هەڵەبجەی شەهید', label: 'هەڵەبجەی شەهید' },
-            { value: 'کەلار', label: 'کەلار' },
-            { value: 'دەرباندیخان', label: 'دەرباندیخان' },
-            { value: 'سەید سادق', label: 'سەید سادق' },
-            { value: 'دؤکان', label: 'دؤکان' },
-            { value: 'شەقلاوە', label: 'شەقلاوە' },
-            { value: 'تەق تەق', label: 'تەق تەق' }
-        ],
-        industry: [
-            { value: 'Technology', label: 'Technology' },
-            { value: 'Medicine', label: 'Healthcare & Medical' },
-            { value: 'Law', label: 'Law' },
-            { value: 'Education', label: 'Education' },
-            { value: 'Finance', label: 'Finance' },
-            { value: 'Retail', label: 'Retail' }
-        ],
-        yearsOfExp: [
-            { value: 'بێ ئەزموو', label: 'بێ ئەزموو' },
-            { value: '3 مانگ', label: '3 مانگ' },
-            { value: '6 مانگ', label: '6 مانگ' },
-            { value: '9 مانگ', label: '9 مانگ' },
-            { value: '1 ساڵ', label: '1 ساڵ' },
-            { value: '2 ساڵ', label: '2 ساڵ' },
-            { value: '3 ساڵ', label: '3 ساڵ' },
-            { value: '4 ساڵ', label: '4 ساڵ' },
-            { value: '5 ساڵ زیاتر', label: '5 ساڵ زیاتر' }
-        ],
-        language: [
-            { value: 'کوردی', label: 'کوردی' },
-            { value: 'ئینگلیزی', label: 'ئینگلیزی' },
-            { value: 'عەرەبی', label: 'عەرەبی' },
-        ],
-        gender: [
-            { value: 'نێر', label: 'نێر' },
-            { value: 'مێ', label: 'مێ' },
-            { value: 'ڕەگەز گرنگ نیە', label: 'ڕەگەز گرنگ نیە' }
-        ],
-    };
-
-    const handleFilterChange = (e) => {
-        const { name, value, checked } = e.target;
-
-        if (name === 'minSalary' || name === 'maxSalary') {
-            const numericValue = value === '' ? '' : parseInt(value, 10);
-            console.log(numericValue)
-            setFilters((prev) => ({
-                ...prev,
-                [name]: numericValue,
-            }));
-        } else if (checked) {
-            setFilters((prev) => ({
-                ...prev,
-                [name]: [...(prev[name] || []), value],
-            }));
-        } else {
-            setFilters((prev) => ({
-                ...prev,
-                [name]: (prev[name] || []).filter(item => item !== value),
-            }));
-        }
-    };
-
     useEffect(() => {
         const filtered = jobs.filter(job =>
             job.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -263,10 +190,6 @@ const Jobs = () => {
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
-    };
-
-    const handleFilterSubmit = () => {
-        setIsFiltersApplied(true);
     };
 
     const resetFilters = () => {
@@ -280,7 +203,6 @@ const Jobs = () => {
             language: [],
             gender: ''
         });
-        setIsFiltersApplied(false);
     };
 
     const formatDate = (date) => {
@@ -305,72 +227,8 @@ const Jobs = () => {
 
     const viewJobDetails = (jobId) => {
         console.log(`Viewing job details for job ID: ${jobId}`);
-        navigate(`/job?jobid=${jobId}`);
+        navigate(`/jobs/jobdetails?jobid=${jobId}`);
     };
-
-    // const toggleCollapse = (section) => {
-    //     setCollapsedSections((prevState) => ({
-    //         ...prevState,
-    //         [section]: !prevState[section]
-    //     }));
-    // };
-
-    // const FilterSection = ({ title, options, name, selectedValues, onChange, isCollapsed, toggleCollapse }) => {
-    //     const safeSelectedValues = Array.isArray(selectedValues) ? selectedValues : [];
-    //     return (
-    //         <div className="accordion-item">
-    //             <h2 className="accordion-header">
-    //                 <button
-    //                     className="accordion-button"
-    //                     type="button"
-    //                     onClick={() => toggleCollapse(name)}
-    //                     aria-expanded={isCollapsed}
-    //                 >
-    //                     {title}
-    //                 </button>
-    //             </h2>
-    //             <div
-    //                 id={`${name}Collapse`}
-    //                 className={`accordion-collapse collapse ${isCollapsed ? 'show' : ''}`}
-    //             >
-    //                 <div className="accordion-body">
-    //                     <div
-    //                         className="filter-options-scroll"
-    //                         style={{
-    //                             maxHeight: '220px',
-    //                             overflowY: 'auto',
-    //                             overflowX: 'hidden',
-    //                         }}
-    //                     >
-    //                         <div className="row g-2">
-    //                             {options.map((option) => (
-    //                                 <div className="col-6" key={option.value}>
-    //                                     <div className="form-check">
-    //                                         <input
-    //                                             className="form-check-input"
-    //                                             type="checkbox"
-    //                                             name={name}
-    //                                             value={option.value}
-    //                                             id={`${name}-${option.value}`}
-    //                                             checked={safeSelectedValues.includes(option.value)}
-    //                                             onChange={onChange}
-    //                                         />
-    //                                         <label
-    //                                             className="form-check-label"
-    //                                             htmlFor={`${name}-${option.value}`}
-    //                                         >
-    //                                             {option.label}
-    //                                         </label>
-    //                                     </div>
-    //                                 </div>
-    //                             ))}
-    //                         </div>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     );
-    // };
 
     const styles = {
         wrapper: {
@@ -421,6 +279,19 @@ const Jobs = () => {
 
     const handleDotClick = (index) => {
         setCurrentSlide(index);
+    };
+
+    const handleCheckboxChange = (filterType, value) => {
+        setFilters(prevFilters => {
+            const updatedValues = prevFilters[filterType].includes(value)
+                ? prevFilters[filterType].filter(item => item !== value)
+                : [...prevFilters[filterType], value];
+
+            return {
+                ...prevFilters,
+                [filterType]: updatedValues
+            };
+        });
     };
 
     if (loading) return <p>Loading jobs...</p>;
@@ -488,6 +359,12 @@ const Jobs = () => {
                     </nav>
                 </div >
             </div >
+            <div className='ad-container'>
+                <div className='ad-text'>
+                    <h1 className='ad-title'>ڕیکلامەکەت لێرە بکە</h1>
+                    <a className='ad-email' href="mailto:eshbdozawabusiness@gmail.com">eshbdozawabusiness@gmail.com</a>
+                </div>
+            </div>
             <div className='search-container'>
                 <div className='search-title-container'>
                     <h1 className='search-title'>ئیشی خەونەکانت لێرە بدۆزەوە</h1>
@@ -520,136 +397,112 @@ const Jobs = () => {
                     <h3 className='filter-title-result'>ئیشی بەردەست {result}</h3>
                     <i onClick={toggleFilter} class="fa-solid fa-xmark filter-close"></i>
                 </div>
-                <div className='filters-content'>
-                    <div className='filters'>
-                        <h3 className='filter-title'>شارەکان</h3>
-                        <div className='checkbox-container'>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">سلێمانی</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">سلێمانی</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">سلێمانی</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">سلێمانی</label>
-                            </div>
+                <div className="filters-content">
+                    <div className="filters">
+                        <h3 className="filter-title">شارەکان</h3>
+                        <div className="checkbox-container">
+                            {['سلێمانی', 'هەولێر', 'دهۆک', 'کەرکوک'].map(city => (
+                                <div className="checkbox-item" key={city}>
+                                    <input
+                                        className="checkbox-input"
+                                        type="checkbox"
+                                        checked={filters.location.includes(city)}
+                                        onChange={() => handleCheckboxChange('location', city)}
+                                    />
+                                    <label className="checkbox-label">{city}</label>
+                                </div>
+                            ))}
                         </div>
                     </div>
-                    <hr className='hr-line' />
-                    <div className='filters'>
-                        <h3 className='filter-title'>پیشەسازی</h3>
-                        <div className='checkbox-container'>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label value="" className='checkbox-label' htmlFor="checkbox">پزیشکی</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">ئەندازیاری</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">مامۆستا</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">تەکنالۆژیا</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">یاسا</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">خانو بەرە</label>
-                            </div>
+
+                    <hr className="hr-line" />
+
+                    <div className="filters">
+                        <h3 className="filter-title">پیشەسازی</h3>
+                        <div className="checkbox-container">
+                            {['پزیشکی', 'ئەندازیاری', 'مامۆستا', 'تەکنالۆژیا', 'یاسا', 'خانو بەرە'].map(ind => (
+                                <div className="checkbox-item" key={ind}>
+                                    <input
+                                        className="checkbox-input"
+                                        type="checkbox"
+                                        checked={filters.industry.includes(ind)}
+                                        onChange={() => handleCheckboxChange('industry', ind)}
+                                    />
+                                    <label className="checkbox-label">{ind}</label>
+                                </div>
+                            ))}
                         </div>
                     </div>
-                    <hr className='hr-line' /><div className='filters'>
-                        <h3 className='filter-title'>ئەزموون</h3>
-                        <div className='checkbox-container'>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">بێ ئەزموون</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">٣ مانگ</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">٦ مانگ</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">٩ مانگ</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">١ ساڵ</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">٢ ساڵ</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">٣ ساڵ</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">٤ ساڵ</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">٥ ساڵ یان زیاتر </label>
-                            </div>
+
+                    <hr className="hr-line" />
+
+                    <div className="filters">
+                        <h3 className="filter-title">ئەزموون</h3>
+                        <div className="checkbox-container">
+                            {[
+                                'بێ ئەزموون',
+                                '٣ مانگ',
+                                '٦ مانگ',
+                                '٩ مانگ',
+                                '١ ساڵ',
+                                '٢ ساڵ',
+                                '٣ ساڵ',
+                                '٤ ساڵ',
+                                '٥ ساڵ یان زیاتر'
+                            ].map(exp => (
+                                <div className="checkbox-item" key={exp}>
+                                    <input
+                                        className="checkbox-input"
+                                        type="checkbox"
+                                        checked={filters.yearsOfExp.includes(exp)}
+                                        onChange={() => handleCheckboxChange('yearsOfExp', exp)}
+                                    />
+                                    <label className="checkbox-label">{exp}</label>
+                                </div>
+                            ))}
                         </div>
                     </div>
-                    <hr className='hr-line' /><div className='filters'>
-                        <h3 className='filter-title'>ڕەگەز</h3>
-                        <div className='checkbox-container'>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">نێر</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">مێ</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">ڕەگەز گرنگ نیە</label>
-                            </div>
+
+                    <hr className="hr-line" />
+
+                    <div className="filters">
+                        <h3 className="filter-title">ڕەگەز</h3>
+                        <div className="checkbox-container">
+                            {['نێر', 'مێ', 'ڕەگەز گرنگ نیە'].map(gen => (
+                                <div className="checkbox-item" key={gen}>
+                                    <input
+                                        className="checkbox-input"
+                                        type="checkbox"
+                                        checked={filters.gender.includes(gen)}
+                                        onChange={() => handleCheckboxChange('gender', gen)}
+                                    />
+                                    <label className="checkbox-label">{gen}</label>
+                                </div>
+                            ))}
                         </div>
                     </div>
-                    <hr className='hr-line' /><div className='filters'>
-                        <h3 className='filter-title'>زمان</h3>
-                        <div className='checkbox-container'>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">کوردی</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">ئینگلیزی</label>
-                            </div>
-                            <div>
-                                <input className='checkbox-input' type="checkbox" />
-                                <label className='checkbox-label' htmlFor="checkbox">عەرەبی</label>
-                            </div>
+
+                    <hr className="hr-line" />
+
+                    <div className="filters">
+                        <h3 className="filter-title">زمان</h3>
+                        <div className="checkbox-container">
+                            {['کوردی', 'ئینگلیزی', 'عەرەبی'].map(lang => (
+                                <div className="checkbox-item" key={lang}>
+                                    <input
+                                        className="checkbox-input"
+                                        type="checkbox"
+                                        checked={filters.language.includes(lang)}
+                                        onChange={() => handleCheckboxChange('language', lang)}
+                                    />
+                                    <label className="checkbox-label">{lang}</label>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
                 <div className='resetFilter-container'>
-                    <button className='resetFilter'>لابردنی فلتەرەکان</button>
+                    <button onClick={resetFilters} className='resetFilter'>لابردنی فلتەرەکان</button>
                 </div>
             </div>
 
@@ -657,76 +510,128 @@ const Jobs = () => {
                 <h3 className='jobs-rec-title'><i class="fa-solid fa-crown"> <span className='vip'> VIP</span> </i>کاری</h3>
             </div>
 
-            <div style={styles.wrapper}>
-                <div style={styles.sliderContainer}>
-                    <div style={styles.slider}>
-                        {vipjobs.length > 0 ? (
-                            vipjobs.map((job, index) => (
-                                <div key={index} className='jobs-container'>
-                                    <div className='job-card'>
-                                        <div className='job-card-content'>
-                                            <div className='job-card-upper'>
-                                                <div className='upper-img-container'>
-                                                    <img className='job-img' src='images.png' width={50} height={50} alt='job' />
+            <div className="vipjobsmob-container">
+                <div style={styles.wrapper}>
+                    <div style={styles.sliderContainer}>
+                        <div style={styles.slider}>
+                            {vipjobs.length > 0 ? (
+                                vipjobs.map((job, index) => (
+                                    <div key={job._id} className='jobs-container'>
+                                        <div className='job-card'>
+                                            <div className='job-card-content'>
+                                                <div className='job-card-upper'>
+                                                    <div className='upper-img-container'>
+                                                        <img className='job-img' src='images.png' width={50} height={50} alt='job' />
+                                                    </div>
+                                                    <div className='upper-title-container'>
+                                                        <h1 className='job-title'>{job.title}</h1>
+                                                    </div>
+                                                    <div className='upper-favicon-container'>
+                                                        <i onClick={() => isJobSaved(job._id) ? unSaveJobs(job._id) : saveJobs(job._id)}
+                                                            className={`fa-${isJobSaved(job._id) ? 'solid' : 'regular'} fa-bookmark fav-icon`}></i>
+                                                    </div>
                                                 </div>
-                                                <div className='upper-title-container'>
-                                                    <h1 className='job-title'>{job.title}</h1>
+                                                <div className='job-info-title'>
+                                                    <p className='job-info'>{job.company}</p>
+                                                    <p className='job-info'>{job.location}</p>
                                                 </div>
-                                                <div className='upper-favicon-container'>
-                                                    <i onClick={() => isJobSaved(job._id) ? unSaveJobs(job._id) : saveJobs(job._id)}
-                                                        className={`fa-${isJobSaved(job._id) ? 'solid' : 'regular'} fa-bookmark fav-icon`}></i>
-                                                </div>
-                                            </div>
-                                            <div className='job-info-title'>
-                                                <p className='job-info'>{job.company}</p>
-                                                <p className='job-info'>{job.location}</p>
-                                            </div>
-                                            <div style={{ marginTop: '-30px' }}>
-                                                <div className='job-langs-container'>
-                                                    <p className='job-langs'>{job.language.join(', ')}  : زمان</p>
-                                                </div>
-                                                <div className='job-exp-container'>
-                                                    <p className='job-exp'> {job.yearsOfExp} :  ئەزموون  </p>
-                                                </div>
-                                                <div className='job-gender-container'>
-                                                    <p className='job-gender'> {job.gender}: ڕەگەز</p>
-                                                </div>
-                                                <div className='job-gender-container'>
-                                                    <p className='job-gender'> {job.degree} :  شەهادە</p>
-                                                    <div className='job-btn-container'>
-                                                        <p className='job-info job-posted'>٢ ڕۆژ لەمەوپێش</p>
-                                                        <button className='view-job-btn'>بینینی زیاتر</button>
+                                                <div style={{ marginTop: '-30px' }}>
+                                                    <div className='job-langs-container'>
+                                                        <p className='job-langs'>{job.language.join(', ')}  : زمان</p>
+                                                    </div>
+                                                    <div className='job-exp-container'>
+                                                        <p className='job-exp'> {job.yearsOfExp} :  ئەزموون  </p>
+                                                    </div>
+                                                    <div className='job-gender-container'>
+                                                        <p className='job-gender'> {job.gender}: ڕەگەز</p>
+                                                    </div>
+                                                    <div className='job-gender-container'>
+                                                        <p className='job-gender'> {job.degree} :  شەهادە</p>
+                                                        <div className='job-btn-container'>
+                                                            <p className='job-info job-posted'>٢ ڕۆژ لەمەوپێش</p>
+                                                            <button className='view-job-btn'>بینینی زیاتر</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))
-                        ) : (
-                            <p>No VIP jobs available.</p> // Fallback when the list is empty
-                        )}
-                    </div>
+                                ))
+                            ) : (
+                                <p>No VIP jobs available.</p> // Fallback when the list is empty
+                            )}
+                        </div>
 
+                    </div>
+                    <div style={styles.dotsContainer}>
+                        {vipjobs.map((_, index) => (
+                            <div
+                                key={index}
+                                onClick={() => handleDotClick(index)}
+                                style={{
+                                    ...styles.dot,
+                                    ...(currentSlide === index ? styles.activeDot : {})
+                                }}
+                            />
+                        ))}
+                    </div>
                 </div>
-                <div style={styles.dotsContainer}>
-                    {vipjobs.map((_, index) => (
-                        <div
-                            key={index}
-                            onClick={() => handleDotClick(index)}
-                            style={{
-                                ...styles.dot,
-                                ...(currentSlide === index ? styles.activeDot : {})
-                            }}
-                        />
-                    ))}
-                </div>
+            </div>
+
+            <div className='vipjobspc-container'>
+                {vipjobs.length > 0 ? (
+                    vipjobs.map((job, index) => (
+                        <div key={job._id} className='jobs-container'>
+                            <div className='job-card'>
+                                <div className='job-card-content'>
+                                    <div className='job-card-upper'>
+                                        <div className='upper-img-container'>
+                                            <img className='job-img' src='images.png' width={50} height={50} alt='job' />
+                                        </div>
+                                        <div className='upper-title-container'>
+                                            <h1 className='job-title'>{job.title}</h1>
+                                        </div>
+                                        <div className='upper-favicon-container'>
+                                            <i onClick={() => isJobSaved(job._id) ? unSaveJobs(job._id) : saveJobs(job._id)}
+                                                className={`fa-${isJobSaved(job._id) ? 'solid' : 'regular'} fa-bookmark fav-icon`}></i>
+                                        </div>
+                                    </div>
+                                    <div className='job-info-title'>
+                                        <p className='job-info'>{job.company}</p>
+                                        <p className='job-info'>{job.location}</p>
+                                    </div>
+                                    <div style={{ marginTop: '-30px' }}>
+                                        <div className='job-langs-container'>
+                                            <p className='job-langs'>{job.language.join(', ')}  : زمان</p>
+                                        </div>
+                                        <div className='job-exp-container'>
+                                            <p className='job-exp'> {job.yearsOfExp} :  ئەزموون  </p>
+                                        </div>
+                                        <div className='job-gender-container'>
+                                            <p className='job-gender'> {job.gender}: ڕەگەز</p>
+                                        </div>
+                                        <div className='job-gender-container'>
+                                            <p className='job-gender'> {job.degree} :  شەهادە</p>
+                                            <div className='job-btn-container'>
+                                                <p className='job-info job-posted'>٢ ڕۆژ لەمەوپێش</p>
+                                                <button onClick={() => viewJobDetails(job._id)} className='view-job-btn'>بینینی زیاتر</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <p>No VIP jobs available.</p> // Fallback when the list is empty
+                )}
             </div>
 
             <div className='jobs-rec-container'>
                 <h3 className='jobs-rec-title'>کاری بەردەستەکان</h3>
             </div>
-            {filteredJob.length > 0 ? (
+           <div className='responsivejobs-container'>
+           {filteredJob.length > 0 ? (
                 filteredJob.map((job) => (
                     <div key={job._id} className='jobs-container'>
                         <div className='job-card'>
@@ -772,6 +677,7 @@ const Jobs = () => {
             ) : (
                 <p>No jobs available.</p>
             )}
+           </div>
             <ToastContainer position='top-center' autoClose={3000} closeOnClick pauseOnHover draggable pauseOnFocusLoss />
         </div>
     );

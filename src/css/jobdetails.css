@@ -1,0 +1,138 @@
+@font-face {
+    font-family: 'kurdish';
+    src: url('../../public/K24KurdishBold-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'kurdish', sans-serif;
+    overflow-x: hidden;
+}
+
+.back-save-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-top: 35px;
+    margin-bottom: 15px;
+}
+
+.back-icon {
+    margin-left: 30px;
+    font-size: 25px;
+}
+
+.save-icon {
+    margin-right: 30px;
+    font-size: 25px;
+}
+
+.jobdetails-upper-info {
+    margin-top: 60px;
+    margin-bottom: 0px;
+    padding: 0px 20px;
+}
+
+.jobdetails-bg-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background-color: rgb(254, 254, 247);
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.jobdetails-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.job-title {
+    color: rgb(70, 69, 69);
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: -10px;
+}
+
+.img-placer {
+    margin-top: -60px;
+}
+
+.jobdetails-info-container {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+    font-size: 17px;
+    margin-top: -10px;
+}
+
+.jobdetails-lower-info {
+    margin-top: 35px;
+}
+
+.jobdetails-lower-info-icon {
+    font-size: 20px;
+    background-color: beige;
+    display: block;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.circle-icon {
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50%;
+    margin-left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.jobdetails-lower-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.jobdetails-lower-info-container-each {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.first-one-container {
+    background-color: #FCECC2;
+}
+
+.second-one-container {
+    background-color: #EADAF8;
+}
+
+.third-one-container {
+    background-color: #D2EEF7;
+}
+
+.first-one-icon {
+    color: rgb(113, 3, 113);
+}
+
+.jobdetails-lower-info-p{
+    color:#6c757d;
+}
+
+.jobdetails-info-container-2{
+    margin-top: -20px;
+}

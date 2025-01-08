@@ -1,5 +1,5 @@
 .search-container {
-    margin-top: 80px;
+    margin-top: 0px;
     background-color: #272c39;
     width: 100%;
     height: 170px;
@@ -18,6 +18,31 @@
     justify-content: center;
     align-items: center;
     color: white;
+}
+
+.ad-container {
+    background-color: rgb(59, 54, 54);
+    width: 100%;
+    height: 170px;
+}
+
+.ad-text {
+    padding-top: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ad-title {
+    color: white;
+    font-size: 18px;
+    margin: 10px 0px;
+}
+
+.ad-email {
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
 }
 
 .search-input {
@@ -258,7 +283,7 @@
     overflow-y: scroll;
 }
 
-.filters-container.open{
+.filters-container.open {
     transform: translateX(0);
 }
 
@@ -296,22 +321,22 @@
     margin-top: 20px;
     margin-right: 15px;
     margin-bottom: 20px;
-    direction: rtl; /* Sets the writing direction to right-to-left */
-    text-align: right; /* Aligns text to the left within the right-to-left layout */
+    direction: rtl;
+    text-align: right;
 }
 
 .checkbox-label {
     color: gray;
     font-size: 18px;
-    margin-bottom: 0px;
     margin-right: 10px;
+    text-align: center;
 }
 
 .checkbox-input {
     accent-color: #2ecc71;
 }
 
-.resetFilter-container{
+.resetFilter-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -339,8 +364,12 @@
     background-color: hsl(145, 100%, 20%);
 }
 
-.hr-line{
+.hr-line {
     opacity: 0.2;
+}
+
+.vipjobspc-container {
+    display: none;
 }
 
 @media (min-width: 350px) and (max-width: 849.99px) {
@@ -377,20 +406,97 @@
     .jobs-rec-title {
         margin-bottom: -7px;
     }
-    
+
     .filters-container {
-        height: 91%;
+        height: 88%;
+        width: 100%;
+        right: 0px;
+    }
+
+    .checkbox-container {
+        margin-right: 40px;
+    }
+
+    .checkbox-label {
+        font-size: 20px;
+        margin-top: 8px;
+    }
+
+    .checkbox-input {
+        transform: scale(0.8);
+    }
+
+    .checkbox-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: right;
+        align-items: center;
+    }
+
+    .resetFilter {
+        padding: 15px 20px;
+        font-size: 15px;
+        margin: 5px 4px;
+        border-radius: 8px;
+    }
+
+    .upper-sec {
+        justify-content: space-between;
+    }
+
+    .filter-title-result {
+        margin-left: 20px;
+    }
+
+    .filter-close {
+        margin-right: 35px;
     }
 }
 
-@media(min-width: 850px) and (max-width: 991.98px) {
+@media(min-width:700px) and (max-width: 991.98px) {
     body {
         overflow-x: hidden;
+    }
+
+    .vipjobsmob-container {
+        display: none;
+    }
+
+    .seachandfilter {
+        gap: 10px;
+        justify-content: center;
+        margin-right: 15px;
+        flex-direction: row-reverse;
+    }
+
+    .responsivejobs-container{
+        display: grid;
+        grid-template-columns:  1fr 1fr;
+    }
+
+    .vipjobspc-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
 }
 
-@media (min-width: 991px) and (max-width: 1200.98px) {
+@media (min-width: 991px) and (max-width: 1280.98px) {
     body {
         overflow-x: hidden;
     }
+
+    .vipjobsmob-container {
+        display: none;
+    }
+
+    .vipjobspc-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .responsivejobs-container{
+        display: grid;
+        grid-template-columns:  1fr 1fr 1fr;
+    }
+
 }
