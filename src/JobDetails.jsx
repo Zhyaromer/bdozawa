@@ -4,6 +4,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaSpinner, FaExclamationCircle } from "react-icons/fa";
+import { franc } from 'franc-min';
 import './css/jobdetails.css'
 
 const JobDetails = () => {
@@ -18,6 +19,68 @@ const JobDetails = () => {
     const [dislikes, setDisLikes] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isEnglish, setisEnglish] = useState(false);
+
+    useEffect(() => {
+        const text = `ob description
+Quality Control Manager is in charge of Product Quality, which includes supervising the production process to make sure that all products meet consistent standards. His duties include developing and implementing quality control tests, inspecting products at various stages and writing reports documenting production issues.
+
+
+
+General Duties and Responsibilities:
+
+· Implementing methods to inspect, test and evaluate products and production equipment.
+
+· Ensuring that products adhere to quality standards.
+
+· Preparing reports by collecting, analysing and summarizing data.
+
+· Working according to deadlines for the delivery of products.
+
+· Training and managing production line staff in production practices and quality assessment of goods.
+
+· Tracking products through the manufacturing process to guarantee that each part of the process is correct.
+
+· Performing detailed and recorded inspections of final products so the products are up to industry and company standards.
+
+· Dealing with customers complaints and issues.
+
+
+
+Requirements:
+
+BSC Degree or similar.
+5+ years quality experience in manufacturing environment PET machines.
+ISO 9001, ISO 14001, FSC22000 OSHA
+Analytical prowess to allow comprehension of scientific/technical journals, financial reports, and legal regulations.
+Skills in monitoring and measurement of process control, auditing, manufacturing of food products, sanitation process, knowledge of HACCP, SSOP regulations, skills in team leadership and root cause analysis
+Excellent intra/inter-department communication skills with attention to detail and organization.
+
+
+What the company Offers:
+
+- Comprehensive Medical Coverage within the company.
+
+- Accommodation with full utilities (including food, electricity, etc.).
+
+- Visa, work permit, and a full onboarding process.
+
+- Annual Vacation Allowance and 30 Days’ Paid Annual Leave.
+
+- Competitive salary package and Bonus.
+
+- Opportunities for Professional Development and career growth`;
+
+        const englishLetterCount = (text.match(/[a-zA-Z]/g) || []).length;
+        const isEnglishLang = englishLetterCount >= 50;
+
+        console.log(`Is the text using the English alphabet? ${isEnglishLang}`);
+        if (isEnglishLang) {
+            setisEnglish(true)
+        } else {
+            setisEnglish(false)
+        }
+    })
 
     // useEffect(() => {
     //     const fetchJobDetails = async () => {
@@ -318,7 +381,7 @@ const JobDetails = () => {
                                 </div>
                                 <div className='jobdetails-lower-info-text'>
                                     <p className='jobdetails-lower-info-p'>ژ.مۆبایل</p>
-                                   <a className='jobdetails-lower-info-phone-num-a' href="tel:7703227250"> <p className='jobdetails-lower-info-p2'>770 322 7250</p></a>
+                                    <a className='jobdetails-lower-info-phone-num-a' href="tel:7703227250"> <p className='jobdetails-lower-info-p2'>770 322 7250</p></a>
                                 </div>
                             </div>
                         </div>
@@ -334,9 +397,75 @@ const JobDetails = () => {
                             <p className='optional-extra-info-p'>zhyaraland123@gmail.com : ئیمەیڵ <i style={{ color: '#007BFF' }} class="fa-solid fa-envelope"></i></p>
                         </div>
                         <div>
-                            <p className='optional-extra-info-p'>بواری بروانامە : ژمێریاری <i  class="fa-solid fa-graduation-cap"></i></p>
+                            <p className='optional-extra-info-p'>بواری بروانامە : ژمێریاری <i class="fa-solid fa-graduation-cap"></i></p>
                         </div>
                     </div>
+                </div>
+                <hr />
+                <div className='jobdetails-description-container'>
+                    <div className='jobdetails-description-header'>
+                        <h3>دەربارەی ئیشەکە</h3>
+                    </div>
+
+                    <div>
+                        <p className={`jobdetails-description-p ${isEnglish ? "jobdetails-description-p-en" : "jobdetails-description-p-ku"}`}
+                            dangerouslySetInnerHTML={{
+                                __html: `ob description
+
+Quality Control Manager is in charge of Product Quality, which includes supervising the production process to make sure that all products meet consistent standards. His duties include developing and implementing quality control tests, inspecting products at various stages and writing reports documenting production issues.
+
+
+
+General Duties and Responsibilities:
+
+· Implementing methods to inspect, test and evaluate products and production equipment.
+
+· Ensuring that products adhere to quality standards.
+
+· Preparing reports by collecting, analysing and summarizing data.
+
+· Working according to deadlines for the delivery of products.
+
+· Training and managing production line staff in production practices and quality assessment of goods.
+
+· Tracking products through the manufacturing process to guarantee that each part of the process is correct.
+
+· Performing detailed and recorded inspections of final products so the products are up to industry and company standards.
+
+· Dealing with customers complaints and issues.
+
+
+
+Requirements:
+
+BSC Degree or similar.
+5+ years quality experience in manufacturing environment PET machines.
+ISO 9001, ISO 14001, FSC22000 OSHA
+Analytical prowess to allow comprehension of scientific/technical journals, financial reports, and legal regulations.
+Skills in monitoring and measurement of process control, auditing, manufacturing of food products, sanitation process, knowledge of HACCP, SSOP regulations, skills in team leadership and root cause analysis
+Excellent intra/inter-department communication skills with attention to detail and organization.
+
+
+What the company Offers:
+
+- Comprehensive Medical Coverage within the company.
+
+- Accommodation with full utilities (including food, electricity, etc.).
+
+- Visa, work permit, and a full onboarding process.
+
+- Annual Vacation Allowance and 30 Days’ Paid Annual Leave.
+
+- Competitive salary package and Bonus.
+
+- Opportunities for Professional Development and career growth.
+    `}} style={{
+                                whiteSpace: 'pre-line',
+                                fontSize: '18px',
+                            }} />
+                    </div>
+                    <hr />
+
                 </div>
             </div>
         </div>

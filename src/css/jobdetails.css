@@ -197,3 +197,21 @@ body {
     color: black;
     font-size: 16px;
 }
+
+.jobdetails-description-header{
+    text-align: right;
+    margin-right: 30px;
+    font-family: sans-serif;
+}
+
+.jobdetails-description-p{
+    padding: 0px 20px;
+}
+
+.jobdetails-description-p-en{
+    text-align: left;
+}
+
+.jobdetails-description-p-ku{
+    text-align: right;
+}
