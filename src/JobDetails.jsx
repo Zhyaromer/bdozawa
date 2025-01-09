@@ -300,7 +300,7 @@ const JobDetails = () => {
                                 </div>
                                 <div className='jobdetails-lower-info-text'>
                                     <p className='jobdetails-lower-info-p'>ڕەگەز</p>
-                                    <p>نێر</p>
+                                    <p className='jobdetails-lower-info-p2'>نێر</p>
                                 </div>
                             </div>
                             <div className='jobdetails-lower-info-container-each'>
@@ -309,7 +309,7 @@ const JobDetails = () => {
                                 </div>
                                 <div className='jobdetails-lower-info-text'>
                                     <p className='jobdetails-lower-info-p'>ئەزموون</p>
-                                    <p>٥ ساڵ یان زیاتر</p>
+                                    <p className='jobdetails-lower-info-p2'>٥ ساڵ یان زیاتر</p>
                                 </div>
                             </div>
                             <div className='jobdetails-lower-info-container-each'>
@@ -318,9 +318,23 @@ const JobDetails = () => {
                                 </div>
                                 <div className='jobdetails-lower-info-text'>
                                     <p className='jobdetails-lower-info-p'>ژ.مۆبایل</p>
-                                    <p>770 322 7250</p>
+                                   <a className='jobdetails-lower-info-phone-num-a' href="tel:7703227250"> <p className='jobdetails-lower-info-p2'>770 322 7250</p></a>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='optional-extra-info'>
+                    <div className='optional-extra-info-container'>
+                        <div>
+                            <p className='optional-extra-info-p'>موچە : $250 <i style={{ color: 'green' }} class="fa-solid fa-dollar-sign"></i></p>
+                        </div>
+                        <div>
+                            <p className='optional-extra-info-p'>zhyaraland123@gmail.com : ئیمەیڵ <i style={{ color: '#007BFF' }} class="fa-solid fa-envelope"></i></p>
+                        </div>
+                        <div>
+                            <p className='optional-extra-info-p'>بواری بروانامە : ژمێریاری <i  class="fa-solid fa-graduation-cap"></i></p>
                         </div>
                     </div>
                 </div>
