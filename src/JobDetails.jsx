@@ -261,7 +261,7 @@ const JobDetails = () => {
                             <img className='jobdetails-img' src='https://via.placeholder.com/150/ff0000/ffffff?text=Placeholder' alt="" />
                         </div>
                         <div className='job-title-container'>
-                            <h3 className='job-title'>حسابات و ژمێریاری</h3>
+                            <h3 className='jobdetails-title'>حسابات و ژمێریاری</h3>
                         </div>
                         <div className='jobdetails-info-container'>
                             <p className='jobdetails-info'>گوگڵ</p>
@@ -271,6 +271,25 @@ const JobDetails = () => {
                         <div className='jobdetails-info-container jobdetails-info-container-2'>
                             <p className='jobdetails-info'>زمان : کوردی-عەرەبی-ئینگلیزی</p>
                             <p className='jobdetails-info'>شەهادەی زانکۆ</p>
+                        </div>
+
+                        <div className='jobdetails-info-container jobdetails-info-container-2 like-dislike-view'>
+                            <div className='like-dislike-container'>
+                                <button
+                                    className={`like-button ${hasLiked ? "active" : ""}`}
+                                >
+                                    <i className={`fa${hasLiked ? "-solid" : "-regular"} fa-thumbs-up`}></i> {likes}
+                                </button>
+
+                                <button
+                                    className={`dislike-button ${hasDisliked ? "active" : ""}`}
+                                >
+                                    <i className={`fa${hasDisliked ? "-solid" : "-regular"} fa-thumbs-down`}></i> {dislikes}
+                                </button>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-eye"></i> 250
+                            </div>
                         </div>
                     </div>
                     <div className='jobdetails-lower-info'>
