@@ -465,7 +465,14 @@ What the company Offers:
                             }} />
                     </div>
                     <hr />
-                    
+                    <div className='jobdetails-botoom-container'>
+                        <div className='jobdetails-botoom-content'>
+                            <p>ژیار عومەر <i class="fa-solid fa-user"></i> </p>
+                            <button className='jobdetails-botoom-report-button'><i class="fa-solid fa-triangle-exclamation"></i> ڕیپۆرت</button>
+                            <button className='jobdetails-botoom-vip-button'><i class="fa-solid fa-star"></i> VIP بیکە ڕیکلامی </button>
+                        </div>
+                    </div>
+                    <hr />
                 </div>
             </div>
         </div>
