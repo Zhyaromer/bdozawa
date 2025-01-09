@@ -20,6 +20,17 @@ const JobDetails = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isEnglish, setisEnglish] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleReportClick = () => {
+        console.log('Report button clicked');
+        setIsOpen(true); // Open the popup
+        console.log(`isOpen ${isOpen}`);
+    };
+
+    const handleClose = () => {
+        setIsOpen(false); // Close the popup
+    };
 
     useEffect(() => {
         const text = `ob description
@@ -468,9 +479,55 @@ What the company Offers:
                     <div className='jobdetails-botoom-container'>
                         <div className='jobdetails-botoom-content'>
                             <p>ژیار عومەر <i class="fa-solid fa-user"></i> </p>
-                            <button className='jobdetails-botoom-report-button'><i class="fa-solid fa-triangle-exclamation"></i> ڕیپۆرت</button>
-                            <button className='jobdetails-botoom-vip-button'><i class="fa-solid fa-star"></i> VIP بیکە ڕیکلامی </button>
+                            <button onClick={handleReportClick} className='jobdetails-botoom-report-button'><i class="fa-solid fa-triangle-exclamation"></i> ڕیپۆرت</button>
+                            <button onclick={handleReportClick} className='jobdetails-botoom-vip-button'><i class="fa-solid fa-star"></i> VIP بیکە ڕیکلامی </button>
                         </div>
+                    </div>
+                    <div>
+                        {isOpen && (
+                            <div className="popup-overlay">
+                                <div className="popup-content">
+                                    <button className="close-btn" onClick={handleClose}>
+                                        <i className="fa-solid fa-xmark report-xmark"></i>
+                                    </button>
+                                    <br />
+                                    <form>
+                                        <div className="form-group">
+                                            <label className="job-details-report-label" htmlFor="name">ناوی سیانیت بنوسە</label>
+                                            <input className="job-details-report-input" placeholder="ناوت لێرە بنوسە" type="text" id="name" required />
+                                        </div>
+                                        <div className="form-group">
+                                            <label className="job-details-report-label" htmlFor="reason">هۆکاری ریپۆرت کردنەکەت</label>
+                                            <select id="reason" className="form-control job-details-report-dropdown" required>
+                                                <option value="">هۆکارێک هەلبژێرە</option>
+                                                <option value="Fake job">ئەم ئیشە ڕاست نیە</option>
+                                                <option value="already got an employment">کارمەندیان دەستکەوتووە</option>
+                                                <option value="Misleading Information">زانیاری چەواشەکارانە و هەڵە</option>
+                                                <option value="fake company">ئەم شوێنە بوونی نیە</option>
+                                                <option value="Duplicate Listing">ئیشی دووبارە</option>
+                                                <option value="Fake Employer">ئەم کەسە خاوەنی ئەم ئیشە نییە</option>
+                                                <option value="other">هیتر</option>
+                                            </select>
+                                        </div>
+                                        <div className="form-group">
+                                            <label className="job-details-report-label" htmlFor="feedback">زانیاری ڕیپۆرت (ئارەزوومەندانەیە)</label>
+                                            <textarea
+                                                id="feedback"
+                                                className="form-control job-details-report-textarea"
+                                                rows="5"
+                                                placeholder="تکایە ئاگادارمان بکەرەوە بۆچی ئەم کارە ڕاپۆرت دەکەیت (بۆ نموونە، چەواشەکاری، فێڵکردن)، فیدباکەکانت یارمەتیدەرمانە بۆ باشترکردنی کوالیتی کارەکە بۆ هەمووان"
+                                                required
+                                            ></textarea>
+                                        </div>
+                                        <div className="form-group">
+                                            <button type="submit" className="btn btn-primary job-details-report-button">
+                                                ناردن
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        )}
                     </div>
                     <hr />
                 </div>

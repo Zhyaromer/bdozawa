@@ -129,11 +129,11 @@ body {
     color: rgb(113, 3, 113);
 }
 
-.jobdetails-lower-info-p{
-    color:#6c757d;
+.jobdetails-lower-info-p {
+    color: #6c757d;
 }
 
-.jobdetails-info-container-2{
+.jobdetails-info-container-2 {
     margin-top: -20px;
 }
 
@@ -169,54 +169,54 @@ body {
     background-color: #B71C1C;
 }
 
-.like-dislike-container{
+.like-dislike-container {
     display: flex;
     justify-content: space-between;
     gap: 20px;
 }
 
-.like-dislike-view{
+.like-dislike-view {
     padding-bottom: 10px;
 }
 
-.jobdetails-lower-info-p2{
+.jobdetails-lower-info-p2 {
     margin-top: -10px;
 }
 
-.optional-extra-info-container{
+.optional-extra-info-container {
     text-align: right;
     margin-right: 25px;
 }
 
-.optional-extra-info-p{
+.optional-extra-info-p {
     font-size: 19px;
 }
 
-.jobdetails-lower-info-phone-num-a{
+.jobdetails-lower-info-phone-num-a {
     text-decoration: none;
     color: black;
     font-size: 16px;
 }
 
-.jobdetails-description-header{
+.jobdetails-description-header {
     text-align: right;
     margin-right: 30px;
     font-family: sans-serif;
 }
 
-.jobdetails-description-p{
+.jobdetails-description-p {
     padding: 0px 20px;
 }
 
-.jobdetails-description-p-en{
+.jobdetails-description-p-en {
     text-align: left;
 }
 
-.jobdetails-description-p-ku{
+.jobdetails-description-p-ku {
     text-align: right;
 }
 
-.jobdetails-botoom-container{
+.jobdetails-botoom-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -225,7 +225,7 @@ body {
     padding: 0px 20px;
 }
 
-.jobdetails-botoom-content{
+.jobdetails-botoom-content {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -233,7 +233,7 @@ body {
     flex-wrap: wrap;
 }
 
-.jobdetails-botoom-report-button{
+.jobdetails-botoom-report-button {
     padding: 10px 20px;
     font-size: 17px;
     font-weight: bold;
@@ -245,11 +245,11 @@ body {
     background-color: #EA4335;
 }
 
-.jobdetails-botoom-report-button:hover{
+.jobdetails-botoom-report-button:hover {
     background-color: #B71C1C;
 }
 
-.jobdetails-botoom-vip-button{
+.jobdetails-botoom-vip-button {
     padding: 10px 20px;
     font-size: 17px;
     border: none;
@@ -261,13 +261,108 @@ body {
     background-color: #34A853;
 }
 
-.jobdetails-botoom-vip-button:hover{
+.jobdetails-botoom-vip-button:hover {
     background-color: #2E7D32;
 }
 
-hr{
+hr {
     margin: 0px 20px;
     opacity: 0.2;
     border: 1px solid black;
     border-radius: 5px;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Popup Content */
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    position: relative;
+}
+
+/* Close Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Form styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.btn {
+    width: 100%;
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: hsl(0, 100%, 40%);
+}
+
+.job-details-report-textarea {
+    resize: none;
+    width: 94%;
+}
+
+.job-details-report-textarea::placeholder {
+    text-align: right;
+}
+
+.job-details-report-label {
+    text-align: right;
+}
+
+.job-details-report-input::placeholder {
+    text-align: right;
+}
+
+.report-xmark {
+    color: black;
+}
+
+.report-xmark:hover {
+    color: red;
+}
+
+.job-details-report-button {
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    background-color: red;
+}
+
+.job-details-report-dropdown {
+    color: black;
+    direction: rtl;
 }
