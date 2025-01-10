@@ -630,54 +630,54 @@ const Jobs = () => {
             <div className='jobs-rec-container'>
                 <h3 className='jobs-rec-title'>کاری بەردەستەکان</h3>
             </div>
-           <div className='responsivejobs-container'>
-           {filteredJob.length > 0 ? (
-                filteredJob.map((job) => (
-                    <div key={job._id} className='jobs-container'>
-                        <div className='job-card'>
-                            <div className='job-card-content'>
-                                <div className='job-card-upper'>
-                                    <div className='upper-img-container'>
-                                        <img className='job-img' src='images.png' width={50} height={50} alt='job' />
+            <div className='responsivejobs-container'>
+                {filteredJob.length > 0 ? (
+                    filteredJob.map((job) => (
+                        <div key={job._id} className='jobs-container'>
+                            <div className='job-card'>
+                                <div className='job-card-content'>
+                                    <div className='job-card-upper'>
+                                        <div className='upper-img-container'>
+                                            <img className='job-img' src='images.png' width={50} height={50} alt='job' />
+                                        </div>
+                                        <div className='upper-title-container'>
+                                            <h1 className='job-title'>{job.title}</h1>
+                                        </div>
+                                        <div className='upper-favicon-container'>
+                                            <i onClick={() => isJobSaved(job._id) ? unSaveJobs(job._id) : saveJobs(job._id)}
+                                                className={`fa-${isJobSaved(job._id) ? 'solid' : 'regular'} fa-bookmark fav-icon`}></i>
+                                        </div>
                                     </div>
-                                    <div className='upper-title-container'>
-                                        <h1 className='job-title'>{job.title}</h1>
+                                    <div className='job-info-title'>
+                                        <p className='job-info'>{job.company}</p>
+                                        <p className='job-info'>{job.location}</p>
                                     </div>
-                                    <div className='upper-favicon-container'>
-                                        <i onClick={() => isJobSaved(job._id) ? unSaveJobs(job._id) : saveJobs(job._id)}
-                                            className={`fa-${isJobSaved(job._id) ? 'solid' : 'regular'} fa-bookmark fav-icon`}></i>
-                                    </div>
-                                </div>
-                                <div className='job-info-title'>
-                                    <p className='job-info'>{job.company}</p>
-                                    <p className='job-info'>{job.location}</p>
-                                </div>
-                                <div style={{ marginTop: '-30px' }}>
-                                    <div className='job-langs-container'>
-                                        <p className='job-langs'>{job.language.join(', ')}  : زمان</p>
-                                    </div>
-                                    <div className='job-exp-container'>
-                                        <p className='job-exp'> {job.yearsOfExp} :  ئەزموون  </p>
-                                    </div>
-                                    <div className='job-gender-container'>
-                                        <p className='job-gender'> {job.gender}: ڕەگەز</p>
-                                    </div>
-                                    <div className='job-gender-container'>
-                                        <p className='job-gender'> {job.degree} :  شەهادە</p>
-                                        <div className='job-btn-container'>
-                                            <p className='job-info job-posted'>{formatDate(job.postedAt)}</p>
-                                            <button onClick={() => viewJobDetails(job._id)} className='view-job-btn'>بینینی زیاتر</button>
+                                    <div style={{ marginTop: '-30px' }}>
+                                        <div className='job-langs-container'>
+                                            <p className='job-langs'>{job.language.join(', ')}  : زمان</p>
+                                        </div>
+                                        <div className='job-exp-container'>
+                                            <p className='job-exp'> {job.yearsOfExp} :  ئەزموون  </p>
+                                        </div>
+                                        <div className='job-gender-container'>
+                                            <p className='job-gender'> {job.gender}: ڕەگەز</p>
+                                        </div>
+                                        <div className='job-gender-container'>
+                                            <p className='job-gender'> {job.degree} :  شەهادە</p>
+                                            <div className='job-btn-container'>
+                                                <p className='job-info job-posted'>{formatDate(job.postedAt)}</p>
+                                                <button onClick={() => viewJobDetails(job._id)} className='view-job-btn'>بینینی زیاتر</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                ))
-            ) : (
-                <p>No jobs available.</p>
-            )}
-           </div>
+                    ))
+                ) : (
+                    <p>No jobs available.</p>
+                )}
+            </div>
             <ToastContainer position='top-center' autoClose={3000} closeOnClick pauseOnHover draggable pauseOnFocusLoss />
         </div>
     );

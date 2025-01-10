@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaSpinner, FaExclamationCircle } from "react-icons/fa";
 import { franc } from 'franc-min';
 import './css/jobdetails.css'
+import { use } from 'react';
 
 const JobDetails = () => {
     const navigate = useNavigate();
@@ -91,6 +92,18 @@ What the company Offers:
         } else {
             setisEnglish(false)
         }
+    })
+
+    useEffect(() => {
+        const suggestionJobs = async () => {
+            try {
+                const res = await axios.get(`http://localhost:3500/suggestionjobs?jobid=${jobId}`);
+                console.log(res.data.jobs);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        suggestionJobs();
     })
 
     // useEffect(() => {
@@ -321,6 +334,9 @@ What the company Offers:
     const goBack = () => {
         navigate(-1);
     }
+
+
+
     return (
         <div>
             <div className='jobdetails-container'>
@@ -332,7 +348,7 @@ What the company Offers:
                 <div className='jobdetails-upper-info'>
                     <div className='jobdetails-bg-container'>
                         <div className='img-placer'>
-                            <img className='jobdetails-img' src='https://via.placeholder.com/150/ff0000/ffffff?text=Placeholder' alt="" />
+                            <img className='jobdetails-img' src='https://via.placeholder.com/150/?text=Placeholder' alt="" />
                         </div>
                         <div className='job-title-container'>
                             <h3 className='jobdetails-title'>حسابات و ژمێریاری</h3>
@@ -367,16 +383,8 @@ What the company Offers:
                         </div>
                     </div>
                     <div className='jobdetails-lower-info'>
-                        <div className='jobdetails-lower-info-container'>
-                            <div className='jobdetails-lower-info-container-each'>
-                                <div className='jobdetails-lower-info-icon first-one-container'>
-                                    <i class="fa-solid fa-user circle-icon first-one-icon"></i>
-                                </div>
-                                <div className='jobdetails-lower-info-text'>
-                                    <p className='jobdetails-lower-info-p'>ڕەگەز</p>
-                                    <p className='jobdetails-lower-info-p2'>نێر</p>
-                                </div>
-                            </div>
+                        <div className='jobdetails-lower-info-container optional-extra-info-container-1'>
+
                             <div className='jobdetails-lower-info-container-each'>
                                 <div className='jobdetails-lower-info-icon second-one-container'>
                                     <i class="fa-solid fa-briefcase circle-icon first-one-icon"></i>
@@ -384,6 +392,16 @@ What the company Offers:
                                 <div className='jobdetails-lower-info-text'>
                                     <p className='jobdetails-lower-info-p'>ئەزموون</p>
                                     <p className='jobdetails-lower-info-p2'>٥ ساڵ یان زیاتر</p>
+                                </div>
+                            </div>
+
+                            <div className='jobdetails-lower-info-container-each'>
+                                <div className='jobdetails-lower-info-icon first-one-container'>
+                                    <i class="fa-solid fa-user circle-icon first-one-icon"></i>
+                                </div>
+                                <div className='jobdetails-lower-info-text'>
+                                    <p className='jobdetails-lower-info-p'>ڕەگەز</p>
+                                    <p className='jobdetails-lower-info-p2'>نێر</p>
                                 </div>
                             </div>
                             <div className='jobdetails-lower-info-container-each'>
@@ -409,6 +427,9 @@ What the company Offers:
                         </div>
                         <div>
                             <p className='optional-extra-info-p'>بواری بروانامە : ژمێریاری <i class="fa-solid fa-graduation-cap"></i></p>
+                        </div>
+                        <div>
+                            <a className='optional-extra-info-a' href="https://wa.me/+9647703227250/?text=http%3A%2F%2Flocalhost%3A3000%2Fjobs%2Fjobdetails%3Fjobid%3D676c81294aab377963316acd" target="_blank"><p className='optional-extra-info-p'>لە وەتساپ نامە بنێرە <i style={{ color: '#25D366' }} class="fa-brands fa-whatsapp"></i></p></a>
                         </div>
                     </div>
                 </div>
@@ -480,7 +501,8 @@ What the company Offers:
                         <div className='jobdetails-botoom-content'>
                             <p>ژیار عومەر <i class="fa-solid fa-user"></i> </p>
                             <button onClick={handleReportClick} className='jobdetails-botoom-report-button'><i class="fa-solid fa-triangle-exclamation"></i> ڕیپۆرت</button>
-                            <button onclick={handleReportClick} className='jobdetails-botoom-vip-button'><i class="fa-solid fa-star"></i> VIP بیکە ڕیکلامی </button>
+                            <button className='jobdetails-botoom-share-button'><i class="fa-solid fa-share"></i> شەیری بکە</button>
+                            <button className='jobdetails-botoom-vip-button'><i class="fa-solid fa-star"></i> VIP بیکە ڕیکلامی </button>
                         </div>
                     </div>
                     <div>
@@ -531,6 +553,115 @@ What the company Offers:
                     </div>
                     <hr />
                 </div>
+                <hr />
+                <div className='jobdetails-recommended-jobs-container'>
+                    <div className='jobdetails-recommended-jobs-title'>
+                        <h3>کاری پەیواندیدار</h3>
+                    </div>
+
+                    <div className='jobdetails-recommendedjobs'>
+                        <div className='responsivejobs-container'>
+                            {/* {filteredJob.length > 0 ? (
+                                filteredJob.map((job) => ( */}
+                            <div className='jobs-container'>
+                                <div className='job-card'>
+                                    <div className='job-card-content'>
+                                        <div className='job-card-upper'>
+                                            <div className='upper-img-container'>
+                                                <img className='job-img' src='images.png' width={50} height={50} alt='job' />
+                                            </div>
+                                            <div className='upper-title-container'>
+                                                <h1 className='job-title'></h1>
+                                            </div>
+                                            <div className='upper-favicon-container'>
+                                                <i
+                                                    className={`fa-solid fa-bookmark fav-icon`}></i>
+                                            </div>
+                                        </div>
+                                        <div className='job-info-title'>
+                                            <p className='job-info'></p>
+                                            <p className='job-info'></p>
+                                        </div>
+                                        <div style={{ marginTop: '-30px' }}>
+                                            <div className='job-langs-container'>
+                                                <p className='job-langs'>  : زمان</p>
+                                            </div>
+                                            <div className='job-exp-container'>
+                                                <p className='job-exp'>  :  ئەزموون  </p>
+                                            </div>
+                                            <div className='job-gender-container'>
+                                                <p className='job-gender'> : ڕەگەز</p>
+                                            </div>
+                                            <div className='job-gender-container'>
+                                                <p className='job-gender'>  :  شەهادە</p>
+                                                <div className='job-btn-container'>
+                                                    <p className='job-info job-posted'></p>
+                                                    <button className='view-job-btn'>بینینی زیاتر</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* ))
+                            ) : (
+                                <p>هیچ کارێکی پەیواندیدار نەدۆزرایەوە</p>
+                            )} */}
+                        </div>
+                    </div>
+                </div>
+                <footer className='footer-main'>
+                    <div className='footer-container'>
+                        <div className='footer-main-div'>
+                            <h2 className='footer-h2'>Jobify</h2>
+                            <p className='footer-p1'>ماڵپەڕەکەمان پلاتفۆرمێکە کە دەتوانیت بە ئاسانی و بە خێرایی کار بدۆزیتەوە. هەروەها دەتوانیت کارەکەت لێرە بڵاو بکەیتەوە و باشترین کاندید بدۆزیتەوە بۆ کارەکەت.</p>
+                            <div className='footer-main-social'>
+                                <a className='socials' href="/"><i class="fa-brands fa-facebook"></i></a>
+                                <a className='socials' href="/"><i class="fa-brands fa-tiktok"></i></a>
+                                <a className='socials' href="/"><i class="fa-brands fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div className='footer-main-secs'>
+                            <div className='footer-main-sec-links'>
+                                <h3 className='footer-h3'>یارمەتی</h3>
+                                <ul className='footer-ul'>
+                                    <li><a href="/">پرسیارە دووبارەکان</a></li>
+                                    <li><a href="/jobs">یارمەتی بەدەست بهێنە</a></li>
+                                    <li><a href="/jobs">پەیوەندیکردن</a></li>
+                                    <li><a href="/jobs">ڕێنمایی</a></li>
+                                    <li><a href="/jobs">ڕیکلام کردن</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className='footer-main-secs'>
+                            <div className='footer-main-sec-links'>
+                                <h3 className='footer-h3'>کارەکان</h3>
+                                <ul className='footer-ul'>
+                                    <li><a href="/">بینینی ئیشەکان</a></li>
+                                    <li><a href="/jobs">ئیشی ڤی ئای پی</a></li>
+                                    <li><a href="/jobs">دۆزینەوەی هەلی کار</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className='footer-main-secs'>
+                            <div className='footer-main-sec-links'>
+                                <h3 className='footer-h3'>هەژمار</h3>
+                                <ul className='footer-ul'>
+                                    <li><a href="/jobs">چونە ژوورەوە</a></li>
+                                    <li><a href="/">دروستکرندی هەژمار</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='footer-bottom'>
+                        <div className='footer-bottom-line'>
+                        </div>
+                        <div className='footer-bottom-txt'>
+                            <p className='footer-bottom-p'>هەموو مافێک پارێزراوە بۆ جۆبی فای &copy; 2025</p>
+                        </div>
+                        <p className='powerby-p'>powered by <a className='powerby-a' target='_blank' rel="noreferrer" href="https://www.facebook.com/zhyaromer999/">zhyar omer</a></p>
+                    </div>
+                </footer>
             </div>
         </div>
     )
