@@ -208,6 +208,15 @@ body {
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
+.optional-extra-info-container-lowerpart {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(27, 23, 23);
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
 .optional-extra-info-p {
     margin-right: 20px;
     font-size: 20px;
@@ -416,4 +425,16 @@ hr {
 .optional-extra-info-a {
     text-decoration: none;
     color: black;
+}
+
+.optional-extra-info-lowerpart-p{
+    color: white;
+    font-size: 20px;
+}
+
+hr{
+    margin: 0px 20px;
+    opacity: 0.2;
+    border: 1px solid black;
+    border-radius: 5px;
 }
