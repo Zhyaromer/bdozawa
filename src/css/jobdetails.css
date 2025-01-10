@@ -25,11 +25,13 @@ body {
 .back-icon {
     margin-left: 30px;
     font-size: 25px;
+    cursor: pointer;
 }
 
 .save-icon {
     margin-right: 30px;
     font-size: 25px;
+    cursor: pointer;
 }
 
 .jobdetails-upper-info {
@@ -65,6 +67,10 @@ body {
 
 .img-placer {
     margin-top: -60px;
+}
+
+.jobdetails-info{
+    font-size: 19px;
 }
 
 .jobdetails-info-container {
@@ -184,7 +190,7 @@ body {
     margin-top: -10px;
 }
 
-.optional-extra-info{
+.optional-extra-info {
     padding: 0px 15px;
 }
 
@@ -230,7 +236,7 @@ body {
 }
 
 .jobdetails-description-header {
-    text-align: right;
+    text-align: center;
     margin-right: 30px;
     font-family: sans-serif;
 }
@@ -264,36 +270,24 @@ body {
     flex-wrap: wrap;
 }
 
-.jobdetails-botoom-report-button {
-    padding: 10px 20px;
-    font-size: 17px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
+.optional-extra-info-p-report a i {
+    color: #FF0000;
+}
+
+.optional-extra-info-p-report a {
+    text-decoration: none;
     color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    background-color: #EA4335;
+    font-size: 20px;
 }
 
-.jobdetails-botoom-report-button:hover {
-    background-color: #B71C1C;
+.optional-extra-info-p-vip {
+    margin-top: 15px;
 }
 
-.jobdetails-botoom-vip-button {
-    padding: 10px 20px;
-    font-size: 17px;
-    border: none;
-    font-weight: bold;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    background-color: #34A853;
-}
-
-.jobdetails-botoom-vip-button:hover {
-    background-color: #2E7D32;
+.optional-extra-info-p-vip a {
+    color: #34A853;
+    text-decoration: none;
+    font-size: 20px;
 }
 
 hr {
@@ -398,20 +392,16 @@ hr {
     direction: rtl;
 }
 
-.jobdetails-botoom-share-button {
-    padding: 10px 20px;
-    font-size: 17px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    background-color: #4285F4;
+.optional-extra-info-p-share {
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
-.jobdetails-botoom-share-button:hover {
-    background-color: #3367D6;
+.optional-extra-info-p-share a {
+    color: #4285F4;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 16px 15px;
 }
 
 .jobdetails-recommended-jobs-title {
@@ -419,7 +409,7 @@ hr {
     color: rgb(45, 42, 42);
     margin-top: 30px;
     margin-bottom: 10px;
-    font-family: 'Times New Roman', sans-serif;
+    font-family: sans-serif;
 }
 
 .optional-extra-info-a {
@@ -427,14 +417,92 @@ hr {
     color: black;
 }
 
-.optional-extra-info-lowerpart-p{
+.optional-extra-info-p-user {
     color: white;
     font-size: 20px;
+    margin-top: 13px;
+    margin-bottom: 13px;
 }
 
-hr{
-    margin: 0px 20px;
-    opacity: 0.2;
-    border: 1px solid black;
+.optional-extra-info-container-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1d2d44;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.optional-extra-info-container-2-container {
+    padding: 0px 20px;
+    margin-top: 20px;
+}
+
+.optional-extra-info-container-2-hr {
+    opacity: 0.8;
+    border: 1px solid white;
     border-radius: 5px;
+    width: 100%;
+    display: block;
+}
+
+.like-dislike-view {
+    padding-bottom: 10px;
+}
+
+.job-title-container{
+    margin-bottom: -10px;
+}
+
+@media(min-width:700px) and (max-width: 1280.98px) {
+    .optional-extra-info-container-2 {
+        flex-direction: row;
+        justify-content: center;
+        gap: 100px;
+    }
+
+    .optional-extra-info-container-2-hr {
+        display: none;
+    }
+
+    .jobdetails-lower-info-container {
+        justify-content: space-evenly;
+    }
+
+    .like-dislike-view {
+        gap: 250px;
+    }
+
+    .jobdetails-eye-icon {
+        font-size: 20px;
+    }
+
+    .jobdetails-title {
+        font-size: 35px;
+        margin-bottom: 3px;
+    }
+
+    .jobdetails-info {
+        font-size: 25px;
+    }
+
+    .jobdetails-info-container {
+        gap: 150px;
+    }
+
+    .optional-extra-info {
+        padding: 0px 15px;
+    }
+
+    .optional-extra-info-container {
+        text-align: center;
+        flex-direction: row-reverse;
+        justify-content: center;
+        gap: 50px;
+    }
+
+    .like-dislike-view {
+        padding-bottom: 10px;
+        gap: 150px;
+    }
 }

@@ -4,9 +4,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaSpinner, FaExclamationCircle } from "react-icons/fa";
-import { franc } from 'franc-min';
 import './css/jobdetails.css'
-import { use } from 'react';
 
 const JobDetails = () => {
     const navigate = useNavigate();
@@ -333,15 +331,14 @@ What the company Offers:
 
     const goBack = () => {
         navigate(-1);
+        console.log('goBack');
     }
-
-
 
     return (
         <div>
             <div className='jobdetails-container'>
                 <div className='back-save-container'>
-                    <i onclick={goBack} class="fa-solid fa-arrow-left back-icon "></i>
+                    <i onClick={goBack} class="fa-solid fa-arrow-left back-icon "></i>
                     <i class="fa-regular fa-bookmark save-icon "></i>
                 </div>
 
@@ -377,14 +374,13 @@ What the company Offers:
                                     <i className={`fa${hasDisliked ? "-solid" : "-regular"} fa-thumbs-down`}></i> {dislikes}
                                 </button>
                             </div>
-                            <div>
-                                <i class="fa-solid fa-eye"></i> 250
+                            <div className='jobdetails-eye-icon'>
+                                <i class="fa-solid fa-eye "></i> 250
                             </div>
                         </div>
                     </div>
                     <div className='jobdetails-lower-info'>
                         <div className='jobdetails-lower-info-container optional-extra-info-container-1'>
-
                             <div className='jobdetails-lower-info-container-each'>
                                 <div className='jobdetails-lower-info-icon second-one-container'>
                                     <i class="fa-solid fa-briefcase circle-icon first-one-icon"></i>
@@ -429,16 +425,15 @@ What the company Offers:
                             <p className='optional-extra-info-p'>بواری بروانامە : ژمێریاری <i class="fa-solid fa-graduation-cap"></i></p>
                         </div>
                         <div>
-                            <a className='optional-extra-info-a' href="https://wa.me/+9647703227250/?text=http%3A%2F%2Flocalhost%3A3000%2Fjobs%2Fjobdetails%3Fjobid%3D676c81294aab377963316acd" target="_blank"><p className='optional-extra-info-p'>لە وەتساپ نامە بنێرە <i style={{ color: '#25D366' }} class="fa-brands fa-whatsapp"></i></p></a>
+                            <a className='optional-extra-info-a' href="https://wa.me/+9647703227250/?text=http%3A%2F%2Flocalhost%3A3000%2Fjobs%2Fjobdetails%3Fjobid%3D676c81294aab377963316acd" target="_blank" rel="noreferrer"><p className='optional-extra-info-p'>لە وەتساپ نامە بنێرە <i style={{ color: '#25D366' }} class="fa-brands fa-whatsapp"></i></p></a>
                         </div>
                     </div>
                 </div>
-                <hr />
                 <div className='jobdetails-description-container'>
+                    <hr />
                     <div className='jobdetails-description-header'>
                         <h3>دەربارەی ئیشەکە</h3>
                     </div>
-
                     <div>
                         <p className={`jobdetails-description-p ${isEnglish ? "jobdetails-description-p-en" : "jobdetails-description-p-ku"}`}
                             dangerouslySetInnerHTML={{
@@ -496,23 +491,9 @@ What the company Offers:
                                 fontSize: '18px',
                             }} />
                     </div>
+                    <hr />
                 </div>
-                <hr />
-                <div className='optional-extra-info'>
-                    <div className='optional-extra-info-container-lowerpart'>
-                        <div>
-                            <p className='optional-extra-info-lowerpart-p' >ژیار عومەر <i class="fa-solid fa-user"></i> </p>
-                        </div>
-                        <div>
-                            <button onClick={handleReportClick} className='jobdetails-botoom-report-button'><i class="fa-solid fa-triangle-exclamation"></i> ڕیپۆرت</button>
-                        </div>
-                        <div>
-                            <button className='jobdetails-botoom-share-button'><i class="fa-solid fa-share"></i> شەیری بکە</button>
-                        </div>
-                        <div>
-                            <button className='jobdetails-botoom-vip-button'><i class="fa-solid fa-star"></i> VIP بیکە ڕیکلامی </button>                        </div>
-                    </div>
-                </div>
+
                 <div>
                     {isOpen && (
                         <div className="popup-overlay">
@@ -559,7 +540,23 @@ What the company Offers:
                         </div>
                     )}
                 </div>
-                <hr />
+                <div className='optional-extra-info-container-2-container'>
+                    <div className='optional-extra-info-container-2'>
+                        <div>
+                            <p className='optional-extra-info-p-user'>ژیار عومەر <i class="fa-solid fa-user"></i> </p>
+                        </div>
+                        <hr className='optional-extra-info-container-2-hr' />
+                        <div>
+                            <p onClick={handleReportClick} className='optional-extra-info-p-report'><a href="#" onClick={(event) => event.preventDefault()}><i class="fa-solid fa-triangle-exclamation"></i> ڕیپۆرت</a></p>
+                        </div>
+                        <div>
+                            <p onclick={copyurl} className='optional-extra-info-p-share'><a href="#" onClick={(event) => event.preventDefault()}><i class="fa-solid fa-share"></i>  شەیری بکە</a></p>
+                        </div>
+                        <div >
+                            <p className='optional-extra-info-p-vip'><a href="#" onClick={(event) => event.preventDefault()}><i class="fa-solid fa-star"></i> VIP بیکە ڕیکلامی </a></p>
+                        </div>
+                    </div>
+                </div>
                 <div className='jobdetails-recommended-jobs-container'>
                     <div className='jobdetails-recommended-jobs-title'>
                         <h3>کاری پەیواندیدار</h3>
@@ -615,6 +612,7 @@ What the company Offers:
                             )} */}
                         </div>
                     </div>
+                    <ToastContainer position="top-center" />
                 </div>
                 <footer className='footer-main'>
                     <div className='footer-container'>
