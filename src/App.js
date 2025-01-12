@@ -6,6 +6,7 @@ import Signup from './Signupform.jsx';
 import Emailverification from './Emailverification.jsx'
 import Jobs from './Jobs.jsx';
 import JobDetails from './JobDetails.jsx';
+import PrePostJob from './PrePostJob.jsx';
 import Test from './Test.jsx';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/emailverification" element={<Emailverification />} />
         <Route path="/jobs" element={<Jobs />} />
+        <Route path="/prepostjob" element={<PrePostJob />} />
         <Route path="/jobs/jobdetails" element={<JobDetails />} />
         <Route path="/test" element={<Test />} />
       </Routes>

@@ -1,0 +1,217 @@
+@font-face {
+    font-family: 'kurdish';
+    src: url('../../public/K24KurdishBold-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'kurdish', sans-serif;
+    overflow-x: hidden;
+}
+
+.prepost-upper-container {
+    padding-top: 100px;
+    text-align: center;
+}
+
+.prepost-upper-title {
+    font-weight: 1100;
+    font-size: 35px;
+    margin-top: 50px;
+    color: #2d2d2d;
+    font-family: sans-serif;
+}
+
+.prepost-upper-img {
+    margin-top: -70px;
+}
+
+.prepost-post-btncontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.prepost-upper-img-btn-content {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+.prepost-post-btn {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-family: sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 270px;
+    font-weight: bold;
+}
+
+.prepost-post-btn:hover {
+    background-color: #27ae60;
+    /* Slightly darker green on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    /* Enhanced shadow on hover */
+}
+
+.prepost-post-btn:active {
+    transform: scale(0.95);
+    /* Click animation */
+}
+
+.prepost-post-btn span {
+    color: black;
+}
+
+.alert-container {
+    padding: 0px 20px;
+    margin-top: -50px;
+}
+
+.alert {
+    padding: 7px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+.alert-warning a {
+    color: #856404;
+}
+
+.alert-warning-p {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.alert-warning i {
+    margin-right: 10px;
+    font-size: 24px;
+}
+
+.vipandhelpjobs-sec {
+    background-color: hsl(0, 0%, 99%);
+    margin: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    border-radius: 10px;
+}
+
+.vipandhelpjobs-img{
+    margin-top: 10px;
+}
+
+.vipandhelpjobs-content {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    padding: 0 20px;
+    margin-top: 50px;
+}
+
+.vipandhelpjobs-crown {
+    margin-top: 10px;
+    font-size: 40px;
+    margin-bottom: 0px;
+}
+
+.vipandhelpjobs-h3 {
+    color: #2d2d2d;
+    font-family: sans-serif;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: -10px;
+}
+
+.vipandhelpjobs-p {
+    padding: 15px;
+    color: #2d2d2d;
+    font-size: 19px;
+    margin-top: 0px;
+}
+
+.vipandhelpjobs-p a {
+    text-decoration: none;
+    color: rgb(89, 187, 220);
+}
+
+.vipandhelpjobs-question {
+    margin-top: 10px;
+    font-size: 55px;
+    margin-bottom: 0px;
+    color: #2d2d2d;
+}
+
+@media(min-width:700px) and (max-width: 1280.98px) {
+    .prepost-upper-img-btn-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .vipandhelpjobs-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 0 20px;
+    }
+
+    .alert-container {
+        padding: 0px 200px;
+        margin-top: -50px;
+    }
+
+    .prepost-img{
+        width: 600px;
+        height: 600px;
+    }
+
+    .prepost-title-btn-content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: -60px;
+    }
+
+    .prepost-upper-title{
+        font-size: 60px;
+        font-weight: 550;
+        font-family:'Trebuchet MS',  sans-serif 
+    }
+
+    .prepost-upper-img-btn-content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row-reverse;
+    }
+
+    .prepost-post-btncontainer {
+        margin-top: 0px;
+    }
+
+    .prepost-post-btn {
+        border-radius: 5px;
+        padding: 15px 15px;
+        font-size: 20px;
+        width: 250px;
+        font-weight: bold;
+    }
+}

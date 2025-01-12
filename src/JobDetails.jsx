@@ -432,7 +432,7 @@ What the company Offers:
                 <div className='jobdetails-description-container'>
                     <hr />
                     <div className='jobdetails-description-header'>
-                        <h3>دەربارەی ئیشەکە</h3>
+                        <h3>دەربارەی ئەم کارە</h3>
                     </div>
                     <div>
                         <p className={`jobdetails-description-p ${isEnglish ? "jobdetails-description-p-en" : "jobdetails-description-p-ku"}`}

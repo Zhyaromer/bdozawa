@@ -1,9 +1,9 @@
 import { Slide, ToastContainer, toast } from 'react-toastify';
 import '../node_modules/react-toastify/dist/ReactToastify.css';
 import { auth, signOut, onAuthStateChanged } from './FirebaseService';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './css/jobs.css'
 import { FaFilter } from 'react-icons/fa';
 
