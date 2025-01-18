@@ -1,0 +1,47 @@
+.addjob-back-save-container {
+    margin-bottom: -70px;
+    margin-top: 30px;
+    padding: 0px 0px;
+}
+
+.back-icon-addjob {
+    font-size: 40px;
+}
+
+.addjob-salary-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.addjob-salary-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.addjob-salary-radio {
+    transform: scale(0.8);
+}
+
+.addjob-selectedsalary1{
+    display: none;
+}
+
+.addjob-selectedsalary2{
+    display: none;
+}
+
+.addjob-selectedsalary1.show{
+    display: block;
+}
+
+.addjob-selectedsalary2.show{
+    display: block;
+}
+
+.addjob-selectedsalary-container.hide{
+    display: none;
+}

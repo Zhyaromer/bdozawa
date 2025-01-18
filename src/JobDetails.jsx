@@ -331,7 +331,6 @@ What the company Offers:
 
     const goBack = () => {
         navigate(-1);
-        console.log('goBack');
     }
 
     return (
