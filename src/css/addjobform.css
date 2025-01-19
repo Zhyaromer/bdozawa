@@ -24,6 +24,7 @@
 
 .addjob-salary-radio {
     transform: scale(0.8);
+    accent-color: #2ecc71;
 }
 
 .addjob-selectedsalary1 {
@@ -111,4 +112,9 @@
 
 .loader-hidden{
     display: none;
+}
+
+.addjob-salary-checkbox{
+    transform: scale(0.8);
+    accent-color: #2ecc71;
 }

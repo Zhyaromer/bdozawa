@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import ReactQuill from "react-quill";
 import '../node_modules/react-quill/dist/quill.snow.css';
 import './css/addjobform.css'
-import { Currency, Eye, EyeOff,Loader } from 'lucide-react';
+import { Loader } from 'lucide-react';
 import { Slide, ToastContainer, toast } from 'react-toastify';
 import '../node_modules/react-toastify/dist/ReactToastify.css';
 
@@ -191,7 +191,7 @@ const Signupform = () => {
                 toast.success('کارەکەت بە سەرکەوتووی زیادکرا', { transition: Slide });
                 setTimeout(() => {
                     window.location.reload();
-                }, 3000);
+                }, 2000);
             } else if (response.status === 409) {
                 toast.error(response.data.message || 'Email already exists. Please use a different email.', { transition: Slide });
             } else if (response.status === 400) {
