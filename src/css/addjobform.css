@@ -26,22 +26,79 @@
     transform: scale(0.8);
 }
 
-.addjob-selectedsalary1{
+.addjob-selectedsalary1 {
     display: none;
 }
 
-.addjob-selectedsalary2{
+.addjob-selectedsalary1-content{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 5px;
+}
+
+.salary-excat-label{
+    display: flex;
+    justify-content: right;
+}
+
+.addjob-selectedsalary2 {
     display: none;
 }
 
-.addjob-selectedsalary1.show{
+.addjob-selectedsalary1.show {
     display: block;
 }
 
-.addjob-selectedsalary2.show{
+.addjob-selectedsalary2.show {
     display: block;
 }
 
-.addjob-selectedsalary-container.hide{
+.addjob-selectedsalary-container.hide {
     display: none;
+}
+
+.currency-picker {
+    height: 45px;
+}
+
+.salary-range-input-content {
+    display: flex;
+    margin-top: 15px;
+    gap: 10px;
+}
+
+.salary-range-input-content input {
+    width: 75px;
+}
+
+.salary-range-label {
+    display: flex;
+    justify-content: right;
+}
+
+.custom-select {
+    accent-color: black;
+    direction: rtl;
+}
+
+.quill-format .ql-editor::before {
+    direction: rtl;
+    text-align: right;
+}
+
+.addjob-langs{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.addjob-langs-each{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 10px;
 }
