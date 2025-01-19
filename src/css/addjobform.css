@@ -1,7 +1,6 @@
 .addjob-back-save-container {
     margin-bottom: -70px;
     margin-top: 30px;
-    padding: 0px 0px;
 }
 
 .back-icon-addjob {
@@ -31,14 +30,14 @@
     display: none;
 }
 
-.addjob-selectedsalary1-content{
+.addjob-selectedsalary1-content {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     gap: 5px;
 }
 
-.salary-excat-label{
+.salary-excat-label {
     display: flex;
     justify-content: right;
 }
@@ -88,7 +87,7 @@
     text-align: right;
 }
 
-.addjob-langs{
+.addjob-langs {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
@@ -96,7 +95,7 @@
     gap: 20px;
 }
 
-.addjob-langs-each{
+.addjob-langs-each {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -104,17 +103,75 @@
     gap: 10px;
 }
 
-.loader{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.loader {
+    display: block;
+    color: white;
 }
 
-.loader-hidden{
+.loader-hidden {
     display: none;
 }
 
-.addjob-salary-checkbox{
+.addjob-salary-checkbox {
     transform: scale(0.8);
     accent-color: #2ecc71;
+}
+
+@media(min-width:700px) and (max-width: 1280.98px) {
+
+    .img-section,
+    .quill-section,
+    .salary-section,
+    .language-section {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .img-section input {
+        direction: rtl;
+    }
+
+    .addjob-salary-container {
+        justify-content: space-around;
+        flex-direction: row-reverse;
+    }
+
+    .addjob-salary-content input,
+    .language-section input {
+        transform: scale(1.1);
+    }
+
+    .addjob-salary-content label,
+    .language-section label {
+        font-size: 20px;
+    }
+
+    .addjob-selectedsalary1-content input {
+        width: 300px;
+    }
+
+    .salary-range-input-content {
+        justify-content: right;
+    }
+
+    .salary-range-input-content input {
+        width: 200px;
+    }
+
+    .addjob-langs {
+        gap: 90px;
+    }
+
+    .addjob-back-save-container-pc {
+        max-width: 900px;
+        margin: 0rem auto;
+    }
+
+    .addjob-back-save-container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        border-radius: 10px;
+    }
 }

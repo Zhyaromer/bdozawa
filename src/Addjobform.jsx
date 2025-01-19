@@ -189,9 +189,6 @@ const Signupform = () => {
             if (response.status === 200) {
                 setLoading(true);
                 toast.success('کارەکەت بە سەرکەوتووی زیادکرا', { transition: Slide });
-                setTimeout(() => {
-                    window.location.reload();
-                }, 2000);
             } else if (response.status === 409) {
                 toast.error(response.data.message || 'Email already exists. Please use a different email.', { transition: Slide });
             } else if (response.status === 400) {
@@ -222,17 +219,19 @@ const Signupform = () => {
 
     return (
         <div>
-            <div className='addjob-back-save-container'>
-                <i onClick={goBack} class="fa-solid fa-arrow-left back-icon back-icon-addjob"></i>
+            <div className='addjob-back-save-container-pc'>
+                <div className='addjob-back-save-container'>
+                    <i onClick={goBack} class="fa-solid fa-arrow-left back-icon back-icon-addjob"></i>
+                </div>
             </div>
             <div className='signup'>
-                <div>
+                <div className='loading-container'>
                     <Loader size={50} className={loading ? 'loader' : 'loader-hidden'} />
                 </div>
                 <div className="signup-container">
                     <h2 className='signup-title'> ئیشەکەت لێرە دابنێ</h2>
                     <form className="signup-form" onSubmit={handleSubmit}>
-                        <div className="form-row">
+                        <div className="form-row img-section">
                             <label htmlFor="login" className="label-format">لۆگۆی شوێنەکەت لێرە دابنێ (ئەم بەشە ئارەزوومەندانەیە)</label>
                             <input type="file" />
                         </div>
@@ -247,7 +246,7 @@ const Signupform = () => {
                             </div>
                         </div>
                         {/* //todo fix this */}
-                        <div className="form-row">
+                        <div className="form-row quill-section">
                             <label className='label-format'>زانیاری لەسەر کارەکە</label>
                             <ReactQuill
                                 className='quill-format'
@@ -265,7 +264,7 @@ const Signupform = () => {
                         </div>
                         <br />
 
-                        <div className="form-row">
+                        <div className="form-row salary-section">
                             <div className="addjob-salary-container">
                                 <div className="addjob-salary-content">
                                     <div className="addjob-salary-input">
@@ -551,7 +550,7 @@ const Signupform = () => {
                             </div>
                         </div>
 
-                        <div className="form-row">
+                        <div className="form-row language-section">
                             <label className="label-format">زمانی داواکراو هەڵبژێرە</label>
                             <div className="addjob-langs">
                                 {Object.keys(selectedLanguages).map(language => (
