@@ -1,27 +1,20 @@
-import './css/Home.css'
-import './css/Nav.css'
-import React, { useState, useEffect } from 'react'
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import './css/howtopost.css';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { auth, signOut, onAuthStateChanged } from './FirebaseService';
-import { useNavigate } from 'react-router-dom';
 
-const Home = () => {
-    useEffect(() => {
-        AOS.init({
-            duration: 800, // Animation duration in ms
-            easing: 'ease-in-out', // Animation easing
-            offset: 100, // Offset from the viewport
-            once: false, // Whether animation should happen only once
-        });
-    }, []);
+const JobPostingGuide = () => {
+    const [activeQuestion, setActiveQuestion] = useState(null);
+    const navigate = useNavigate();
+
+    const addJob = () => {
+        navigate('/addjobform');
+    }
     const [showSidebar, setShowSidebar] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
     const [user, setUser] = useState(null);
-    const navigate = useNavigate();
-
     const toggleSidebar = () => {
         setShowSidebar(!showSidebar);
     };
@@ -81,11 +74,6 @@ const Home = () => {
             unsubscribe();
         };
     }, []);
-
-    function navToJobs() {
-        navigate('/jobs');
-    }
-
     return (
         <div>
             <div className='nav'>
@@ -148,61 +136,158 @@ const Home = () => {
                     </nav>
                 </div >
             </div >
-            <br />
-            <div className='main'>
-                <div className='Main-container'>
-                    <h1 className='Main-h1'>ئایا بە دوای کاردا ئەگەڕێیت؟</h1>
-                    <p className='Main-p1'>لێرە دەتوانیت ئیشی خەونەکانت بدۆزیتەوە، بگەڕێو ئەو کارەی ئەتەوێ بە کەمترین کات لێرە بدۆزەوە، لەگەل ئێمە ژیانت ئاسانتر بکە</p>
-                    <div className='Main-button-container'>
-                        <button onClick={navToJobs} className='Main-button'>کارەکان ببینە</button>
-                    </div>
-                    <p className='Main-p2'>ئەتوانیت  <a className='Main-p2-a' href="/login">بچیتە ژورەوە</a> بۆ هەژمارەکەت یان هەژمارێکی تازە <a className='Main-p2-a' href="/signup">دروست بکەی</a>، یان بەبێ هەژمار بەردەوام بیت</p>
-                </div>
-            </div>
-
-            <div className='imgsecmain'>
-                <img className='imgsecmain-img' src="65_MjExMi53MDEyLm4wMDEuMjTQoS5wNi4yNA.jpg" alt="" />
-            </div>
-
-            <div className='titleandimgsec'>
-                <div className='title'>
-                    <div className='titleline'></div>
-                    <div className='titletxt'>بۆچی ئێمە هەڵبژێریت</div>
-                    <div className='titleline'></div>
-                </div>
-
-                <div className='imgsec1'>
-                    <img  className='imgsec1-img' src="7.webp" alt="" />
-                    <div className='imgsec1-txt'>
-                        <h2 className='imgsec1-h2'>بێزار بوویت لە گەڕان بەدوای کاردا؟</h2>
-                        <p className='imgsec1-p'> دۆزینەوەی کارێکی گونجاو دەتوانێت هەست بە ماندووبوون بکات، لە شوێنێکەوە بۆ شوێنێکی تر، داواکاری بێکۆتایی پێشکەش بکەیت و ڕووبەڕووی ڕەتکردنەوە ببیتەوە. لەگەڵ ئێمەدا، ئیتر پێویست ناکات خەبات بکەیت. پلاتفۆرمی ئێمە ڕاستەوخۆ دەتبەستێتەوە بە خاوەنکارە سەرەکییەکان، ئەمەش کات و هەوڵ و فشارت بۆ پاشەکەوت دەکات. با گەڕان بەدوای کارەکەتدا ئاسانتر و کاریگەرتر بکەین</p>
+            <div className="guide-container">
+                <div className="hero">
+                    <div className="hero-content">
+                        <h1>چۆنیەتی بڵاوکردنەوەی هەلی کار</h1>
+                        <p className="subtitle">ڕێنمایی هەنگاو بە هەنگاو بۆ بڵاوکردنەوەی کار</p>
+                        <button onClick={addJob} className="start-button">
+                            <span className="plus-icon">+</span>
+                            زیادکردنی کار
+                        </button>
                     </div>
                 </div>
 
-                <div className='imgsec2'>
-                    <div  className='imgsec2-txt'>
-                        <h2 className='imgsec2-h2'>دۆزینەوەی هەلی کار ئاسانترە</h2>
-                        <p className='imgsec2-p'>لە ماڵپەڕەکەماندا، دەتوانیت کارەکان بەپێی ئارەزووەکانت فلتەر بکەیت، جا جۆری کارەکە، شوێن، مووچە، یان پیشەسازی بێت. ئەمەش وا دەکات دۆزینەوەی دەرفەتەکان کە لەگەڵ لێهاتوویی و پێداویستییەکانتان بگونجێت، هەمووی لە یەک شوێندا ئاسان بێت. ئەمڕۆ دەست بکە بە گەڕان و بزانە ڕاوکردنی کار چەندە ئاسانە!</p>
-                    </div>
-                    <img className='imgsec2-img' src="workfromhome.jpg" alt="" />
-                </div>
-            </div>
-
-            <div className='cvsec-main'>
-                <div  className='cvsec-main-titletxt'>کێشەی سیڤیت هەیە؟</div>
-                <div className='cvsec-main-cards'>
-                    <div  class="cv-card">
-                        <div class="cv-card-image">
-                            <img class="cv-card-img" src="309901-P8G9WT-600.jpg" alt="" />
+                <div className="steps-container">
+                    <div className="step-card">
+                        <div className="step-number">1</div>
+                        <div className="step-content">
+                            <div className="step-icon">   <img className='vipandhelpjobs-img' src="create-account-icon.png" width={'50'} alt="" /></div>
+                            <h2>دروستکردنی هەژمار</h2>
+                            <p>سەرەتا پێویستە هەژمارێک دروست بکەیت وەک خاوەن کار:</p>
+                            <ul className="requirements-list">
+                                <li>
+                                    <span className="check-icon">✓</span>
+                                    کلیک لەسەر دروستکردنی هەژمار بکە
+                                </li>
+                                <li>
+                                    <span className="check-icon">✓</span>
+                                    پڕکردنەوەی زانیاریەکان
+                                </li>
+                                <li>
+                                    <span className="check-icon">✓</span>
+                                    هەڵبژاردنی ڕۆڵی "خاوەن کار
+                                </li>
+                                <li>
+                                    <span className="check-icon">✓</span>
+                                    کلیک لە درووستکردنی هەژمار بکە
+                                </li>
+                            </ul>
                         </div>
-                        <p class="cv-card-title">ئەتوانیت سیڤی خۆت دروست بکەی</p>
-                        <p class="cv-card-body">
-                            ئەتوانی بە ئاسانترین شێوە سیڤی بۆخۆت دروست بکەی بە بێ هیچ بڕە پارەیەک <span className='cv-card-link'>کلیک لێرە</span> بکەو چۆنیەتی دروستکردنی سیڤی بۆ خۆت فێربە
-                        </p>
+                    </div>
+
+                    <div className="step-card">
+                        <div className="step-number">2</div>
+                        <div className="step-content">
+                            <div className="step-icon">📝</div>
+                            <h2>تەواوکردنی پرۆفایل</h2>
+                            <p>دڵنیابە لە هەبوونی هەژمار و ئیمەیڵەکەت دڵنیا کردبێتەوە:</p>
+                            <ul className="requirements-list">
+                                <li>
+                                    <span className="check-icon">✓</span>
+                                    ئیمەیڵی هەژمارەکەت دڵنیا بکەرەوە
+                                </li>
+                                <li>
+                                    <span className="check-icon">✓</span>
+                                    پێویستە داخلی هەژمارەکەت بوبیت
+                                </li>
+                                <li>
+                                    <span className="check-icon">✓</span>
+                                    برؤ بەشتی کارێک دابنێ
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div className="step-card">
+                        <div className="step-number">3</div>
+                        <div className="step-content">
+                            <div className="step-icon">📋</div>
+                            <h2>زیادکردنی کار</h2>
+                            <p>دوای تەواوکردنی پرۆفایل، دەتوانی کار زیاد بکەیت:</p>
+                            <ul className="requirements-list">
+                                <li>
+                                    <span className="check-icon">✓</span>
+                                    زانیاریە سەرەکیەکان پڕبکەوە
+                                </li>
+                                <li>
+                                    <span className="check-icon">✓</span>
+                                    زانیاریەکانی پێویستە ورد بنو زانیاری تەواون لەسەر هەلی کارەکە بدات
+                                </li>
+                                <li>
+                                    <span className="check-icon">✓</span>
+                                    دڵنیابەرەوە لە ڕاستی و درووستی زانیاریەکانت
+                                </li>
+                                <li>
+                                    <span className="check-icon">✓</span>
+                                    پاشان کلیک لەسەر دانانی کار بکە
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="help-section">
+                    <h2>پرسیارە باوەکان</h2>
+                    <div className="faq-container">
+                        {[
+                            {
+                                q: "چەند کاتژمێر دەخایەنێت تاکو کارەکەم بڵاو دەبێتەوە؟",
+                                a: "دوای پێداچوونەوە لە ماوەی ٢٤ کاتژمێر بڵاو دەکرێتەوە بۆ ڕیگری کردن لە هەلی کاری ساختە"
+                            },
+                            {
+                                q: "ئایا دەتوانم ڕیپۆرت لە هەلی کارێک بدەم؟",
+                                a: 'بەڵێ دەتوانیت، ئەگەر هەستت کرد هەلی کارێک کێشەیەکی هەیە ئەوا دەستنی ڕیپۆرتی بکەیت و هۆکارو تێبینی خۆت بنێریت'
+                            },
+                            {
+                                q: 'نرخی بڵاوکردنەوەی هەلی کار چەندە؟',
+                                a: 'بڵاوکردنەوەی هەلی کار بە خۆراییەو هیچ بڕە پارەیەک نادەیت تەنها پێویستت بە هەژمارێکە'
+                            },
+                        ].map((faq, index) => (
+                            <div
+                                key={index}
+                                className={`faq-item ${activeQuestion === index ? 'active' : ''}`}
+                                onClick={() => setActiveQuestion(activeQuestion === index ? null : index)}
+                            >
+                                <div className="question">
+                                    <span>{faq.q}</span>
+                                    <span className="arrow"><i class="fa-solid fa-angle-down"></i></span>
+                                </div>
+                                <div className="answer">{faq.a}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="contact-section">
+                        <h2>پەیوەندیمان پێوە بکە</h2>
+                        <div className="contact-grid">
+                            <div className="contact-item">
+                                <div className="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+                                <h3>ئیمەیڵ</h3>
+                                <p>contact@example.com</p>
+                            </div>
+                            <div className="contact-item">
+                                <div className="contact-icon"><i class="fa-solid fa-phone"></i></div>
+                                <h3>تەلەفۆن</h3>
+                                <p>0750 123 4567</p>
+                            </div>
+                        </div>
+
+                        <div className="social-links">
+                            <div className="social-icon">
+                                <span><i class="fa-brands fa-facebook"></i></span> Facebook
+                            </div>
+                            <div className="social-icon">
+                                <span><i class="fa-brands fa-instagram"></i></span> Instagram
+                            </div>
+                            <div className="social-icon">
+                                <span><i class="fa-brands fa-telegram"></i></span> Telegram
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <footer  className='footer-main'>
+            <footer className='footer-main'>
                 <div className='footer-container'>
                     <div className='footer-main-div'>
                         <h2 className='footer-h2'>Jobify</h2>
@@ -254,8 +339,8 @@ const Home = () => {
                     <p className='powerby-p'>powered by <a className='powerby-a' target='_blank' rel="noreferrer" href="https://www.facebook.com/zhyaromer999/">zhyar omer</a></p>
                 </div>
             </footer>
-        </div >
-    )
-}
+        </div>
+    );
+};
 
-export default Home
+export default JobPostingGuide;
