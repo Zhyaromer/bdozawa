@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import ReactQuill from "react-quill";
 import '../node_modules/react-quill/dist/quill.snow.css';
 import './css/addjobform.css'
-import { Currency, Eye, EyeOff } from 'lucide-react';
+import { Currency, Eye, EyeOff,Loader } from 'lucide-react';
 import { Slide, ToastContainer, toast } from 'react-toastify';
 import '../node_modules/react-toastify/dist/ReactToastify.css';
 
@@ -30,6 +30,7 @@ const Signupform = () => {
     const [showIndustryDropdown, setShowIndustryDropdown] = useState(false);
     const [citySearch, setCitySearch] = useState('');
     const [showCityDropdown, setShowCityDropdown] = useState(false);
+    const [loading, setLoading] = useState(false);
     const cities = ['Erbil', 'Sulaymaniyah', 'Duhok', 'Kirkuk'];
     const [selectedLanguages, setSelectedLanguages] = useState({
         کوردی: false,
@@ -135,7 +136,7 @@ const Signupform = () => {
     const handleChangePhonenumber = (e) => {
         const input = e.target.value;
         const rawNumber = input.replace(/\s/g, '');
-
+        console.log(rawNumber);
         if (rawNumber.length <= 11) {
             const formatted = formatPhoneNumber(rawNumber);
             setPhoneNumber(formatted);
@@ -153,7 +154,7 @@ const Signupform = () => {
 
         try {
             const langs = Object.keys(selectedLanguages).filter(key => selectedLanguages[key]);
-
+            const phoneNum = phoneNumber.replace(/\s/g, '');
             if (langs.length === 0) {
                 toast.error('تکایە بە لایەنی کەمەوە زمانێک هەڵبژێرە', { transition: Slide });
                 return;
@@ -169,7 +170,7 @@ const Signupform = () => {
                 description: formData.description,
                 location: citySearch,
                 gender: formData.gender,
-                companyNumber: phoneNumber,
+                companyNumber: phoneNum,
                 companyEmail: formData.gmail,
                 degree: formData.degree,
                 degreetype: formData.degreetype,
@@ -186,8 +187,11 @@ const Signupform = () => {
             });
 
             if (response.status === 200) {
-                toast.success('Job added successfully!', { transition: Slide });
-                form.reset();
+                setLoading(true);
+                toast.success('کارەکەت بە سەرکەوتووی زیادکرا', { transition: Slide });
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
             } else if (response.status === 409) {
                 toast.error(response.data.message || 'Email already exists. Please use a different email.', { transition: Slide });
             } else if (response.status === 400) {
@@ -222,6 +226,9 @@ const Signupform = () => {
                 <i onClick={goBack} class="fa-solid fa-arrow-left back-icon back-icon-addjob"></i>
             </div>
             <div className='signup'>
+                <div>
+                    <Loader size={50} className={loading ? 'loader' : 'loader-hidden'} />
+                </div>
                 <div className="signup-container">
                     <h2 className='signup-title'> ئیشەکەت لێرە دابنێ</h2>
                     <form className="signup-form" onSubmit={handleSubmit}>
