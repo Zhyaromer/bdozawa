@@ -398,12 +398,7 @@
 
     .step-card {
         flex-direction: column;
-        text-align: right;
-        direction: rtl;
-    }
-
-    .step-number {
-        margin: 0 auto;
+        text-align: center;
     }
 
     .requirements-list li {
@@ -425,7 +420,6 @@
 
     .contact-grid,
     .help-grid {
-
         grid-template-columns: 1fr;
     }
 
