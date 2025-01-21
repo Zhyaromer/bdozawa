@@ -1,12 +1,12 @@
-import { React, useState, useEffect } from 'react';
-import './css/howtopost.css';
-import './css/makejobsvip.css';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { auth, signOut, onAuthStateChanged } from './FirebaseService';
+import './css/faq.css';
 
-const VIPJobGuide = () => {
+const Faq = () => {
     const [activeQuestion, setActiveQuestion] = useState(null);
+    const navigate = useNavigate();
     const [showSidebar, setShowSidebar] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
@@ -132,95 +132,23 @@ const VIPJobGuide = () => {
                     </nav>
                 </div >
             </div >
-            <div className="guide-container">
-                <div className="hero">
-                    <div className="hero-content">
-                        <h1>چۆن هەلی کارەکەمان بکەینە VIP</h1>
-                        <p className="subtitle">ڕێنمایی هەنگاو بە هەنگاو بۆ کە چۆن هەلی کارەکەمان بکەینە VIP تاوەکو زۆرترین کەس بینەری بێت</p>
-                    </div>
-                </div>
-
-                <div className="steps-container">
-                    <div className="step-card">
-                        <div className="step-number">1</div>
-                        <div className="step-content">
-                            <div className="step-icon">
-                                <img className='vipandhelpjobs-img' src="Settings.png" width={'50'} alt="" />
-                            </div>
-                            <h2>بڕۆ بەشی ڕێکخستنەکان</h2>
-                            <ul className="requirements-list">
-                                <li>
-                                    <span className="check-icon">✓</span>
-                                    لە بەشی سەرەوە کلیک لەسەر ئایکۆنی ئەکاونت بکە                                </li>
-                                <li>
-                                    <span className="check-icon">✓</span>
-                                    برۆ بەشی ڕێک خستنەکان
-                                </li>
-                                <li>
-                                    <span className="check-icon">✓</span>
-                                    لەوێوە بڕۆ بەشی پۆستەکانم
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div className="step-card">
-                        <div className="step-number">2</div>
-                        <div className="step-content">
-                            <div className="step-icon">
-                                <img className='vipandhelpjobs-img' src="idcard.png" width={'75'} alt="" />
-                            </div>
-                            <h2>کۆپی کردنی ID</h2>
-                            <ul className="requirements-list">
-                                <li>
-                                    <span className="check-icon">✓</span>
-                                    ئەو کارە بدۆزەوە کە دەتەوێت
-                                </li>
-                                <li>
-                                    <span className="check-icon">✓</span>
-                                    دۆزینەوەی ID ـی تایبەت بە پۆستەکەت
-                                </li>
-                                <li>
-                                    <span className="check-icon">✓</span>
-                                    کۆپی کردنی ID کە
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div className="step-card">
-                        <div className="step-number">3</div>
-                        <div className="step-content">
-                            <div className="step-icon">
-                                <img className='vipandhelpjobs-img' src="msgus.png" width={'50'} alt="" />
-                            </div>
-                            <h2>ئاگادارمان بکەرەوە</h2>
-                            <ul className="requirements-list">
-                                <li>
-                                    <span className="check-icon">✓</span>
-                                    نامە بۆ یەکێک لە هەژمارەکانمان بنێرە
-                                </li>
-                                <li>
-                                    <span className="check-icon">✓</span>
-                                    ئایدی کارەکەتمان بۆ بنێرە
-                                </li>
-                                <li>
-                                    <span className="check-icon">✓</span>
-                                    بڕی 15,000 بنێرە بۆ ئەو ژمارەیەی پێت دەدریت
-                                </li>
-                                <li>
-                                    <span className="check-icon">✓</span>
-                                    کارەکەت بۆ ماوەی هەفتەیەک دەبێتە VIP
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="help-section help-section-vip">
-                    <h2>پرسیارە باوەکان</h2>
-                    <div className="faq-container">
+            <div className='faqq-container'>
+                <div className='help-section'>
+                    <h2 className='faq-section-title'>پرسیارە باوەکان</h2>
+                    <div className="faq-container faq-section-vip">
                         {[
+                            {
+                                q: "چەند کاتژمێر دەخایەنێت تاکو کارەکەم بڵاو دەبێتەوە؟",
+                                a: "دوای پێداچوونەوە لە ماوەی ٢٤ کاتژمێر بڵاو دەکرێتەوە بۆ ڕیگری کردن لە هەلی کاری ساختە"
+                            },
+                            {
+                                q: "ئایا دەتوانم ڕیپۆرت لە هەلی کارێک بدەم؟",
+                                a: 'بەڵێ دەتوانیت، ئەگەر هەستت کرد هەلی کارێک کێشەیەکی هەیە ئەوا دەستنی ڕیپۆرتی بکەیت و هۆکارو تێبینی خۆت بنێریت'
+                            },
+                            {
+                                q: 'نرخی بڵاوکردنەوەی هەلی کار چەندە؟',
+                                a: 'بڵاوکردنەوەی هەلی کار بە خۆراییەو هیچ بڕە پارەیەک نادەیت تەنها پێویستت بە هەژمارێکە'
+                            },
                             {
                                 q: 'ئایا ئیسفادەی چیە لە هەلی کارەکەمان بکەینە VIP؟',
                                 a: 'ئەگەر بتەوێت بە زووترین کات کارمەندێکی نایاب بۆ ئیشەکەت بدۆزیتەوە ئەم بەشە بۆتۆ گونجاوە بۆتە چونکە زۆرترین کەس بینەری دەبێت'
@@ -232,7 +160,7 @@ const VIPJobGuide = () => {
                             {
                                 q: 'چی بەسەر هەلی کارەکەمان دێت ئەگەر بکەینە VIP؟',
                                 a: 'هەلی کارەکەت لە پێش هەموو کارەکانی تر لە سەرەوەی ماڵپەرەکە دەمێنێتەوەو زۆرترین کەس بینەری دەبێت'
-                            },
+                            }
                         ].map((faq, index) => (
                             <div
                                 key={index}
@@ -247,34 +175,11 @@ const VIPJobGuide = () => {
                             </div>
                         ))}
                     </div>
-                    <div className="contact-section">
-                        <h2>پەیوەندیمان پێوە بکە</h2>
-                        <div className="contact-grid">
-                            <div className="contact-item">
-                                <div className="contact-icon"><i class="fa-solid fa-envelope"></i></div>
-                                <h3>ئیمەیڵ</h3>
-                                <p>contact@example.com</p>
-                            </div>
-                            <div className="contact-item">
-                                <div className="contact-icon"><i class="fa-solid fa-phone"></i></div>
-                                <h3>تەلەفۆن</h3>
-                                <p>0750 123 4567</p>
-                            </div>
-                        </div>
 
-                        <div className="social-links">
-                            <div className="social-icon">
-                                <span><i class="fa-brands fa-facebook"></i></span> Facebook
-                            </div>
-                            <div className="social-icon">
-                                <span><i class="fa-brands fa-instagram"></i></span> Instagram
-                            </div>
-                            <div className="social-icon">
-                                <span><i class="fa-brands fa-telegram"></i></span> Telegram
-                            </div>
-                        </div>
-                    </div>
                 </div>
+            </div>
+            <div className='faq-contact'>
+                <p>پرسیارەکەت لێرە نیە؟ <a href="/contact">پەیوەندیمان پێوە بکە</a></p>
             </div>
             <footer className='footer-main'>
                 <div className='footer-container'>
@@ -329,7 +234,7 @@ const VIPJobGuide = () => {
                 </div>
             </footer>
         </div>
-    );
-};
+    )
+}
 
-export default VIPJobGuide;
+export default Faq;

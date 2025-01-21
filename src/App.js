@@ -12,6 +12,7 @@ import JobPostingGuide from './Postingtutorial.jsx';
 import VIPJobGuide from './Makejobvip.jsx';
 import About from './About.jsx';
 import ContactPage from './Contact.jsx';
+import Faq from './Faq.jsx';
 import Test from './Test.jsx';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/makejobvip" element={<VIPJobGuide />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/faq" element={<Faq />} />
         <Route path="/test" element={<Test />} />
       </Routes>
     </Router>
