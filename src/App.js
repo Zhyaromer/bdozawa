@@ -10,6 +10,7 @@ import PrePostJob from './PrePostJob.jsx';
 import Addjobform from './Addjobform.jsx';
 import JobPostingGuide from './Postingtutorial.jsx';
 import VIPJobGuide from './Makejobvip.jsx';
+import About from './About.jsx';
 import Test from './Test.jsx';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/addjob" element={<Addjobform />} />
         <Route path="/postingtutorial" element={<JobPostingGuide />} />
         <Route path="/makejobvip" element={<VIPJobGuide />} />
+        <Route path="/about" element={<About />} />
         <Route path="/test" element={<Test />} />
       </Routes>
     </Router>
