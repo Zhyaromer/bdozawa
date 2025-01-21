@@ -146,51 +146,53 @@ const About = () => {
               لە ڕێگەی تەکنەلۆژیای نوێ و سیستەمی پێشکەوتوو، ئێمە هەوڵ دەدەین ببینە پردێک لە نێوان کۆمپانیاکان و ئەو کەسانەی بەدوای کاردا دەگەڕێن. ئامانجمان دروستکردنی پلاتفۆرمێکی متمانەپێکراو و کاریگەرە بۆ دۆزینەوەی هەلی کار.
             </p>
           </div>
+          <h2 className='features-container-title'>تایبەتمەندییەکانی ماڵپەڕەکەمان</h2>
           <div className="features-container">
-            <h2>تایبەتمەندییەکانی ماڵپەڕەکەمان</h2>
             <div className="feature-item">
               <FaSearch className="feature-icon" />
-              <h3>گەڕانی پێشکەوتوو</h3>
+              <h2>گەڕانی پێشکەوتوو</h2>
               <p>گەڕان بەپێی ناوی کار، ڕەگەز، شار و چەندین فلتەری پێشکەوتوو وە دۆزینەوەی خێرا</p>
             </div>
             <div className="feature-item">
               <FaNewspaper className="feature-icon" />
-              <h3>نوێترین هەلی کارەکان</h3>
+              <h2>نوێترین هەلی کارەکان</h2>
               <p>هەلی بەردەوام بینەری تازەترین هەلی کارەکان ببە، نوێکردنەوەی ڕۆژانە و هەلی کاری ئۆنڵاین</p>
             </div>
             <div className="feature-item">
               <FaRegMoneyBillAlt className="feature-icon" />
-              <h3>بەکارهێنانی بێبەرامبەر</h3>
+              <h2>بەکارهێنانی بێبەرامبەر</h2>
               <p>ماڵپەڕەکەمان بۆ دۆزینەوەی کار بێبەرامبەرە و دەتوانی بەخۆڕایی بەکاری بهێنیت</p>
             </div>
           </div>
         </section>
 
-        <section className="creator-section">
-          <div className='creator-imagetitle-container'>
-            <h2>دەربارەی دروستکەر</h2>
-            <div className="creator-image-wrapper">
-              <img src="/api/placeholder/150/150" alt="Creator" className="creator-image" />
-            </div>
-          </div>
-          <div className="creator-content">
-            <div className="creator-info">
-              <div className="creator-text">
-                <p className="creator-main-text">
-                  من خوێندکاری قۆناغی دووەمم لە بەشی تەکنەلۆژیای زانیاری. ئەم پڕۆژەیەم دروستکردووە بۆ یارمەتیدانی گەنجانی وڵاتەکەم لە دۆزینەوەی هەلی کار.
-                </p>
-                <p className="creator-vision">
-                  ئامانجم ئەوەیە کە پردێک دروست بکەم لە نێوان خاوەن کار و ئەو کەسانەی بەدوای کاردا دەگەڕێن. بە بەکارهێنانی تەکنەلۆژیای نوێ، دەمانەوێت پرۆسەی دۆزینەوەی کار ئاسانتر بکەین.
-                </p>
-              </div>
-              <div className="about-social-links">
-                <a href="#" className="about-social-link"><FaInstagram /></a>
-                <a href="#" className="about-social-link"><FaGithub /></a>
-                <a href="#" className="about-social-link"><FaTelegram /></a>
+        <div className="creator-section-container">
+          <section className="creator-section">
+            <div className='creator-imagetitle-container'>
+              <h2>دەربارەی دروستکەر</h2>
+              <div className="creator-image-wrapper">
+                <img src="/api/placeholder/150/150" alt="Creator" className="creator-image" />
               </div>
             </div>
-          </div>
-        </section>
+            <div className="creator-content">
+              <div className="creator-info">
+                <div className="creator-text">
+                  <p className="creator-main-text">
+                    من خوێندکاری قۆناغی دووەمم لە بەشی تەکنەلۆژیای زانیاری. ئەم پڕۆژەیەم دروستکردووە بۆ یارمەتیدانی گەنجانی وڵاتەکەم لە دۆزینەوەی هەلی کار.
+                  </p>
+                  <p className="creator-vision">
+                    ئامانجم ئەوەیە کە پردێک دروست بکەم لە نێوان خاوەن کار و ئەو کەسانەی بەدوای کاردا دەگەڕێن. بە بەکارهێنانی تەکنەلۆژیای نوێ، دەمانەوێت پرۆسەی دۆزینەوەی کار ئاسانتر بکەین.
+                  </p>
+                </div>
+                <div className="about-social-links">
+                  <a href="#" className="about-social-link"><FaInstagram /></a>
+                  <a href="#" className="about-social-link"><FaGithub /></a>
+                  <a href="#" className="about-social-link"><FaTelegram /></a>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
 
         <div className="help-section">
           <div className="contact-section about-contact-section">
