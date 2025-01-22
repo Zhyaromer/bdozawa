@@ -3,9 +3,14 @@ import { auth, signOut, onAuthStateChanged } from './FirebaseService';
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Eye, EyeOff } from 'lucide-react';
 
 const Settings = () => {
+    const [showPassword, setShowPassword] = useState(false);
     const [changename, setChangename] = useState(false);
+    const [oldpassword, setoldPassword] = useState('');
+    const [newpassword, setnewPassword] = useState('');
+    const [confirmpassword, setconfirmPassword] = useState('');
     const [changeemail, setChangeemail] = useState(true);
     const [changepassword, setChangepassword] = useState(true);
     const [deleteaccount, setDeleteaccount] = useState(true);
@@ -206,11 +211,6 @@ const Settings = () => {
                             <div className='settings-pages-input'>
                                 <input type='text' placeholder='ناوی نوێ' />
                             </div>
-                            <div className='settings-pages-alert-container'> 
-                                <div className='settings-pages-alert'>
-                                    <small>ناوی ئێستای هەژمارەکەت ژیار </small>
-                                </div>
-                            </div>
                             <div className='settings-pages-changename-button'>
                                 <button>ناوەکەم بگۆرە</button>
                             </div>
@@ -218,31 +218,112 @@ const Settings = () => {
                     </div>
                     <div className={`settings-pages-changeemail ${changeemail ? '' : 'active'}`}>
                         <div>
-                            <div className='settings-pages-title'>
-                                <p>گۆرینی ئیمایڵ</p>
-                            </div>
-                            <div className='settings-pages-input'>
-                                <input type='text' placeholder='ناوی نوێ' />
+                            <div>
+                                <div className='settings-pages-title'>
+                                    <p>گۆرینی ئیمەیڵی هەژمارەکەت</p>
+                                </div>
+                                <div className='settings-pages-input settings-pages-input-email'>
+                                    <input type='email' value={'zhyaraland123@gmail.com'} readOnly />
+                                </div>
+                                <div className='settings-pages-alert-container settings-pages-alert-container-email'>
+                                    <div className='settings-pages-alert'>
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                        <small> ببورە ناتوانیت ئیمەیڵەکەت بگۆڕیت</small>
+                                    </div>
+                                </div>
+                                <div className='settings-pages-changename-button'>
+                                    <button disabled={true}>ئیمەیڵەکەم بگۆرە</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div className={`settings-pages-changepassword ${changepassword ? '' : 'active'}`}>
                         <div>
-                            <div className='settings-pages-title'>
-                                <p>گۆرینی پاسۆرد</p>
+                            <div className='settings-pages-title settings-pages-title-password'>
+                                <p>گۆرینی وشەی نهێنی</p>
+                                <small>بۆ گۆڕینی وشەی نهێنی پێوسیتە وشە نهێنیە کۆنەکە بزانیت</small>
                             </div>
-                            <div className='settings-pages-input'>
-                                <input type='text' placeholder='ناوی نوێ' />
+                            <div className="form-group">
+                                <div className="form-label-email">
+                                    <label className='email-label' htmlFor="email"><i class="fa-solid fa-lock mail-icon"></i>وشەی نهێنیە کۆنەکە
+                                    </label>
+                                </div>
+                                <input
+                                    className='email-input'
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="وشەی نهێنیە کۆنەکەت بنووسە"
+                                    value={oldpassword}
+                                    onChange={(e) => setoldPassword(e.target.value)}
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    className="password-toggle"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+                                </button>
+                            </div>
+                            <div className="form-group">
+                                <div className="form-label-email">
+                                    <label className='email-label' htmlFor="email"><i class="fa-solid fa-lock mail-icon"></i>وشەی نهێنیە تازەکەت بنووسە
+                                    </label>
+                                </div>
+                                <input
+                                    className='email-input'
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="وشەی نهێنیە تازەکەت بنووسە"
+                                    value={newpassword}
+                                    onChange={(e) => setnewPassword(e.target.value)}
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    className="password-toggle"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+                                </button>
+                            </div>
+                            <div className="form-group">
+                                <div className="form-label-email">
+                                    <label className='email-label' htmlFor="email"><i class="fa-solid fa-lock mail-icon"></i>وشەی نهێنیە تازەکەت بنووسەوە
+                                    </label>
+                                </div>
+                                <input
+                                    className='email-input'
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="وشەی نهێنیکە تازەکەت بنووسەوە بنووسە"
+                                    value={confirmpassword}
+                                    onChange={(e) => setconfirmPassword(e.target.value)}
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    className="password-toggle"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+                                </button>
+                            </div>
+                            <div className='settings-pages-changename-button settings-pages-changename-button-password'>
+                                <button>وشەی نهێنی بگۆرە</button>
+                            </div>
+
+                            <div className='settings-pages-changename-button-password settings-pages-changename-button-password-forget'>
+                                <p>وشەی نهێنیە کۆنەکەت لەیاد کردووە؟ <a href="">کلیک لێرە بکە</a></p>
                             </div>
                         </div>
                     </div>
                     <div className={`settings-pages-deleteaccount ${deleteaccount ? '' : 'active'}`}>
                         <div>
                             <div className='settings-pages-title'>
-                                <p>تەنەکەی خۆڵ</p>
+                                <p>سڕینەوەی هەژمارەکەت</p>
+                                <small>ئایا دڵنیایت کە هەژمارەکەت دەسڕیتەوە؟ هەژمارەکەت بە تەواوی بوونی نامێنێت</small>
                             </div>
-                            <div className='settings-pages-input'>
-                                <input type='text' placeholder='ناوی نوێ' />
+
+                            <div className='settings-pages-changename-deletebutton'>
+                                <button>هەژمارەکەم بسڕەوە</button>
                             </div>
                         </div>
                     </div>

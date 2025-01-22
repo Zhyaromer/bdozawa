@@ -72,10 +72,13 @@ body {
     display: block;
 }
 
-.settings-pages-changename{
+.settings-pages-changename,
+.settings-pages-changeemail,
+.settings-pages-changepassword,
+.settings-pages-deleteaccount{
     padding: 0px 20px;
     margin-top: 40px;
-    text-align: right;
+    text-align: center;
 }
 
 .settings-pages-title p{
@@ -92,7 +95,7 @@ body {
     font-family:  sans-serif;
 }
 
-.settings-pages-changename input{
+.settings-pages-input input{
     width: 80%;
     margin-top: 20px;
     padding: 10px 10px;
@@ -104,28 +107,40 @@ body {
     font-family:  sans-serif;
 }
 
-.settings-pages-changename input::placeholder{
+.settings-pages-input input::placeholder{
     text-align: right;
 }
 
 .settings-pages-alert-container{
-    padding-left: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .settings-pages-alert{
-    background-color: #fff3cd;
-    padding: 10px;
+    background-color: #dc3545;
+    padding: 10px 40px;
     border-radius: 10px;
-    color: #856404;
+    color: #ffffff;
     font-size: 14px;
-    margin-top: 10px;
+    margin-top: 15px;
     font-family:  sans-serif;
+    text-align: right;
     font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.settings-pages-alert i {
+    font-size: 17px;
 }
 
 .settings-pages-changename-button{
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .settings-pages-changename-button button{
@@ -139,6 +154,44 @@ body {
     font-family:  sans-serif;
     cursor: pointer;
     margin-top: 20px;
+}
+
+.settings-pages-changename-deletebutton button{
+    padding: 10px 20px;
+    width: 80%;
+    background-color: #FF4D4D;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    font-family:  sans-serif;
+    cursor: pointer;
+    margin-top: 40px;
+}
+
+.settings-pages-alert-container-email small{
+    font-size: 16px;
+}
+
+.settings-pages-input-email{
+    margin-top: -10px;
+}
+
+.settings-pages-title-password{
+    margin-bottom: 35px;
+}
+
+.settings-pages-changename-button-password{
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.settings-pages-changename-button-password-forget a{
+    color: #4caf50;
+    font-weight: bold;
+    font-size: 15px;
+    font-family:  sans-serif;
+    text-decoration: none;
 }
 
 @media(min-width:700px) and (max-width: 1280.98px) {
@@ -163,4 +216,9 @@ body {
         width: 240px;
         padding: 5px 0;
     }
+
+    .settings-pages-changename-button-password{
+        margin-top: 20px;
+        margin-bottom: 0px;
+    }    
 }
