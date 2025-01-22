@@ -130,10 +130,17 @@ const ContactPage = () => {
                 </div >
             </div >
             <div className='contactus-main-container'>
-                <div className="contactus-header">
-                    <p >لە کاتی هەبوونی کێشەیەک یان بۆ هەر ڕیکلامێکی بازرگانی پەوەندی بە یەکێک لەم هەژمارانەی خوارە بکە</p>
+                <div>
+                    <div className="contactus-header-container">
+                        <div className="contactus-header">
+                            <p>لە کاتی هەبوونی کێشەیەک یان بۆ هەر ڕیکلامێکی بازرگانی پەیوەندی بە یەکێک لەم هەژمارانەی خوارە بکە</p>
+                        </div>
+                        <div className='contactus-gif-container'>
+                            <img className="contactus-gif" src="nx59dhUZSz.gif" alt="" />
+                        </div>
+                    </div>
                 </div>
-                <div className="contact-section">
+                <div className="contact-section constact-section-2">
                     <h2>پەیوەندیمان پێوە بکە</h2>
                     <div className="contact-grid">
                         <div className="contact-item">
