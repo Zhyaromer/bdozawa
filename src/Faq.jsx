@@ -132,9 +132,19 @@ const Faq = () => {
                     </nav>
                 </div >
             </div >
+            <div className='faq-header'>
+                <div className='faq-header-container'>
+                    <div>
+                        <h2 className='faq-section-title'>پرسیارە باوەکان</h2>
+                    </div>
+                    <div>
+                        <img className='faq-header-image' src="image_processing20201231-4907-a8958e.gif" alt="" />
+                    </div>
+                </div>
+            </div>
             <div className='faqq-container'>
                 <div className='help-section'>
-                    <h2 className='faq-section-title'>پرسیارە باوەکان</h2>
+
                     <div className="faq-container faq-section-vip">
                         {[
                             {
