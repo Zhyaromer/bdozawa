@@ -27,28 +27,31 @@ body {
 
 .settings-options-title-text-icon {
     display: flex;
+    cursor: pointer;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 10px;
     width: 80%;
     color: hsl(0, 0%, 94%);
+    border-radius: 10px;
+    transition: background-color 0.3s;
 }
 
 .settings-options-title-text-icon:hover {
-    background-color: #5353ff;
+    background-color: hsl(0, 0%, 60%);
     border-radius: 10px;
     color: #f1f1f1;
 }
 
 .activechangename{
-    background-color: #5353ff;
+    background-color: #5353ff !important;
     border-radius: 10px;
     color: #f1f1f1;
 }
 
 .activedeleteaccount{
-    background-color: red;
+    background-color: hsl(0, 100%, 40%);
     border-radius: 10px;
     color: #f1f1f1;
 }
@@ -225,15 +228,58 @@ body {
         justify-content: flex-start;
         height: 100vh;
         padding-top: 20px;
+        padding: 20px 10px;
     }
 
     .settings-options-title-text-icon {
-        width: 240px;
-        padding: 5px 0;
+        width: 300px;
+        padding: 3px 0;
     }
 
     .settings-pages-changename-button-password {
-        margin-top: 20px;
+        margin-top: 40px;
         margin-bottom: 0px;
+    }
+
+    .settings-pages-title p {
+        font-size: 40px;
+        margin-bottom: 25px;
+    }
+    
+    .settings-pages-title small {
+        font-size: 20px;
+    }
+
+    .settings-pages-input input {
+        width: 84%;
+        margin-top: 20px;
+        padding: 15px 20px;
+        font-size: 20px;
+    }
+    
+    .settings-pages-currentname {
+        font-size: 21px;
+    }
+
+    .settings-pages-changename-button {
+        text-align: center;
+        margin-top: 10px;
+    }
+    
+    .settings-pages-changename-button button {
+        padding: 10px 15px;
+        width: 50%;
+        background-color: hsl(223, 19%, 23%);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 20px;
+        font-family: sans-serif;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+    .settings-pages-changename-button-password-forget{
+        margin-bottom: 25px;
     }
 }

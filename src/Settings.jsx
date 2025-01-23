@@ -209,7 +209,7 @@ const Settings = () => {
                                 <small>بۆ گۆڕینی ناوی هەژمارەکەت, ناوە تازەکەت بنووسە</small>
                             </div>
                             <div className='settings-pages-input'>
-                                <input type='text' placeholder='ناوی نوێ' />
+                                <input type='text' placeholder='ناوە نوێیەکەت لێرە بنووسە' />
                             </div>
                             <div className='settings-pages-currentname'>
                                 <small>  zhyar : ناوی ئێستات </small>
