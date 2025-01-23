@@ -78,7 +78,6 @@ const Settings = () => {
                 deleteCookie('idToken');
             })
             .catch((error) => {
-                console.error("Error signing out: ", error);
                 toast.error("هەڵەیەک ڕویدا" + error.message, { transition: Slide })
             });
     };
@@ -206,7 +205,6 @@ const Settings = () => {
                 toast.error('هەڵەیەک ڕویدا تکایە دووبارە هەوڵ بدەرەوە', { transition: Slide });
             }
         } catch (error) {
-            console.error(error);
             toast.error(error.response.data.message || "هەڵەیەک ڕویدا تکایە دووبارە هەوڵ بدەرەوە", { transition: Slide });
         }
     }
@@ -481,7 +479,7 @@ const Settings = () => {
                             </div>
 
                             <div className='settings-pages-changename-button-password settings-pages-changename-button-password-forget'>
-                                <p>وشەی نهێنیە کۆنەکەت لەیاد کردووە؟ <a href="">کلیک لێرە بکە</a></p>
+                                <p>وشەی نهێنیە کۆنەکەت لەیاد کردووە؟ <a href="/forgotpassword">کلیک لێرە بکە</a></p>
                             </div>
                         </div>
                     </div>

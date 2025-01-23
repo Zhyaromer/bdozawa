@@ -15,7 +15,7 @@ import ContactPage from './Contact.jsx';
 import Faq from './Faq.jsx';
 import Settings from './Settings.jsx';
 import Test from './Test.jsx';
-
+//forgotpassword
 function App() {
   return (
     <Router>

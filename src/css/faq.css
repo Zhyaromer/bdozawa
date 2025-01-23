@@ -23,7 +23,6 @@
     margin-bottom: 1rem;
     padding: 0px 20px;
     text-align: center;
-
 }
 
 .faq-contact p a {
@@ -49,6 +48,11 @@
     height: auto;
     margin-top: -30px;
     margin-bottom: -40px;
+}
+
+.question span,.answer {
+    font-family: sans-serif;
+    font-weight: bold;
 }
 
 @media(min-width:700px) and (max-width: 1280.98px) {
