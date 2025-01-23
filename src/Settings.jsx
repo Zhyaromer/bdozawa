@@ -191,7 +191,7 @@ const Settings = () => {
                                 <i class="fa-solid fa-lock"></i>
                             </div>
                         </div>
-                        <div onClick={openDeleteAccount} className='settings-options-title-text-icon'>
+                        <div onClick={openDeleteAccount} className='settings-options-title-text-icon settings-options-title-text-icon-delete'>
                             <div>
                                 <p>سڕێنەوەی هەژمار</p>
                             </div>
@@ -210,6 +210,9 @@ const Settings = () => {
                             </div>
                             <div className='settings-pages-input'>
                                 <input type='text' placeholder='ناوی نوێ' />
+                            </div>
+                            <div className='settings-pages-currentname'>
+                                <small>  zhyar : ناوی ئێستات </small>
                             </div>
                             <div className='settings-pages-changename-button'>
                                 <button>ناوەکەم بگۆرە</button>
