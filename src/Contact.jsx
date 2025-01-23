@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import './css/contact.css';
 import axios from 'axios';
+import { Slide, ToastContainer, toast } from 'react-toastify';
 import { auth, signOut, onAuthStateChanged } from './FirebaseService';
 
 const ContactPage = () => {
@@ -25,41 +26,32 @@ const ContactPage = () => {
         signOut(auth)
             .then(() => {
                 deleteCookie('idToken');
-                console.log("User logged out");
             })
             .catch((error) => {
-                console.error("Error signing out: ", error);
+                toast.error("هەڵەیەک ڕویدا" + error.message, { transition: Slide })
             });
     };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
             if (firebaseUser) {
-                console.log('Firebase user:', firebaseUser);
                 try {
                     const response = await axios.post(
                         "http://localhost:3500/checkAuth",
                         { uid: firebaseUser.uid },
                         { withCredentials: true }
                     );
-
-                    console.log(`Firebase user response status: ${response.status}`);
                     if (response.status === 200) {
-                        console.log("Authenticated user");
                         setUser(firebaseUser);
                     } else if (response.status === 404) {
-                        console.log("User not authenticated or profile not complete");
                         setUser(false);
                     } else {
-                        console.log(`Unexpected status code: ${response.status}`);
                         setUser(false);
                     }
                 } catch (error) {
-                    console.error(`Error checking authentication: ${error.message}`);
                     setUser(false);
                 }
             } else {
-                console.log("No user signed in");
                 setUser(false);
             }
         });
@@ -67,6 +59,7 @@ const ContactPage = () => {
             unsubscribe();
         };
     }, []);
+
     return (
         <div>
             <div className='nav'>
@@ -151,7 +144,7 @@ const ContactPage = () => {
                         <div className="contact-item">
                             <div className="contact-icon"><i class="fa-solid fa-phone"></i></div>
                             <h3>تەلەفۆن</h3>
-                            <p>0750 123 4567</p>
+                            <p>0770 322 7250</p>
                         </div>
                     </div>
 
@@ -167,6 +160,9 @@ const ContactPage = () => {
                         </div>
                         <div className="social-icon">
                             <span><i class="fa-brands fa-tiktok"></i></span> TikTok
+                        </div>
+                        <div className="social-icon">
+                            <span><i class="fa-brands fa-whatsapp"></i></span> Whatsapp
                         </div>
                     </div>
                 </div>
@@ -223,6 +219,7 @@ const ContactPage = () => {
                     <p className='powerby-p'>powered by <a className='powerby-a' target='_blank' rel="noreferrer" href="https://www.facebook.com/zhyaromer999/">zhyar omer</a></p>
                 </div>
             </footer>
+            <ToastContainer position='top-center' />
         </div>
     );
 };

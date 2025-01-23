@@ -279,6 +279,20 @@
     line-height: 1.5;
 }
 
+.contact-item h3{
+    font-size: 30px;
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-top: 0px;
+}
+
+.contact-item p{
+    font-size: 18px;
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-top: 0px;
+}
+
 .social-links {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -296,12 +310,12 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    font-size: 1.7rem !important;
     color: #64748b;
     border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .social-icon:hover {
-    background: #2ecc71;
     color: white;
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(79, 70, 229, 0.2);
