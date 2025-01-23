@@ -4,6 +4,7 @@ import './css/makejobsvip.css';
 import { FaSearch, FaNewspaper, FaRegMoneyBillAlt, FaInstagram, FaTelegram, FaGithub } from 'react-icons/fa';
 import axios from 'axios';
 import { auth, signOut, onAuthStateChanged } from './FirebaseService';
+import { Slide, ToastContainer, toast } from 'react-toastify';
 
 const About = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -15,7 +16,6 @@ const About = () => {
   };
 
   const handleCloseSidebar = () => {
-    console.log('Close button clicked');
     setShowSidebar(false);
   };
 
@@ -27,41 +27,32 @@ const About = () => {
     signOut(auth)
       .then(() => {
         deleteCookie('idToken');
-        console.log("User logged out");
       })
       .catch((error) => {
-        console.error("Error signing out: ", error);
+        toast.error("هەڵەیەک ڕویدا" + error.message, { transition: Slide })
       });
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
-        console.log('Firebase user:', firebaseUser);
         try {
           const response = await axios.post(
             "http://localhost:3500/checkAuth",
             { uid: firebaseUser.uid },
             { withCredentials: true }
           );
-
-          console.log(`Firebase user response status: ${response.status}`);
           if (response.status === 200) {
-            console.log("Authenticated user");
             setUser(firebaseUser);
           } else if (response.status === 404) {
-            console.log("User not authenticated or profile not complete");
             setUser(false);
           } else {
-            console.log(`Unexpected status code: ${response.status}`);
             setUser(false);
           }
         } catch (error) {
-          console.error(`Error checking authentication: ${error.message}`);
           setUser(false);
         }
       } else {
-        console.log("No user signed in");
         setUser(false);
       }
     });
@@ -69,6 +60,7 @@ const About = () => {
       unsubscribe();
     };
   }, []);
+
   return (
     <div>
       <div className='nav'>
@@ -171,23 +163,23 @@ const About = () => {
             <div className='creator-imagetitle-container'>
               <h2>دەربارەی دروستکەر</h2>
               <div className="creator-image-wrapper">
-                <img src="/api/placeholder/150/150" alt="Creator" className="creator-image" />
+                <img src="creater.avif" alt="Creator" className="creator-image" />
               </div>
             </div>
             <div className="creator-content">
               <div className="creator-info">
                 <div className="creator-text">
                   <p className="creator-main-text">
-                    من خوێندکاری قۆناغی دووەمم لە بەشی تەکنەلۆژیای زانیاری. ئەم پڕۆژەیەم دروستکردووە بۆ یارمەتیدانی گەنجانی وڵاتەکەم لە دۆزینەوەی هەلی کار.
+                    من خوێندکاری قۆناغی دووەمم لە بەشی تەکنەلۆژیای زانیاری. ئەم پڕۆژەیەم دروستکردووە بۆ یارمەتیدانی گەنجانی وڵاتەکەم لە دۆزینەوەی هەلی کار
                   </p>
                   <p className="creator-vision">
-                    ئامانجم ئەوەیە کە پردێک دروست بکەم لە نێوان خاوەن کار و ئەو کەسانەی بەدوای کاردا دەگەڕێن. بە بەکارهێنانی تەکنەلۆژیای نوێ، دەمانەوێت پرۆسەی دۆزینەوەی کار ئاسانتر بکەین.
+                    ئامانجم ئەوەیە کە پردێک دروست بکەم لە نێوان خاوەن کار و ئەو کەسانەی بەدوای کاردا دەگەڕێن. بە بەکارهێنانی تەکنەلۆژیای نوێ، ئەمەوێت پرۆسەی دۆزینەوەی کار ئاسانتر بکەم
                   </p>
                 </div>
                 <div className="about-social-links">
-                  <a href="#" className="about-social-link"><FaInstagram /></a>
-                  <a href="#" className="about-social-link"><FaGithub /></a>
-                  <a href="#" className="about-social-link"><FaTelegram /></a>
+                  <a href="https://www.instagram.com/0.zhia/" className="about-social-link"><FaInstagram /></a>
+                  <a href="https://github.com/Zhyaromer" className="about-social-link"><FaGithub /></a>
+                  <a href="https://t.me/Zhyaromar99" className="about-social-link"><FaTelegram /></a>
                 </div>
               </div>
             </div>
@@ -219,6 +211,12 @@ const About = () => {
               </div>
               <div className="social-icon">
                 <span><i class="fa-brands fa-telegram"></i></span> Telegram
+              </div>
+              <div className="social-icon">
+                <span><i class="fa-brands fa-tiktok"></i></span> TikTok
+              </div>
+              <div className="social-icon">
+                <span><i class="fa-brands fa-whatsapp"></i></span> Whatsapp
               </div>
             </div>
           </div>
@@ -276,6 +274,7 @@ const About = () => {
           <p className='powerby-p'>powered by <a className='powerby-a' target='_blank' rel="noreferrer" href="https://www.facebook.com/zhyaromer999/">zhyar omer</a></p>
         </div>
       </footer>
+      <ToastContainer position='top-center' />
     </div>
   );
 };

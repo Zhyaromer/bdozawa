@@ -13,6 +13,7 @@
     border-radius: 15px;
     background: linear-gradient(to right, #4caf50, #388e3c);
     color: #fff;
+    font-family: sans-serif;
     animation: fadeIn 1.5s ease-in-out;
 }
 
@@ -35,11 +36,15 @@
     color: #4caf50;
     margin-bottom: 20px;
     animation: slideIn 1.2s ease-out;
+    font-family: sans-serif;
+    font-weight: bold;
 }
 
 .about-us-description {
     font-size: 1.1rem;
     margin-bottom: 20px;
+    font-family: sans-serif;
+    font-weight: bold;
     line-height: 1.5;
 }
 
@@ -48,6 +53,7 @@
     line-height: 1.6;
     margin-bottom: 20px;
     font-size: 1.1rem;
+    font-family: sans-serif;
 }
 
 .features-container {
@@ -86,6 +92,7 @@
 .creator-section {
     background-color: #f1f8e9;
     padding: 30px;
+    font-family: sans-serif;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     animation: zoomIn 1.3s ease-in-out;
@@ -168,6 +175,8 @@
 
 .features-container-title {
     margin-top: 60px;
+    font-family: sans-serif;
+    font-weight: bold;
 }
 
 /* Animations */
