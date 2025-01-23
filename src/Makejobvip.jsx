@@ -1,9 +1,9 @@
 import { React, useState, useEffect } from 'react';
 import './css/howtopost.css';
 import './css/makejobsvip.css';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { auth, signOut, onAuthStateChanged } from './FirebaseService';
+import { Slide, ToastContainer, toast } from 'react-toastify';
 
 const VIPJobGuide = () => {
     const [activeQuestion, setActiveQuestion] = useState(null);
@@ -16,7 +16,6 @@ const VIPJobGuide = () => {
     };
 
     const handleCloseSidebar = () => {
-        console.log('Close button clicked');
         setShowSidebar(false);
     };
 
@@ -28,41 +27,32 @@ const VIPJobGuide = () => {
         signOut(auth)
             .then(() => {
                 deleteCookie('idToken');
-                console.log("User logged out");
             })
             .catch((error) => {
-                console.error("Error signing out: ", error);
+                toast.error("هەڵەیەک ڕویدا" + error.message, { transition: Slide })
             });
     };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
             if (firebaseUser) {
-                console.log('Firebase user:', firebaseUser);
                 try {
                     const response = await axios.post(
                         "http://localhost:3500/checkAuth",
                         { uid: firebaseUser.uid },
                         { withCredentials: true }
                     );
-
-                    console.log(`Firebase user response status: ${response.status}`);
                     if (response.status === 200) {
-                        console.log("Authenticated user");
                         setUser(firebaseUser);
                     } else if (response.status === 404) {
-                        console.log("User not authenticated or profile not complete");
                         setUser(false);
                     } else {
-                        console.log(`Unexpected status code: ${response.status}`);
                         setUser(false);
                     }
                 } catch (error) {
-                    console.error(`Error checking authentication: ${error.message}`);
                     setUser(false);
                 }
             } else {
-                console.log("No user signed in");
                 setUser(false);
             }
         });
@@ -70,6 +60,7 @@ const VIPJobGuide = () => {
             unsubscribe();
         };
     }, []);
+
     return (
         <div>
             <div className='nav'>
@@ -151,7 +142,8 @@ const VIPJobGuide = () => {
                             <ul className="requirements-list">
                                 <li>
                                     <span className="check-icon">✓</span>
-                                    لە بەشی سەرەوە کلیک لەسەر ئایکۆنی ئەکاونت بکە                                </li>
+                                    لە بەشی سەرەوە کلیک لەسەر ئایکۆنی هەژمار بکە
+                                </li>
                                 <li>
                                     <span className="check-icon">✓</span>
                                     برۆ بەشی ڕێک خستنەکان
@@ -182,7 +174,7 @@ const VIPJobGuide = () => {
                                 </li>
                                 <li>
                                     <span className="check-icon">✓</span>
-                                    کۆپی کردنی ID کە
+                                    ID کە کۆپی بکە
                                 </li>
                             </ul>
                         </div>
@@ -222,8 +214,8 @@ const VIPJobGuide = () => {
                     <div className="faq-container">
                         {[
                             {
-                                q: 'ئایا ئیسفادەی چیە لە هەلی کارەکەمان بکەینە VIP؟',
-                                a: 'ئەگەر بتەوێت بە زووترین کات کارمەندێکی نایاب بۆ ئیشەکەت بدۆزیتەوە ئەم بەشە بۆتۆ گونجاوە بۆتە چونکە زۆرترین کەس بینەری دەبێت'
+                                q: 'ئایا سوودی چیە هەلی کارەکەمان بکەینە VIP؟',
+                                a: 'ئەگەر بتەوێت بە زووترین کات کارمەندێکی نایاب بۆ ئیشەکەت بدۆزیتەوە ئەم بەشە بۆتۆ گونجاوە چونکە زۆرترین بینەری دەبێت'
                             },
                             {
                                 q: 'ئایا پێویستە بڕە پارەیەک بنێرم بۆ ئەوەی هەلی کارەکەم بکەمە VIP؟',
@@ -231,7 +223,7 @@ const VIPJobGuide = () => {
                             },
                             {
                                 q: 'چی بەسەر هەلی کارەکەمان دێت ئەگەر بکەینە VIP؟',
-                                a: 'هەلی کارەکەت لە پێش هەموو کارەکانی تر لە سەرەوەی ماڵپەرەکە دەمێنێتەوەو زۆرترین کەس بینەری دەبێت'
+                                a: 'هەلی کارەکەت لە پێش هەموو کارەکانی تر لە سەرەوەی ماڵپەرەکە دەمێنێتەوەو زۆرترین بینەری دەبێت'
                             },
                         ].map((faq, index) => (
                             <div
@@ -271,6 +263,12 @@ const VIPJobGuide = () => {
                             </div>
                             <div className="social-icon">
                                 <span><i class="fa-brands fa-telegram"></i></span> Telegram
+                            </div>
+                            <div className="social-icon">
+                                <span><i class="fa-brands fa-tiktok"></i></span> TikTok
+                            </div>
+                            <div className="social-icon">
+                                <span><i class="fa-brands fa-whatsapp"></i></span> Whatsapp
                             </div>
                         </div>
                     </div>
@@ -328,6 +326,7 @@ const VIPJobGuide = () => {
                     <p className='powerby-p'>powered by <a className='powerby-a' target='_blank' rel="noreferrer" href="https://www.facebook.com/zhyaromer999/">zhyar omer</a></p>
                 </div>
             </footer>
+            <ToastContainer position='top-center' />
         </div>
     );
 };

@@ -7,6 +7,14 @@
     direction: rtl;
 }
 
+.hero-content{
+    font-family: sans-serif;
+}
+
+.hero-content p{
+    font-size: 19px;
+}
+
 .about-us-header {
     text-align: center;
     padding: 20px 0;
@@ -292,5 +300,9 @@
 
     .feature-item p{
         font-size: 1.2rem;
+    }
+
+    .hero-content p{
+        font-size: 23px;
     }
 }

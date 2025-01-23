@@ -391,6 +391,13 @@
     color: #4338ca;
 }
 
+
+@media(min-width:700px) and (max-width: 1280.98px) {
+    .requirements-list li {
+        font-size: 23px;
+    }
+}
+
 @media (max-width: 1024px) {
     .hero h1 {
         font-size: 3rem;
@@ -479,3 +486,5 @@
         padding: 20px;
     }
 }
+
+
