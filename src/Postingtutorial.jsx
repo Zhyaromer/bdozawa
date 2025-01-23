@@ -3,13 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { auth, signOut, onAuthStateChanged } from './FirebaseService';
+import { Slide, ToastContainer, toast } from 'react-toastify';
 
 const JobPostingGuide = () => {
     const [activeQuestion, setActiveQuestion] = useState(null);
     const navigate = useNavigate();
 
     const addJob = () => {
-        navigate('/addjobform');
+        navigate('/addjob');
     }
     const [showSidebar, setShowSidebar] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -20,7 +21,6 @@ const JobPostingGuide = () => {
     };
 
     const handleCloseSidebar = () => {
-        console.log('Close button clicked');
         setShowSidebar(false);
     };
 
@@ -32,41 +32,32 @@ const JobPostingGuide = () => {
         signOut(auth)
             .then(() => {
                 deleteCookie('idToken');
-                console.log("User logged out");
             })
             .catch((error) => {
-                console.error("Error signing out: ", error);
+                toast.error("هەڵەیەک ڕویدا" + error.message, { transition: Slide })
             });
     };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
             if (firebaseUser) {
-                console.log('Firebase user:', firebaseUser);
                 try {
                     const response = await axios.post(
                         "http://localhost:3500/checkAuth",
                         { uid: firebaseUser.uid },
                         { withCredentials: true }
                     );
-
-                    console.log(`Firebase user response status: ${response.status}`);
                     if (response.status === 200) {
-                        console.log("Authenticated user");
                         setUser(firebaseUser);
                     } else if (response.status === 404) {
-                        console.log("User not authenticated or profile not complete");
                         setUser(false);
                     } else {
-                        console.log(`Unexpected status code: ${response.status}`);
                         setUser(false);
                     }
                 } catch (error) {
-                    console.error(`Error checking authentication: ${error.message}`);
                     setUser(false);
                 }
             } else {
-                console.log("No user signed in");
                 setUser(false);
             }
         });
@@ -74,6 +65,7 @@ const JobPostingGuide = () => {
             unsubscribe();
         };
     }, []);
+
     return (
         <div>
             <div className='nav'>
@@ -166,7 +158,7 @@ const JobPostingGuide = () => {
                                 </li>
                                 <li>
                                     <span className="check-icon">✓</span>
-                                    هەڵبژاردنی ڕۆڵی "خاوەن کار
+                                    هەڵبژاردنی ڕۆڵی خاوەن کار
                                 </li>
                                 <li>
                                     <span className="check-icon">✓</span>
@@ -193,7 +185,7 @@ const JobPostingGuide = () => {
                                 </li>
                                 <li>
                                     <span className="check-icon">✓</span>
-                                    برؤ بەشتی کارێک دابنێ
+                                    برۆ بەشی کارێک دابنێ
                                 </li>
                             </ul>
                         </div>
@@ -212,8 +204,7 @@ const JobPostingGuide = () => {
                                 </li>
                                 <li>
                                     <span className="check-icon">✓</span>
-                                    زانیاریەکانی پێویستە ورد بنو زانیاری تەواون لەسەر هەلی کارەکە بدات
-                                </li>
+                                    زانیاری ورد و تەواو لەسەر هەلی کارەکە بنووسە                                </li>
                                 <li>
                                     <span className="check-icon">✓</span>
                                     دڵنیابەرەوە لە ڕاستی و درووستی زانیاریەکانت
@@ -237,7 +228,7 @@ const JobPostingGuide = () => {
                             },
                             {
                                 q: "ئایا دەتوانم ڕیپۆرت لە هەلی کارێک بدەم؟",
-                                a: 'بەڵێ دەتوانیت، ئەگەر هەستت کرد هەلی کارێک کێشەیەکی هەیە ئەوا دەستنی ڕیپۆرتی بکەیت و هۆکارو تێبینی خۆت بنێریت'
+                                a: 'بەڵێ دەتوانیت، ئەگەر هەستت کرد هەلی کارێک کێشەیەکی هەیە ئەوا دەتوانی ڕیپۆرتی بکەیت و هۆکارو تێبینی خۆت بنێریت'
                             },
                             {
                                 q: 'نرخی بڵاوکردنەوەی هەلی کار چەندە؟',
@@ -274,15 +265,21 @@ const JobPostingGuide = () => {
                         </div>
 
                         <div className="social-links">
-                            <div className="social-icon">
-                                <span><i class="fa-brands fa-facebook"></i></span> Facebook
-                            </div>
-                            <div className="social-icon">
-                                <span><i class="fa-brands fa-instagram"></i></span> Instagram
-                            </div>
-                            <div className="social-icon">
-                                <span><i class="fa-brands fa-telegram"></i></span> Telegram
-                            </div>
+                        <div className="social-icon">
+                            <span><i class="fa-brands fa-facebook"></i></span> Facebook
+                        </div>
+                        <div className="social-icon">
+                            <span><i class="fa-brands fa-instagram"></i></span> Instagram
+                        </div>
+                        <div className="social-icon">
+                            <span><i class="fa-brands fa-telegram"></i></span> Telegram
+                        </div>
+                        <div className="social-icon">
+                            <span><i class="fa-brands fa-tiktok"></i></span> TikTok
+                        </div>
+                        <div className="social-icon">
+                            <span><i class="fa-brands fa-whatsapp"></i></span> Whatsapp
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -339,6 +336,7 @@ const JobPostingGuide = () => {
                     <p className='powerby-p'>powered by <a className='powerby-a' target='_blank' rel="noreferrer" href="https://www.facebook.com/zhyaromer999/">zhyar omer</a></p>
                 </div>
             </footer>
+            <ToastContainer position="top-center" />
         </div>
     );
 };
