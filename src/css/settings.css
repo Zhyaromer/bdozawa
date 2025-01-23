@@ -21,6 +21,7 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
+    padding: 10px 0;
     background-color: hsl(223, 19%, 23%);
 }
 
@@ -30,12 +31,30 @@ body {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    width: 100%;
+    width: 80%;
     color: hsl(0, 0%, 94%);
 }
 
 .settings-options-title-text-icon:hover {
     background-color: #5353ff;
+    border-radius: 10px;
+    color: #f1f1f1;
+}
+
+.activechangename{
+    background-color: #5353ff;
+    border-radius: 10px;
+    color: #f1f1f1;
+}
+
+.activedeleteaccount{
+    background-color: red;
+    border-radius: 10px;
+    color: #f1f1f1;
+}
+
+.settings-options-title-text-icon:hover:last-child {
+    background-color: red;
     border-radius: 10px;
     color: #f1f1f1;
 }
@@ -65,7 +84,7 @@ body {
 .settings-pages-deleteaccount {
     padding: 0px 20px;
     margin-top: 40px;
-    text-align: center;
+    text-align: right;
 }
 
 .settings-pages-title p {
@@ -76,7 +95,7 @@ body {
 }
 
 .settings-pages-title small {
-    font-size: 13px;
+    font-size: 14px;
     color: gray;
     font-weight: bold;
     font-family: sans-serif;
@@ -85,7 +104,7 @@ body {
 .settings-pages-input input {
     width: 80%;
     margin-top: 20px;
-    padding: 10px 10px;
+    padding: 10px 20px;
     border-radius: 5px;
     border: 1px solid gray;
     margin-bottom: 15px;
@@ -100,8 +119,8 @@ body {
 
 .settings-pages-alert-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: right;
+    justify-content: right;
 }
 
 .settings-pages-alert {
@@ -112,8 +131,8 @@ body {
     font-size: 14px;
     margin-top: 15px;
     font-family: sans-serif;
-    text-align: right;
     font-weight: bold;
+    text-align: right;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -132,8 +151,8 @@ body {
 
 .settings-pages-changename-button button {
     padding: 10px 20px;
-    width: 80%;
-    background-color:  hsl(223, 19%, 23%);
+    width: 60%;
+    background-color: hsl(223, 19%, 23%);
     color: white;
     border: none;
     border-radius: 5px;
@@ -181,14 +200,13 @@ body {
     text-decoration: none;
 }
 
-.settings-pages-currentname{
+.settings-pages-currentname {
     margin-top: 10px;
     font-size: 17px;
     font-weight: bold;
     font-family: sans-serif;
     color: hsl(0, 0%, 57%);
     text-align: right;
-    padding-right: 30px;
 }
 
 @media(min-width:700px) and (max-width: 1280.98px) {

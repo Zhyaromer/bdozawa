@@ -14,7 +14,7 @@ const Settings = () => {
     const [changeemail, setChangeemail] = useState(true);
     const [changepassword, setChangepassword] = useState(true);
     const [deleteaccount, setDeleteaccount] = useState(true);
-
+    const [hasChanged, setHasChanged] = useState(false);
     const [user, setUser] = useState(null);
     const [showSidebar, setShowSidebar] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -167,15 +167,15 @@ const Settings = () => {
             <div className='settings-container'>
                 <div className='settings-options'>
                     <div className='settings-options-title'>
-                        <div onClick={openChangeName} className='settings-options-title-text-icon'>
+                        <div onClick={openChangeName} className={`settings-options-title-text-icon ${changename ? '' : 'activechangename'}`}>
                             <div>
                                 <p>گۆرینی ناو</p>
                             </div>
                             <div>
-                                <i class="fa-solid fa-gear"></i>
+                            <i class="fa-solid fa-user"></i>
                             </div>
                         </div>
-                        <div onClick={openChangeEmail} className='settings-options-title-text-icon'>
+                        <div onClick={openChangeEmail} className={`settings-options-title-text-icon ${changeemail ? '' : 'activechangename'}`}>
                             <div>
                                 <p>گۆرینی ئیمەیڵ</p>
                             </div>
@@ -183,7 +183,7 @@ const Settings = () => {
                                 <i class="fa-solid fa-envelope"></i>
                             </div>
                         </div>
-                        <div onClick={openChangePassword} className='settings-options-title-text-icon'>
+                        <div onClick={openChangePassword} className={`settings-options-title-text-icon ${changepassword ? '' : 'activechangename'}`}>
                             <div>
                                 <p>گۆرینی وشەی نهێنی</p>
                             </div>
@@ -191,9 +191,9 @@ const Settings = () => {
                                 <i class="fa-solid fa-lock"></i>
                             </div>
                         </div>
-                        <div onClick={openDeleteAccount} className='settings-options-title-text-icon settings-options-title-text-icon-delete'>
+                        <div onClick={openDeleteAccount} className={`settings-options-title-text-icon ${deleteaccount ? '' : 'activedeleteaccount'} settings-options-title-text-icon-delete`}>
                             <div>
-                                <p>سڕێنەوەی هەژمار</p>
+                                <p>سڕینەوەی هەژمار</p>
                             </div>
                             <div>
                                 <i class="fa-solid fa-trash"></i>
@@ -205,7 +205,7 @@ const Settings = () => {
                     <div className={`settings-pages-changename ${changename ? '' : 'active'}`}>
                         <div>
                             <div className='settings-pages-title'>
-                                <p>گۆرینی ناوی هەژمارەکەت</p>
+                                <p>گۆرینی ناوی هەژمارەکەت <i class="fa-solid fa-user"></i></p>
                                 <small>بۆ گۆڕینی ناوی هەژمارەکەت, ناوە تازەکەت بنووسە</small>
                             </div>
                             <div className='settings-pages-input'>
@@ -223,7 +223,7 @@ const Settings = () => {
                         <div>
                             <div>
                                 <div className='settings-pages-title'>
-                                    <p>گۆرینی ئیمەیڵی هەژمارەکەت</p>
+                                    <p>گۆرینی ئیمەیڵی هەژمارەکەت <i class="fa-solid fa-envelope"></i></p>
                                 </div>
                                 <div className='settings-pages-input settings-pages-input-email'>
                                     <input type='email' value={'zhyaraland123@gmail.com'} readOnly />
@@ -243,7 +243,7 @@ const Settings = () => {
                     <div className={`settings-pages-changepassword ${changepassword ? '' : 'active'}`}>
                         <div>
                             <div className='settings-pages-title settings-pages-title-password'>
-                                <p>گۆرینی وشەی نهێنی</p>
+                                <p>گۆرینی وشەی نهێنی <i class="fa-solid fa-lock"></i></p>
                                 <small>بۆ گۆڕینی وشەی نهێنی پێوسیتە وشە نهێنیە کۆنەکە بزانیت</small>
                             </div>
                             <div className="form-group">
@@ -321,7 +321,7 @@ const Settings = () => {
                     <div className={`settings-pages-deleteaccount ${deleteaccount ? '' : 'active'}`}>
                         <div>
                             <div className='settings-pages-title'>
-                                <p>سڕینەوەی هەژمارەکەت</p>
+                                <p>سڕینەوەی هەژمارەکەت <i class="fa-solid fa-trash"></i></p>
                                 <small>ئایا دڵنیایت کە هەژمارەکەت دەسڕیتەوە؟ هەژمارەکەت بە تەواوی بوونی نامێنێت</small>
                             </div>
 
