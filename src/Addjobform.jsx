@@ -189,6 +189,32 @@ const Signupform = () => {
             if (response.status === 200) {
                 setLoading(true);
                 toast.success('کارەکەت بە سەرکەوتووی زیادکرا', { transition: Slide });
+                setFormData({
+                    jobtitle: '',
+                    companyname: '',
+                    description: '',
+                    gender: '',
+                    gmail: '',
+                    degree: '',
+                    degreetype: '',
+                    jobtype: '',
+                    salary: '',
+                    salaryrange1: '',
+                    salaryrange2: '',
+                    currency: '',
+                    experience: '',
+                });
+
+                setPhoneNumber('');
+                setSelectedLanguages({
+                    کوردی: false,
+                    ئینگلیزی: false,
+                    عەرەبی: false,
+                });
+                setCitySearch('');
+                setIndustrySearch('');
+                setSelectedSalaryOption(null);
+                setLoading(false);
             } else if (response.status === 409) {
                 toast.error(response.data.message || 'Email already exists. Please use a different email.', { transition: Slide });
             } else if (response.status === 400) {
@@ -459,7 +485,7 @@ const Signupform = () => {
                             </div>
                             <div className="form-group">
                                 <label className='label-format'>ئیمەیڵ (ئەم بەشە ئارەزوومەندانەیە)</label>
-                                <input onChange={handleChange} id='gmail' value={formData.gmail} className='input-format' type="email" placeholder="ئیمەیڵەکەت بنوسە" required />
+                                <input onChange={handleChange} id='gmail' value={formData.gmail} className='input-format' type="email" placeholder="ئیمەیڵەکەت بنوسە" />
                             </div>
                         </div>
                         {/* done */}
@@ -523,7 +549,7 @@ const Signupform = () => {
                             </div>
                             <div className="form-group">
                                 <label className='label-format'>جۆری کارەکە (ئەم بەشە ئارەزوومەندانەیە)</label>
-                                <select id='jobtype' value={formData.jobtype} onChange={handleChange} className='input-format custom-select' required>
+                                <select id='jobtype' value={formData.jobtype} onChange={handleChange} className='input-format custom-select'>
                                     <option value="">بژاردەیەک هەڵبژێرە</option>
                                     <option value="لەسەر کار">لەسەر کار</option>
                                     <option value="ئۆنڵاین">ئۆنڵاین</option>

@@ -44,13 +44,13 @@ body {
     color: #f1f1f1;
 }
 
-.activechangename{
+.activechangename {
     background-color: #5353ff !important;
     border-radius: 10px;
     color: #f1f1f1;
 }
 
-.activedeleteaccount{
+.activedeleteaccount {
     background-color: hsl(0, 100%, 40%);
     border-radius: 10px;
     color: #f1f1f1;
@@ -70,24 +70,33 @@ body {
 .settings-pages-changename,
 .settings-pages-changeemail,
 .settings-pages-changepassword,
-.settings-pages-deleteaccount {
+.settings-pages-deleteaccount,
+.settings-pages-myposts {
     display: none;
 }
 
 .settings-pages-changename.active,
 .settings-pages-changeemail.active,
 .settings-pages-changepassword.active,
-.settings-pages-deleteaccount.active {
+.settings-pages-deleteaccount.active,
+.settings-pages-myposts.active {
     display: block;
 }
 
 .settings-pages-changename,
 .settings-pages-changeemail,
 .settings-pages-changepassword,
-.settings-pages-deleteaccount {
+.settings-pages-deleteaccount,
+.settings-pages-myposts {
     padding: 0px 20px;
     margin-top: 40px;
     text-align: right;
+}
+
+.hasChanged {
+    background-color: #e9ecef !important;
+    color: #6c757d !important;
+    cursor: not-allowed !important;
 }
 
 .settings-pages-title p {
@@ -212,6 +221,69 @@ body {
     text-align: right;
 }
 
+.settings-pages-myposts-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.job-card-content-settings {
+    width: 345px;
+    background-color: #272c39;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    height: auto;
+    max-height: 300px;
+    position: relative;
+    z-index: 0;
+    margin-left: 10px;
+}
+
+.settings-pages-myposts-delete button {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    font-family: sans-serif;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+.settings-pages-myposts-delete button:hover {
+    background-color: hsl(0, 100%, 40%);
+}
+
+.settings-pages-myposts-copyid button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    font-family: sans-serif;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+.settings-pages-myposts-copyid button:hover {
+    background-color: hsl(122, 39%, 40%);
+}
+
+.no-jobs {
+    margin-top: 20px;
+}
+
+.responsivejobs-container-settings {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
 @media(min-width:700px) and (max-width: 1280.98px) {
     .settings-container {
         display: flex;
@@ -245,7 +317,7 @@ body {
         font-size: 40px;
         margin-bottom: 25px;
     }
-    
+
     .settings-pages-title small {
         font-size: 20px;
     }
@@ -256,7 +328,7 @@ body {
         padding: 15px 20px;
         font-size: 20px;
     }
-    
+
     .settings-pages-currentname {
         font-size: 21px;
     }
@@ -265,7 +337,7 @@ body {
         text-align: center;
         margin-top: 10px;
     }
-    
+
     .settings-pages-changename-button button {
         padding: 10px 15px;
         width: 50%;
@@ -279,7 +351,20 @@ body {
         margin-top: 20px;
     }
 
-    .settings-pages-changename-button-password-forget{
+    .settings-pages-changename-button-password-forget {
         margin-bottom: 25px;
+    }
+
+    .settings-options {
+        height: 100%;
+        width: 400px;
+        padding-left: 30px;
+    }
+
+    .settings-options-title {
+        height: 100%;
+        position: fixed;
+        top: 80px;
+        width: 320px;
     }
 }
