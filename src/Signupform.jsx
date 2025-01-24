@@ -242,7 +242,7 @@ const Signupform = () => {
 
                         <div className="form-row">
                             <div className="form-group">
-                                <label className='label-format'>شەهادە (ئەم بەشە ئارەزوومەندانە)</label>
+                                <label className='label-format'>شەهادە (ئەم بەشە ئارەزوومەندانەیە)</label>
                                 <select id='degree' onChange={handleChange} className='input-format signup-select-input-placeholder'>
                                     <option value="">شەهادەکەت هەڵبژێرە</option>
                                     {degrees.map((degree) => (
@@ -254,7 +254,7 @@ const Signupform = () => {
                             </div>
 
                             <div className="form-group">
-                                <label className='label-format'>پیشەسازی کار (ئەم بەشە ئارەزوومەندانە)</label>
+                                <label className='label-format'>پیشەسازی کار (ئەم بەشە ئارەزوومەندانەیە)</label>
                                 <div className="custom-select">
                                     <input
                                         className='input-format'

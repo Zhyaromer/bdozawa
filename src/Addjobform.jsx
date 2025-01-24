@@ -31,7 +31,7 @@ const Signupform = () => {
     const [citySearch, setCitySearch] = useState('');
     const [showCityDropdown, setShowCityDropdown] = useState(false);
     const [loading, setLoading] = useState(false);
-    const cities = ['Erbil', 'Sulaymaniyah', 'Duhok', 'Kirkuk'];
+    const cities = ['سلێمانی', 'هەولێر', 'دهۆک', 'کەرکوک', 'هەڵەبجە', 'هەڵەبجەی شەهید', 'زاخۆ', 'چەمچەماڵ', 'دەربەندیخان', 'سۆران', 'کۆیە', 'ڕەواندز', 'شەقلاوە', 'کەلار', 'دۆکان', 'ئاکرێ', 'ڕانیە', 'کفری', 'گەرمیان', 'عەربەت', 'تەق تەق', 'سەید سادق', 'هیتر'];
     const [selectedLanguages, setSelectedLanguages] = useState({
         کوردی: false,
         ئینگلیزی: false,
@@ -62,24 +62,26 @@ const Signupform = () => {
     };
 
     const industries = [
-        'Technology', 'Healthcare', 'Finance', 'Education',
-        'Manufacturing', 'Retail', 'Construction', 'Entertainment'
+        'تەکنەلۆژیا', 'تەندروستی', 'شاگردی', 'یاسا', 'خانووبەرە', 'خواردن', 'پەروەردە',
+        'پیشەسازی', 'بازرگانی', 'گواستنەوە ', 'گەشتیاری ', 'وەرگێر',
+        'میدیا', 'ژینگە', 'ئاسایش', 'گرافیک دیزاین', 'ئەندازیار ', 'مامۆستا', 'دارایی', 'هیتر'
     ];
 
     const degrees = [
-        'No Degree', 'Diploma', 'Bachelor', 'Master', 'PhD'
+        'بێ بڕوانامە', 'دیپلۆم', 'بەکالۆریۆس', 'ماستەر', 'دکتۆرا'
     ];
 
     const degreetypes = [
-        'No Degree', 'Diploma', 'Bachelor', 'Master', 'PhD'
+        'پزیشکی', 'پەرستاری', 'دەرمانسازی', 'تاقیگەی پزیشکی', 'سڕکردن', 'ددان', 'تەلارسازی', 'شارستانی', 'میکانیک', 'ڤێتەنەری', 'کارەبا', 'ئایتی یان زانستی کۆمپیتەر', 'ئینگلیزی', 'عەرەبی', 'کوردی',
+        'کیمیا', 'فیزیا', 'وەرگێڕان', 'راگەیاندن', 'یاسا', 'ژمێریاری', 'کارگێری کار', 'پەروەردەی تایبەت', 'دەروناسی', 'بایەلۆجی', 'ئابوری', 'ئامار و زانیاری', 'میدیا', 'شەریعە'
     ];
-
-    const filteredCities = cities.filter((city) =>
-        city.toLowerCase().includes(citySearch.toLowerCase())
-    );
 
     const filteredIndustries = industries.filter(industry =>
         industry.toLowerCase().includes(industrySearch.toLowerCase())
+    );
+
+    const filteredCities = cities.filter((city) =>
+        city.includes(citySearch)
     );
 
     const handleCitySelect = (selectedCity) => {
@@ -105,6 +107,24 @@ const Signupform = () => {
     const handleChange = (e) => {
         const { id, value } = e.target;
         setFormData(prev => ({ ...prev, [id]: value }));
+    };
+
+    const handleBlur = () => {
+        setTimeout(() => {
+            setShowCityDropdown(false);
+            if (!cities.includes(citySearch)) {
+                setCitySearch('');
+            }
+        }, 150);
+    };
+
+    const handleBlurINdustry = () => {
+        setTimeout(() => {
+            setShowIndustryDropdown(false);
+            if (!industries.includes(industrySearch)) {
+                setIndustrySearch('');
+            }
+        }, 150);
     };
 
     const handleQuillChange = (value) => {
@@ -145,13 +165,29 @@ const Signupform = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const form = e.target.closest('form');
         if (!form.checkValidity()) {
             form.reportValidity();
             return;
         }
 
+        if (formData.currency === '') {
+            formData.currency = 'دینار';
+        }
+
+        if (formData.salary === '') {
+            formData.salary = 'موچە دیاری نەکراوە';
+        }
+
+        if (!cities.includes(citySearch)) {
+            toast.error('تکایە شارێک هەڵبژێرە لە لیستەکە', { transition: Slide });
+            return;
+        }
+
+        if (!industries.includes(industrySearch)) {
+            toast.error('تکایە پیشەسازیەک هەڵبژێرە لە لیستەکە', { transition: Slide });
+            return;
+        }
         try {
             const langs = Object.keys(selectedLanguages).filter(key => selectedLanguages[key]);
             const phoneNum = phoneNumber.replace(/\s/g, '');
@@ -215,17 +251,14 @@ const Signupform = () => {
                 setIndustrySearch('');
                 setSelectedSalaryOption(null);
                 setLoading(false);
-            } else if (response.status === 409) {
-                toast.error(response.data.message || 'Email already exists. Please use a different email.', { transition: Slide });
-            } else if (response.status === 400) {
-                toast.error(response.data.message || 'Invalid data. Please check your inputs.', { transition: Slide });
             } else {
-                toast.error(response.data.message || 'Signup failed. Please try again later.', { transition: Slide });
+                toast.error('هەڵەیەک لە زیادکردنی کارەکە ڕویدا تکایە دووبارە هەوڵ بدەرەوە', { transition: Slide });
             }
         } catch (error) {
-            toast.error(error.response?.data?.message || 'An error occurred. Please try again later.', { transition: Slide });
+            toast.error('هەڵەیەک ڕویدا تکایە دووبارە هەوڵ بدەرەوە', { transition: Slide });
         }
     };
+
     const goBack = () => {
         navigate(-1);
     }
@@ -264,14 +297,13 @@ const Signupform = () => {
                         <div className="form-row">
                             <div className="form-group">
                                 <label className='label-format'>ناوی کارەکە</label>
-                                <input maxLength='60' id='jobtitle' onChange={handleChange} value={formData.jobtitle} className='input-format' type="text" placeholder="ناوی کارەکە بنووسە" required />
+                                <input maxLength='50' id='jobtitle' onChange={handleChange} value={formData.jobtitle} className='input-format' type="text" placeholder="ناوی کارەکە بنووسە" required />
                             </div>
                             <div className="form-group">
                                 <label className='label-format'>ناوی کۆمپانیا</label>
-                                <input maxLength='60' id='companyname' onInvalid={(e) => console.log(`${e.target.name} is invalid`)} onChange={handleChange} value={formData.companyname} className='input-format' type="text" placeholder="ناوی کۆمپانیەکەت بنووسە" required />
+                                <input maxLength='50' id='companyname' onInvalid={(e) => console.log(`${e.target.name} is invalid`)} onChange={handleChange} value={formData.companyname} className='input-format' type="text" placeholder="ناوی کۆمپانیەکەت بنووسە" required />
                             </div>
                         </div>
-                        {/* //todo fix this */}
                         <div className="form-row quill-section">
                             <label className='label-format'>زانیاری لەسەر کارەکە</label>
                             <ReactQuill
@@ -285,11 +317,8 @@ const Signupform = () => {
                                 mmaxLength='3000'
                                 modules={modules}
                                 formats={formats}
-                                style={{ height: '150px' }}
                             />
                         </div>
-                        <br />
-
                         <div className="form-row salary-section">
                             <div className="addjob-salary-container">
                                 <div className="addjob-salary-content">
@@ -422,8 +451,6 @@ const Signupform = () => {
                                 )}
                             </div>
                         </div>
-
-                        {/* done */}
                         <div className="form-row">
                             <div className="form-group">
                                 <label className="label-format">شار یان شارۆچکەی کارەکەت</label>
@@ -437,6 +464,7 @@ const Signupform = () => {
                                         autoComplete="off"
                                         onChange={handleCitychange}
                                         onFocus={() => setShowCityDropdown(true)}
+                                        onBlur={handleBlur}
                                         required
                                     />
                                     {showCityDropdown && filteredCities.length > 0 && (
@@ -446,7 +474,7 @@ const Signupform = () => {
                                                     <div
                                                         className="dropdown-item"
                                                         key={city}
-                                                        onClick={() => handleCitySelect(city)}
+                                                        onMouseDown={() => handleCitySelect(city)}
                                                     >
                                                         {city}
                                                     </div>
@@ -466,8 +494,6 @@ const Signupform = () => {
                                 </select>
                             </div>
                         </div>
-                        {/* done */}
-
                         <div className="form-row">
                             <div className="form-group">
                                 <label className='label-format'>ژمارەی مۆبایل</label>
@@ -488,7 +514,6 @@ const Signupform = () => {
                                 <input onChange={handleChange} id='gmail' value={formData.gmail} className='input-format' type="email" placeholder="ئیمەیڵەکەت بنوسە" />
                             </div>
                         </div>
-                        {/* done */}
                         <div className="form-row">
                             <div className="form-group">
                                 <label className='label-format'>شەهادە</label>
@@ -503,7 +528,7 @@ const Signupform = () => {
                             </div>
 
                             <div className="form-group">
-                                <label className='label-format'>بەشی بڕوانامە (ئەم بەشە ئارەزوومەندانە)</label>
+                                <label className='label-format'>بەشی بڕوانامە (ئەم بەشە ئارەزوومەندانەیە)</label>
                                 <select id='degreetype' value={formData.degreetype} onChange={handleChange} className='input-format custom-select'>
                                     <option value="">بڕوانامەی کەسی داواکراو هەڵبژێرە</option>
                                     {degreetypes.map((degreetype) => (
@@ -514,7 +539,6 @@ const Signupform = () => {
                                 </select>
                             </div>
                         </div>
-                        {/* done */}
                         <div className="form-row">
                             <div className="form-group">
                                 <label className='label-format'>پیشەسازی کار</label>
@@ -528,6 +552,7 @@ const Signupform = () => {
                                         required
                                         value={industrySearch}
                                         onChange={handleindustrychange}
+                                        onBlur={handleBlurINdustry}
                                         onFocus={() => setShowIndustryDropdown(true)}
                                     />
                                     {showIndustryDropdown && filteredIndustries.length > 0 && (
@@ -537,7 +562,7 @@ const Signupform = () => {
                                                     <div
                                                         className="dropdown-item"
                                                         key={industry}
-                                                        onClick={() => handleIndustrySelect(industry)}
+                                                        onMouseDown={() => handleIndustrySelect(industry)}
                                                     >
                                                         {industry}
                                                     </div>
@@ -553,7 +578,7 @@ const Signupform = () => {
                                     <option value="">بژاردەیەک هەڵبژێرە</option>
                                     <option value="لەسەر کار">لەسەر کار</option>
                                     <option value="ئۆنڵاین">ئۆنڵاین</option>
-                                    <option value="هەردووکیەتی">هەردووکیەتی</option>
+                                    <option value="لەسەر کار ، ئۆنڵاین">لەسەر کار ، ئۆنڵاین</option>
                                 </select>
                             </div>
                         </div>
