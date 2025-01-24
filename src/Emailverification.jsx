@@ -8,22 +8,19 @@ import './css/emailverification.css';
 
 const EmailVerification = () => {
     const location = useLocation();
-    const [timer, setTimer] = useState(30);
+    const [timer, setTimer] = useState(0);
     const [canResend, setCanResend] = useState(false);
     const { email } = location.state || {};
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (!email) {
-            toast.error('No email provided.', { transition: Slide });
+            toast.error('هیچ ئیمەیلێك نەدۆزرایەوە', { transition: Slide });
         }
     }, [email]);
 
     const handleVerifyEmail = async () => {
         if (!email) return;
-
-        setLoading(true);
         try {
             const response = await axios.post(
                 'http://localhost:3500/emailverify',
@@ -37,54 +34,54 @@ const EmailVerification = () => {
             );
 
             if (response.status === 201) {
-                toast.success('Email verified successfully', { transition: Slide });
+                toast.success('ئیمەیڵەکەت بە سەرکەوتووی پشتراستکرایەوە', { transition: Slide });
                 navigate('/login');
             } else if (response.status === 401) {
-                toast.error('Your Email has not been verified.Please try again', { transition: Slide });
+                toast.error('ئیمەیڵەکەت پشتڕاست نەکرایەوە. تکایە دووبارە هەوڵ بدەوە', { transition: Slide });
             } else {
-                toast.warn('Something went wrong. Please try again', { transition: Slide });
+                toast.warn('هەڵەیەک ڕویدا تکایە دووبارە هەوڵ بدەرەوە', { transition: Slide });
             }
         } catch (error) {
-            console.error('Error verifying email:', error);
-            toast.error('Error verifying email. Please try again.', { transition: Slide });
-        } finally {
-            setLoading(false);
+            toast.error('هەڵەیەک لە پشتڕاستکردنەوەی ئیمەیڵەکەتدا ڕوویدا. تکایە دووبارە هەوڵ بدەوە', { transition: Slide });
         }
     };
 
     useEffect(() => {
+        let countdown;
         if (timer > 0) {
-            const countdown = setInterval(() => {
+            countdown = setInterval(() => {
                 setTimer((prevTimer) => prevTimer - 1);
             }, 1000);
-            return () => clearInterval(countdown); // Cleanup interval on component unmount
-        } else {
-            setCanResend(true); // Enable link after timer reaches 0
+        } else if (timer === 0) {
+            setCanResend(true);
         }
+        return () => clearInterval(countdown);
     }, [timer]);
 
-    const handleResendClick = () => {
-        setTimer(30); 
-        setCanResend(false);
-        // Add logic to resend the email here
-        console.log("Resending verification email...");
-    };
+    const handleResendClick = async () => {
+        if (!canResend) return;
 
-    const resendEmailVerification = async () => {
         try {
-            const response = await axios.post('http://localhost:3500/resendemailverify', { email }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                withCredentials: true,
-            })
+            const response = await axios.post(
+                "http://localhost:3500/resendemailverify",
+                { email },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    withCredentials: true
+                }
+            );
+
             if (response.status === 200) {
-                toast.success('Email verification link has been resent.', { transition: Slide });
+                toast.success("بەستەری پشتڕاستکردنەوەی ئیمەیڵەکەت دووبارە نێردرایەوە", { transition: Slide });
+                setTimer(30); 
+                setCanResend(false);
             }
         } catch (error) {
-            toast.error('Error resending email verification. Please try again.', { transition: Slide });
+            toast.error("هەڵەیەک لە ناردنەوەی بەستەری پشتڕاستکردنەوەی ئیمەیڵەکەتدا ڕووی دا. تکایە دووبارە هەوڵ بدەوە", { transition: Slide });
         }
-    }
+    };
 
     return (
         <div>
@@ -95,27 +92,29 @@ const EmailVerification = () => {
                         <h2 className='emailverify-title'>ئیمەیڵەکەت پشتڕاست بکەرەوە</h2>
                         <p className='emailverify-text'>
                             <strong>{email}</strong> <br />
-                        ئیمەیڵێکی پشتڕاستکردنەوە بۆ ئیمەیڵەکەت نێردراوە، تکایە ئیمەیڵەکەت پشتڕاستبکەوە
+                            ئیمەیڵێکی پشتڕاستکردنەوە بۆ ئیمەیڵەکەت نێردراوە، تکایە ئیمەیڵەکەت پشتڕاستبکەوە
                         </p>
 
                         <button onClick={handleVerifyEmail} className="cool-btn">پشتڕاستکردنەوە</button>
-                        <p className='spanemail'><a
-                            href="#resend"
-                            className={`btn-link ${!canResend ? "disabled-link" : ""}`}
-                            onClick={(e) => {
-                                if (!canResend) e.preventDefault();
-                                else resendEmailVerification();
-                            }}
-                        >
-                            ئیمەیڵی پشتڕاستکردنەوە بنێرەوە
-                        </a></p>
-                        <p className='spantimer'>{timer > 0 && `${timer}s`}</p>
+                        <p className="spanemail">
+                            <p
+                                className={`btn-link ${!canResend ? "disabled-link" : ""}`}
+                                onClick={(e) => {
+                                    if (!canResend) e.preventDefault();
+                                    else handleResendClick();
+                                }}
+                            >
+                                ئیمەیڵی پشتڕاستکردنەوە بنێرەوە
+                            </p>
+                        </p>
+                        <p className="spantimer">{timer > 0 && `${timer}s`}</p>
                         <a className="btnlink" href="login" onClick={() => navigate('/login')}>
                             <i class="fa-solid fa-arrow-left"></i>دواتر ئەیکەم
                         </a>
                     </div>
                 </div>
             </div>
+            <ToastContainer position="top-center" />
         </div>
     )
 }
