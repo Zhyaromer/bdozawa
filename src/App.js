@@ -15,6 +15,7 @@ import ContactPage from './Contact.jsx';
 import Faq from './Faq.jsx';
 import Settings from './Settings.jsx';
 import Test from './Test.jsx';
+import Savedjobs from './Savedjobs.jsx';
 //forgotpassword
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/faq" element={<Faq />} />
+        <Route path="/savedjobs" element={<Savedjobs />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/test" element={<Test />} />
       </Routes>
