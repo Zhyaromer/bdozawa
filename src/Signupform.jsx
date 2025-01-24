@@ -34,15 +34,16 @@ const Signupform = () => {
     const [showIndustryDropdown, setShowIndustryDropdown] = useState(false);
     const [citySearch, setCitySearch] = useState('');
     const [showCityDropdown, setShowCityDropdown] = useState(false);
-    const cities = ['Erbil', 'Sulaymaniyah', 'Duhok', 'Kirkuk'];
+    const cities = ['سلێمانی', 'هەولێر', 'دهۆک', 'کەرکوک', 'هەڵەبجە', 'هەڵەبجەی شەهید', 'زاخۆ', 'چەمچەماڵ', 'دەربەندیخان', 'سۆران', 'کۆیە', 'ڕەواندز', 'شەقلاوە', 'کەلار', 'دۆکان', 'ئاکرێ', 'ڕانیە', 'کفری', 'گەرمیان', 'عەربەت', 'تەق تەق', 'سەید سادق', 'هیتر'];
 
     const industries = [
-        'Technology', 'Healthcare', 'Finance', 'Education',
-        'Manufacturing', 'Retail', 'Construction', 'Entertainment'
+        'تەکنەلۆژیا', 'تەندروستی', 'شاگردی', 'یاسا', 'خانووبەرە', 'خواردن', 'پەروەردە',
+        'پیشەسازی', 'بازرگانی', 'گواستنەوە ', 'گەشتیاری ','وەرگێر',
+        'میدیا', 'ژینگە', 'ئاسایش', 'گرافیک دیزاین', 'ئەندازیار ', 'مامۆستا', 'دارایی', 'هیتر'
     ];
 
     const degrees = [
-        'No Degree', 'Diploma', 'Bachelor', 'Master', 'PhD'
+        'بێ بڕوانامە', 'دیپلۆم', 'بەکالۆریۆس', 'ماستەر', 'دکتۆرا'
     ];
 
     const filteredCities = cities.filter((city) =>
@@ -79,7 +80,6 @@ const Signupform = () => {
     };
 
     const handleSubmit = async (e) => {
-        console.log(formData);
         e.preventDefault();
         try {
             console.log('here');
@@ -99,14 +99,14 @@ const Signupform = () => {
             if (response.status === 201) {
                 navigate('/emailVerification', { state: { email: formData.gmail } });
             } else if (response.status === 409) {
-                toast.error(response.data.message || 'Email already exists. Please use a different email.', { transition: Slide });
+                toast.error(response.data.message || 'ئیمەیڵەکەت پێشتر بەکار هێنراوە،تکایە ئیمەیڵێکی جیاواز بەکاربهێنە', { transition: Slide });
             } else if (response.status === 400) {
-                toast.error(response.data.message || 'Invalid data. Please check your inputs.', { transition: Slide });
+                toast.error(response.data.message || 'زانیارییەکان نادروستن. تکایە زانیارییەکانت پشتڕاست بکەوە', { transition: Slide });
             } else {
-                toast.error(response.data.message || 'Signup failed. Please try again later.', { transition: Slide });
+                toast.error(response.data.message || 'تۆمارکردنەکەت سەرکەوتوو نەبوو. تکایە دواتر دووبارە هەوڵ بدەوە', { transition: Slide });
             }
         } catch (error) {
-            toast.error(error.response.data.message || 'An error occurred. Please try again later.', { transition: Slide });
+            toast.error(error.response.data.message || 'هەڵەیەک ڕویدا تکایە دووبارە هەوڵ بدەرەوە', { transition: Slide });
         }
     };
 
@@ -207,7 +207,7 @@ const Signupform = () => {
 
                             <div className="form-group">
                                 <label className='label-format'>ڕەگەز</label>
-                                <select onChange={handleChange} id='gender' value={formData.gender} className='input-format' required>
+                                <select onChange={handleChange} id='gender' value={formData.gender} className='input-format signup-select-input-placeholder' required>
                                     <option value="">ڕەگەزەکەت هەڵبژێرە</option>
                                     <option value="male">نێر</option>
                                     <option value="female">مێ</option>
@@ -218,7 +218,7 @@ const Signupform = () => {
                         <div className="form-row">
                             <div className="form-group">
                                 <label className='label-format'>شەهادە (ئەم بەشە ئارەزوومەندانە)</label>
-                                <select id='degree' onChange={handleChange} className='input-format'>
+                                <select id='degree' onChange={handleChange} className='input-format signup-select-input-placeholder'>
                                     <option value="">شەهادەکەت هەڵبژێرە</option>
                                     {degrees.map((degree) => (
                                         <option key={degree} value={degree.toLowerCase()}>
@@ -263,10 +263,10 @@ const Signupform = () => {
                         <div className="form-row">
                             <div className="form-group">
                                 <label className='label-format'>بە دوای چیا ئەگەڕێی؟</label>
-                                <select id='role' value={formData.role} onChange={handleChange} className='input-format' required>
+                                <select id='role' value={formData.role} onChange={handleChange} className='input-format signup-select-input-placeholder' required>
                                     <option value="">بژاردەیەک هەڵبژێرە</option>
-                                    <option value="job">بە دوای ئیشێکدا ئەگەڕێم</option>
-                                    <option value="employee">بە دوای فەرمانبەردا ئەگەڕێم</option>
+                                    <option value="jobseeker">بە دوای کارێکدا ئەگەڕێم</option>
+                                    <option value="employeeseeker">بە دوای فەرمانبەردا ئەگەڕێم</option>
                                 </select>
                             </div>
 
@@ -300,6 +300,7 @@ const Signupform = () => {
 
                         <button onClick={handleSubmit} type="submit" className="signup-btn">دروستکردن</button>
                     </form>
+                    <ToastContainer position='top-center' />
                 </div>
             </div>
         </div>

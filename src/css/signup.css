@@ -125,7 +125,11 @@ select:focus {
     text-align: right;
 }
 
-/* Responsive Design */
+.signup-select-input-placeholder{
+   color: black;
+   direction: rtl;
+}
+
 @media screen and (max-width: 768px) {
     .signup-container {
         margin: 1rem;

@@ -19,6 +19,36 @@ const EmailVerification = () => {
         }
     }, [email]);
 
+    useEffect(() => {
+        const savedTimer = localStorage.getItem('emailVerificationTimer');
+        if (savedTimer) {
+            const timeRemaining = parseInt(savedTimer, 10) - Math.floor(Date.now() / 1000);
+            if (timeRemaining > 0) {
+                setTimer(timeRemaining);
+                setCanResend(false);
+            } else {
+                setCanResend(true);
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        let countdown;
+        if (timer > 0) {
+            countdown = setInterval(() => {
+                setTimer((prevTimer) => {
+                    const newTimer = prevTimer - 1;
+                    localStorage.setItem('emailVerificationTimer', Math.floor(Date.now() / 1000) + newTimer);
+                    return newTimer;
+                });
+            }, 1000);
+        } else if (timer === 0) {
+            setCanResend(true);
+            localStorage.removeItem('emailVerificationTimer');
+        }
+        return () => clearInterval(countdown);
+    }, [timer]);
+
     const handleVerifyEmail = async () => {
         if (!email) return;
         try {
@@ -46,18 +76,6 @@ const EmailVerification = () => {
         }
     };
 
-    useEffect(() => {
-        let countdown;
-        if (timer > 0) {
-            countdown = setInterval(() => {
-                setTimer((prevTimer) => prevTimer - 1);
-            }, 1000);
-        } else if (timer === 0) {
-            setCanResend(true);
-        }
-        return () => clearInterval(countdown);
-    }, [timer]);
-
     const handleResendClick = async () => {
         if (!canResend) return;
 
@@ -72,10 +90,13 @@ const EmailVerification = () => {
                     withCredentials: true
                 }
             );
-
+            console.log(response.status)
             if (response.status === 200) {
                 toast.success("بەستەری پشتڕاستکردنەوەی ئیمەیڵەکەت دووبارە نێردرایەوە", { transition: Slide });
-                setTimer(30); 
+                const newTimer = 30;
+                const expirationTime = Math.floor(Date.now() / 1000) + newTimer;
+                localStorage.setItem('emailVerificationTimer', expirationTime);
+                setTimer(newTimer);
                 setCanResend(false);
             }
         } catch (error) {
@@ -109,7 +130,7 @@ const EmailVerification = () => {
                         </p>
                         <p className="spantimer">{timer > 0 && `${timer}s`}</p>
                         <a className="btnlink" href="login" onClick={() => navigate('/login')}>
-                            <i class="fa-solid fa-arrow-left"></i>دواتر ئەیکەم
+                            <i className="fa-solid fa-arrow-left"></i>دواتر ئەیکەم
                         </a>
                     </div>
                 </div>
