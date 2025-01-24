@@ -38,7 +38,7 @@ const Signupform = () => {
 
     const industries = [
         'تەکنەلۆژیا', 'تەندروستی', 'شاگردی', 'یاسا', 'خانووبەرە', 'خواردن', 'پەروەردە',
-        'پیشەسازی', 'بازرگانی', 'گواستنەوە ', 'گەشتیاری ','وەرگێر',
+        'پیشەسازی', 'بازرگانی', 'گواستنەوە ', 'گەشتیاری ', 'وەرگێر',
         'میدیا', 'ژینگە', 'ئاسایش', 'گرافیک دیزاین', 'ئەندازیار ', 'مامۆستا', 'دارایی', 'هیتر'
     ];
 
@@ -46,12 +46,12 @@ const Signupform = () => {
         'بێ بڕوانامە', 'دیپلۆم', 'بەکالۆریۆس', 'ماستەر', 'دکتۆرا'
     ];
 
-    const filteredCities = cities.filter((city) =>
-        city.toLowerCase().includes(citySearch.toLowerCase())
-    );
-
     const filteredIndustries = industries.filter(industry =>
         industry.toLowerCase().includes(industrySearch.toLowerCase())
+    );
+
+    const filteredCities = cities.filter((city) =>
+        city.includes(citySearch)
     );
 
     const handleCitySelect = (selectedCity) => {
@@ -62,6 +62,24 @@ const Signupform = () => {
     const handleCitychange = (e) => {
         setCitySearch(e.target.value);
         setShowCityDropdown(true);
+    };
+
+    const handleBlur = () => {
+        setTimeout(() => {
+            setShowCityDropdown(false);
+            if (!cities.includes(citySearch)) {
+                setCitySearch('');
+            }
+        }, 150);
+    };
+
+    const handleBlurINdustry = () => {
+        setTimeout(() => {
+            setShowIndustryDropdown(false);
+            if (!industries.includes(industrySearch)) {
+                setIndustrySearch('');
+            }
+        }, 150);
     };
 
     const handleIndustrySelect = (selectedIndustry) => {
@@ -81,8 +99,16 @@ const Signupform = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!cities.includes(citySearch)) {
+            toast.error('تکایە شارێک هەڵبژێرە لە لیستەکە', { transition: Slide });
+            return;
+        }
+
+        if (!industries.includes(industrySearch)) {
+            toast.error('تکایە پیشەسازیەک هەڵبژێرە لە لیستەکە', { transition: Slide });
+            return;
+        }
         try {
-            console.log('here');
             const response = await axios.post('http://localhost:3500/signup', {
                 displayName: formData.fullName,
                 email: formData.gmail,
@@ -165,7 +191,6 @@ const Signupform = () => {
                                 <label className='label-format'>ناوی سیانی</label>
                                 <input id='fullName' onChange={handleChange} value={formData.fullName} className='input-format' type="text" placeholder="ناوی سیانیت بنوسە" required />
                             </div>
-
                             <div className="form-group">
                                 <label className="label-format">شار یان شارۆچکە</label>
                                 <div className="custom-select">
@@ -178,25 +203,25 @@ const Signupform = () => {
                                         autoComplete="off"
                                         onChange={handleCitychange}
                                         onFocus={() => setShowCityDropdown(true)}
+                                        onBlur={handleBlur}
                                         required
                                     />
                                     {showCityDropdown && filteredCities.length > 0 && (
-                                        <div >
-                                            {
-                                                filteredCities.map((city) => (
-                                                    <div
-                                                        className="dropdown-item"
-                                                        key={city}
-                                                        onClick={() => handleCitySelect(city)}
-                                                    >
-                                                        {city}
-                                                    </div>
-                                                ))
-                                            }
+                                        <div className="dropdown">
+                                            {filteredCities.map((city) => (
+                                                <div
+                                                    className="dropdown-item"
+                                                    key={city}
+                                                    onMouseDown={() => handleCitySelect(city)}
+                                                >
+                                                    {city}
+                                                </div>
+                                            ))}
                                         </div>
                                     )}
                                 </div>
                             </div>
+
                         </div>
 
                         <div className="form-row">
@@ -240,6 +265,7 @@ const Signupform = () => {
                                         value={industrySearch}
                                         onChange={handleindustrychange}
                                         onFocus={() => setShowIndustryDropdown(true)}
+                                        onBlur={handleBlurINdustry}
                                     />
                                     {showIndustryDropdown && filteredIndustries.length > 0 && (
                                         <div >
@@ -248,7 +274,7 @@ const Signupform = () => {
                                                     <div
                                                         className="dropdown-item"
                                                         key={industry}
-                                                        onClick={() => handleIndustrySelect(industry)}
+                                                        onMouseDown={() => handleIndustrySelect(industry)}
                                                     >
                                                         {industry}
                                                     </div>
