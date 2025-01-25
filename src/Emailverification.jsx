@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import './css/emailverification.css';
 
 const EmailVerification = () => {
-    const location = useLocation();
     const [timer, setTimer] = useState(0);
     const [canResend, setCanResend] = useState(false);
+    const location = useLocation();
     const { email } = location.state || {};
     const navigate = useNavigate();
 

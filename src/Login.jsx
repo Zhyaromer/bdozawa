@@ -51,8 +51,8 @@ const Login = () => {
                 toast.error('وشەی نهێنی یان ئیمەیڵەکەت هەلەیە', { transition: Slide });
             }
         } catch (err) {
-            setMessage('idk');
-            toast.error(`idk`, { transition: Slide });
+            setMessage(err.message);
+            toast.error(err.message, { transition: Slide });
         }
     };
 
@@ -73,13 +73,14 @@ const Login = () => {
                 navigate('/jobs');
             } else if (response.status === 201) {
                 console.log(`response.status === 201`);
-                navigate(`/SignUpGoogle?email=${encodeURIComponent(result.user.email)}&displayName=${encodeURIComponent(result.user.displayName)}`);
+                navigate(`/googleauthsignup?email=${encodeURIComponent(result.user.email)}&displayName=${encodeURIComponent(result.user.displayName)}`);
             }
         } catch (err) {
             toast.error(`${err.message}`, { transition: Slide });
             console.error(err);
         }
     }
+
     return (
         <div>
             <div className='nav'>
