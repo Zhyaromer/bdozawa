@@ -6,7 +6,7 @@ import { Slide, ToastContainer, toast } from 'react-toastify';
 import '../node_modules/react-toastify/dist/ReactToastify.css';
 import './css/Nav.css';
 import { Eye, EyeOff } from 'lucide-react';
-import { auth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from './FirebaseService';
+import { auth, signInWithEmailAndPassword, linkWithPopup, GoogleAuthProvider, signInWithPopup } from './FirebaseService';
 import './css/login.css'
 
 const Login = () => {
@@ -65,21 +65,20 @@ const Login = () => {
             const result = await signInWithPopup(auth, provider);
             const idToken = await result.user.getIdToken();
             const response = await axios.post("http://localhost:3500/googleauth", { email: result.user.email }, { headers: { Authorization: `Bearer ${idToken}` }, withCredentials: true })
-            console.log(response);
-            console.log(`response.status`);
+
+            console.log(`response.status: ${response.status}`);
+
             if (response.status === 200) {
+                console.log(`response.status === 200`);
                 navigate('/jobs');
             } else if (response.status === 201) {
-                navigate(`/googleauthsignup?email=${encodeURIComponent(result.user.email)}&displayName=${encodeURIComponent(result.user.displayName)}`);
-            } else if (response.status === 409) {
-                toast.error('email alreafy exists', { transition: Slide });
+                console.log(`response.status === 201`);
+                navigate(`/googlesignup?email=${encodeURIComponent(result.user.email)}&displayName=${encodeURIComponent(result.user.displayName)}`);
+            } else if (response.status === 403) {
+                toast.error('تکایە ئیمەیڵەکەت پشتڕاست بکەوە بۆ بەردەوام بوون لە لینک کردنی ئەکاونتی گۆگڵەکەت', { transition: Slide });
             }
         } catch (err) {
-            if (err.response && err.response.data && err.response.data.message) {
-                toast.error(err.response.data.message, { transition: Slide });
-            } else {
-                toast.error(`${err.message}`, { transition: Slide });
-            }
+            toast.error(`${err.response.data.message}`, { transition: Slide });
         }
     }
 

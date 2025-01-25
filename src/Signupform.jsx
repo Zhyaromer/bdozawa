@@ -128,6 +128,8 @@ const Signupform = () => {
                 toast.error(response.data.message || 'ئیمەیڵەکەت پێشتر بەکار هێنراوە،تکایە ئیمەیڵێکی جیاواز بەکاربهێنە', { transition: Slide });
             } else if (response.status === 400) {
                 toast.error(response.data.message || 'زانیارییەکان نادروستن. تکایە زانیارییەکانت پشتڕاست بکەوە', { transition: Slide });
+            } else if (response.status === 403) {
+                toast.error(response.data.message || 'تۆمارکردنەکەت سەرکەوتوو نەبوو. تکایە دواتر دووبارە هەوڵ بدەوە', { transition: Slide });
             } else {
                 toast.error(response.data.message || 'تۆمارکردنەکەت سەرکەوتوو نەبوو. تکایە دواتر دووبارە هەوڵ بدەوە', { transition: Slide });
             }

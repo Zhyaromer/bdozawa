@@ -6,7 +6,7 @@ import './css/Nav.css';
 import { Slide, ToastContainer, toast } from 'react-toastify';
 import '../node_modules/react-toastify/dist/ReactToastify.css';
 
-const GoogleauthSingup = () => {
+const Googlesignup = () => {
     const paramSearch = new URLSearchParams(window.location.search);
     const email = paramSearch.get('email');
     const name = paramSearch.get('displayName');
@@ -125,7 +125,7 @@ const GoogleauthSingup = () => {
             })
 
             if (response.status === 201) {
-                navigate('/emailVerification', { state: { email: formData.gmail } });
+                navigate('/login');
             } else if (response.status === 409) {
                 toast.error(response.data.message || 'ئیمەیڵەکەت پێشتر بەکار هێنراوە،تکایە ئیمەیڵێکی جیاواز بەکاربهێنە', { transition: Slide });
             } else if (response.status === 400) {
@@ -315,5 +315,4 @@ const GoogleauthSingup = () => {
     )
 }
 
-
-export default GoogleauthSingup
+export default Googlesignup

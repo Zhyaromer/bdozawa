@@ -15,7 +15,7 @@ import ContactPage from './Contact.jsx';
 import Faq from './Faq.jsx';
 import Settings from './Settings.jsx';
 import Test from './Test.jsx';
-import GoogleauthSingup from './GoogleauthSingup.jsx';
+import Googlesignup from './Googlesignup.jsx'
 import Forgotpassword from './Forgotpassword.jsx';
 import Savedjobs from './Savedjobs.jsx';
 
@@ -38,7 +38,7 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="/savedjobs" element={<Savedjobs />} />
-        <Route path="/googleauthsignup" element={<GoogleauthSingup />} />
+        <Route path="/googlesignup" element={<Googlesignup />} />
         <Route path="/forgotpassword" element={<Forgotpassword />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/test" element={<Test />} />
