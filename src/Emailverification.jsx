@@ -90,7 +90,6 @@ const EmailVerification = () => {
                     withCredentials: true
                 }
             );
-            console.log(response.status)
             if (response.status === 200) {
                 toast.success("بەستەری پشتڕاستکردنەوەی ئیمەیڵەکەت دووبارە نێردرایەوە", { transition: Slide });
                 const newTimer = 30;
@@ -98,6 +97,8 @@ const EmailVerification = () => {
                 localStorage.setItem('emailVerificationTimer', expirationTime);
                 setTimer(newTimer);
                 setCanResend(false);
+            } else {
+                toast.error('هەڵەیەک ڕویدا تکایە دووبارە هەوڵ بدەرەوە', { transition: Slide });
             }
         } catch (error) {
             toast.error("هەڵەیەک لە ناردنەوەی بەستەری پشتڕاستکردنەوەی ئیمەیڵەکەتدا ڕووی دا. تکایە دووبارە هەوڵ بدەوە", { transition: Slide });

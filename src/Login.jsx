@@ -170,7 +170,7 @@ const Login = () => {
                             </button>
                         </div>
 
-                        <a href="/forgetpassword" className="forgot-password">
+                        <a href="/forgotpassword" className="forgot-password">
                             وشەی نهێنیت لەبیرکردووە؟
                         </a>
 
