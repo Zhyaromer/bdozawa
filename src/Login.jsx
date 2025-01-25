@@ -65,19 +65,21 @@ const Login = () => {
             const result = await signInWithPopup(auth, provider);
             const idToken = await result.user.getIdToken();
             const response = await axios.post("http://localhost:3500/googleauth", { email: result.user.email }, { headers: { Authorization: `Bearer ${idToken}` }, withCredentials: true })
-
-            console.log(`response.status: ${response.status}`);
-
+            console.log(response);
+            console.log(`response.status`);
             if (response.status === 200) {
-                console.log(`response.status === 200`);
                 navigate('/jobs');
             } else if (response.status === 201) {
-                console.log(`response.status === 201`);
                 navigate(`/googleauthsignup?email=${encodeURIComponent(result.user.email)}&displayName=${encodeURIComponent(result.user.displayName)}`);
+            } else if (response.status === 409) {
+                toast.error('email alreafy exists', { transition: Slide });
             }
         } catch (err) {
-            toast.error(`${err.message}`, { transition: Slide });
-            console.error(err);
+            if (err.response && err.response.data && err.response.data.message) {
+                toast.error(err.response.data.message, { transition: Slide });
+            } else {
+                toast.error(`${err.message}`, { transition: Slide });
+            }
         }
     }
 
