@@ -1,0 +1,47 @@
+.verified,.timeout,.error{
+    display: none;
+}
+
+.verified.show,.timeout.show,.show,.error.show{
+    display: block;
+}
+
+.Tokenverificationemail-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.Tokenverificationemail-container h1 {
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.Tokenverificationemail-verified-icon {
+    color: green;
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.Tokenverificationemail-timeout-icon {
+    color: #FFA500;
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.Tokenverificationemail-error-icon {
+    color: red;
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.Tokenverificationemail-container p{
+    font-size: 19px;
+}
+
+.verified,.timeout,.error{
+    padding-top: 150px;
+    text-align: center;
+}
+

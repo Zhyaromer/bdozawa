@@ -17,6 +17,7 @@ import Settings from './Settings.jsx';
 import Test from './Test.jsx';
 import Googlesignup from './Googlesignup.jsx'
 import Forgotpassword from './Forgotpassword.jsx';
+import Tokenverificationemail from './Tokenverificationemail.jsx';
 import Savedjobs from './Savedjobs.jsx';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/postingtutorial" element={<JobPostingGuide />} />
         <Route path="/makejobvip" element={<VIPJobGuide />} />
         <Route path="/about" element={<About />} />
+        <Route path="/auth/emailverification" element={<Tokenverificationemail />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="/savedjobs" element={<Savedjobs />} />
