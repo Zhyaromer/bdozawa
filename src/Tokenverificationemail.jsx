@@ -16,12 +16,10 @@ const Tokenverificationemail = () => {
                     const response = await fetch(`http://localhost:3500/auth/emailverification?email=${email}&token=${token}`);
         
                     if (response.ok) {
-                        // Status code is 200-299
                         setIsVerified(true);
                         setIsTimeout(false);
                         setIsError(false);
                     } else {
-                        // Handle specific status codes
                         if (response.status === 410) {
                             setIsTimeout(true);
                             setIsVerified(false);
@@ -34,7 +32,6 @@ const Tokenverificationemail = () => {
                     }
                 }
             } catch (error) {
-                // Handle network or unexpected errors
                 setIsError(true);
                 setIsTimeout(false);
                 setIsVerified(false);
