@@ -95,6 +95,7 @@
 }
 
 .jobs-rec-title {
+    font-size: 30px;
     display: flex;
     justify-content: right;
     align-items: right;
@@ -167,6 +168,8 @@
     justify-content: right;
     color: white;
     margin-bottom: 5px;
+    font-family: sans-serif;
+    font-weight: bold;
 }
 
 .job-langs-container {
@@ -372,6 +375,29 @@
     display: none;
 }
 
+.vipjobsmob-container.hide {
+    display: none;
+}
+
+.jobs-vip-container.hide{
+    display : none;
+}
+
+.novipjob-text{
+    text-align: center;
+    font-size: 25px;
+}
+
+.novipjob-text.hide{
+    display : none;
+}
+
+@media (min-width : 650.98px) and (max-width : 850px) {
+    .search-input {
+        width: 350px !important;
+    }
+}
+
 @media (min-width: 350px) and (max-width: 849.99px) {
     .search-input {
         width: 250px;
@@ -383,8 +409,7 @@
 
     .seachandfilter {
         gap: 10px;
-        justify-content: right;
-        margin-right: 15px;
+        justify-content: center;
         flex-direction: row-reverse;
     }
 
@@ -404,7 +429,7 @@
     }
 
     .jobs-rec-title {
-        margin-bottom: -7px;
+        margin-bottom: 10px;
     }
 
     .filters-container {
@@ -465,13 +490,12 @@
     .seachandfilter {
         gap: 10px;
         justify-content: center;
-        margin-right: 15px;
         flex-direction: row-reverse;
     }
 
-    .responsivejobs-container{
+    .responsivejobs-container {
         display: grid;
-        grid-template-columns:  1fr 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .vipjobspc-container {
@@ -494,9 +518,9 @@
         grid-template-columns: 1fr 1fr 1fr;
     }
 
-    .responsivejobs-container{
+    .responsivejobs-container {
         display: grid;
-        grid-template-columns:  1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
     }
 
 }

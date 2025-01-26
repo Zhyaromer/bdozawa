@@ -55,7 +55,7 @@ const Jobs = () => {
             try {
                 const response = await axios.get('http://localhost:3500/vipjobs');
                 setVIPJobs(response.data.jobs);
-                console.log(response.data.jobs);
+                console.log(response.data.jobs.length);
             } catch (error) {
                 console.error(error);
             }
@@ -152,8 +152,8 @@ const Jobs = () => {
     }, [filters]);
 
     const isJobSaved = (jobId) => savedJobs.includes(jobId);
+
     const handleCloseSidebar = () => {
-        console.log('Close button clicked');
         setShowSidebar(false);
     };
 
@@ -365,6 +365,7 @@ const Jobs = () => {
                     <a className='ad-email' href="mailto:eshbdozawabusiness@gmail.com">eshbdozawabusiness@gmail.com</a>
                 </div>
             </div>
+
             <div className='search-container'>
                 <div className='search-title-container'>
                     <h1 className='search-title'>ئیشی خەونەکانت لێرە بدۆزەوە</h1>
@@ -506,16 +507,16 @@ const Jobs = () => {
                 </div>
             </div>
 
-            <div className='jobs-rec-container'>
+            <div className={`jobs-vip-container ${vipjobs.length > 0 ? '' : 'hide'}`}>
                 <h3 className='jobs-rec-title'><i class="fa-solid fa-crown"> <span className='vip'> VIP</span> </i>کاری</h3>
             </div>
 
-            <div className="vipjobsmob-container">
+            <div className={`vipjobsmob-container ${vipjobs.length < 0 ? '' : 'hide'}`}>
                 <div style={styles.wrapper}>
                     <div style={styles.sliderContainer}>
                         <div style={styles.slider}>
                             {vipjobs.length > 0 ? (
-                                vipjobs.map((job, index) => (
+                                vipjobs.map((job, _) => (
                                     <div key={job._id} className='jobs-container'>
                                         <div className='job-card'>
                                             <div className='job-card-content'>
@@ -558,7 +559,7 @@ const Jobs = () => {
                                     </div>
                                 ))
                             ) : (
-                                <p>No VIP jobs available.</p> // Fallback when the list is empty
+                                <p></p>
                             )}
                         </div>
 
@@ -578,9 +579,8 @@ const Jobs = () => {
                 </div>
             </div>
 
-            <div className='vipjobspc-container'>
-                {vipjobs.length > 0 ? (
-                    vipjobs.map((job, index) => (
+            <div className={`vipjobspc-container ${vipjobs.length < 0 ? '' : 'hide'}`}>
+                {vipjobs.map((job, index) => (
                         <div key={job._id} className='jobs-container'>
                             <div className='job-card'>
                                 <div className='job-card-content'>
@@ -622,17 +622,15 @@ const Jobs = () => {
                             </div>
                         </div>
                     ))
-                ) : (
-                    <p>No VIP jobs available.</p> // Fallback when the list is empty
-                )}
+                }
             </div>
 
             <div className='jobs-rec-container'>
-                <h3 className='jobs-rec-title'>کاری بەردەستەکان</h3>
+                <h3 className='jobs-rec-title'>کارە بەردەستەکان</h3>
             </div>
-            <div className='responsivejobs-container'>
-                {filteredJob.length > 0 ? (
-                    filteredJob.map((job) => (
+
+            <div className={`responsivejobs-container ${filteredJob.length > 0 ? 'hide' : ''}`}>
+                    {filteredJob.map((job) => (
                         <div key={job._id} className='jobs-container'>
                             <div className='job-card'>
                                 <div className='job-card-content'>
@@ -651,6 +649,7 @@ const Jobs = () => {
                                     <div className='job-info-title'>
                                         <p className='job-info'>{job.company}</p>
                                         <p className='job-info'>{job.location}</p>
+                                        <p className='job-info'>{job.jobtype}</p>
                                     </div>
                                     <div style={{ marginTop: '-30px' }}>
                                         <div className='job-langs-container'>
@@ -674,10 +673,9 @@ const Jobs = () => {
                             </div>
                         </div>
                     ))
-                ) : (
-                    <p>No jobs available.</p>
-                )}
+               }
             </div>
+            <p className={`novipjob-text  ${filteredJob.length > 0 ? 'hide' : ''}`}>هیچ کارێک بەردەست نیە</p>
             <ToastContainer position='top-center' autoClose={3000} closeOnClick pauseOnHover draggable pauseOnFocusLoss />
         </div>
     );
