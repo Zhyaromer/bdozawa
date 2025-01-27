@@ -488,9 +488,9 @@ const Signupform = () => {
                                 <label className='label-format'>ڕەگەز</label>
                                 <select onChange={handleChange} id='gender' value={formData.gender} className='input-format custom-select' required>
                                     <option value="">ڕەگەزی کەسی داواکراو هەڵبژێرە</option>
-                                    <option value="male">نێر</option>
-                                    <option value="female">مێ</option>
-                                    <option value="notspecified">ڕەگەز گرنگ نیە</option>
+                                    <option value="نێر">نێر</option>
+                                    <option value="مێ">مێ</option>
+                                    <option value="هەردوو ڕەگەز">هەردوو ڕەگەز</option>
                                 </select>
                             </div>
                         </div>
