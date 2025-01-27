@@ -280,7 +280,7 @@ body {
     font-family: sans-serif;
 }
 
-.jobdetails-description-header{
+.jobdetails-description-header {
     margin-top: 50px;
 }
 
@@ -500,10 +500,6 @@ hr {
     margin-bottom: -10px;
 }
 
-.jobdetails-lower-infos-content-email{
-    margin-top: -27px;
-}
-
 .isemailavailable.hide {
     display: none;
 }
@@ -541,23 +537,22 @@ hr {
     align-items: center;
     justify-content: flex-end;
     margin-top: 20px;
-    margin-bottom: 20px;
     gap: 15px;
 }
 
 .jobdetails-lower-infos-content-grid {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 7px;
 }
 
-.jobdetails-lower-infos-content-grid p{
+.jobdetails-lower-infos-content-grid p {
     font-size: 19px;
 }
 
-.jobdetails-lower-infos-content-grid i{
+.jobdetails-lower-infos-content-grid i {
     font-size: 19px;
 }
 
@@ -636,6 +631,21 @@ hr {
     color: brown;
 }
 
+.walahidk{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+@media(min-width:300px) and(max-width:445px) {
+    .walahidk{
+        gap: 0px;
+    }
+}
+
 @media(min-width:700px) and (max-width: 1280.98px) {
     .optional-extra-info-container-2 {
         flex-direction: row;
@@ -700,5 +710,56 @@ hr {
     .like-dislike-view {
         padding-bottom: 10px;
         gap: 150px;
+    }
+
+    .jobdetails-upper-background {
+        height: 220px;
+        width: 90%;
+    }
+
+    .jobdetails-upper-infos {
+        padding: 0 70px;
+    }
+
+    .jobdetails-upper-infos-content h1 {
+        font-size: 3.7rem;
+        margin-top: 0px;
+        letter-spacing: 1px;
+    }
+
+    .jobdetails-upper-infos-content p {
+        font-size: 35px;
+        margin-top: -30px;
+        margin-bottom: 0px;
+        color: black;
+    }
+
+    .jobdetails-lower-infos-fr {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .jobdetails-lower-infos-content-grid p {
+        font-size: 25px;
+    }
+
+    .jobdetails-lower-infos-content-grid i {
+        font-size: 25px;
+    }
+    
+    .optional-extra-info-container-content p {
+        margin-top: 15px;
+    }
+
+    .jobdetails-description-header,.jobdetails-recommended-jobs-title {
+        font-size: 1.7rem;
+    }
+}
+
+@media(min-width:1100px) {
+    .jobdetails-job-info-content {
+        flex-direction: row-reverse;
+        flex-wrap: wrap;
+        padding: 10px 40px;
     }
 }

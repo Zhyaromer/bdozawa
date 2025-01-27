@@ -348,7 +348,6 @@ const Jobdetails2 = () => {
                     {/* for the bg or bg color  */}
                 </div>
 
-
                 <div className='jobdetails-upper-infos' >
                     <div className='jobdetails-infos-content'>
                         <div className='jobdetails-upper-infos-content'>
@@ -358,30 +357,37 @@ const Jobdetails2 = () => {
                         <div className='jobdetails-lower-infos-content'>
                             <div className='jobdetails-lower-infos-content-grid'>
                                 <div>
-                                    <i class="fa-regular fa-eye jobdetails-eye-icon"></i>
+                                    <p>2000</p>
                                 </div>
                                 <div>
-                                    <p>2000</p>
+                                    <i class="fa-regular fa-eye jobdetails-eye-icon"></i>
                                 </div>
                             </div>
                             <div className='jobdetails-lower-infos-content-grid'>
                                 <div>
-                                    <i class="fa-solid fa-location-dot jobdetails-location-icon"></i>
-                                </div>
-                                <div>
                                     <p>هەڵەبجەی</p>
                                 </div>
+                                <div>
+                                    <i class="fa-solid fa-location-dot jobdetails-location-icon"></i>
+                                </div>
                             </div>
-                            <div className={`jobdetails-lower-infos-content-grid jobdetails-lower-infos-content-email isemailavailable ${companyEmail === "" ? "" : 'hide'}`}>
-                                <div>
-                                    <i class="fa-solid fa-envelope jobdetails-email-i"></i>
-                                </div>
-                                <div>
-                                    <p>: ئیمەیڵ</p>
-                                </div>
-                                <div>
-                                    <p>zhyarala4443@gmail.com</p>
-                                </div>
+                        </div>
+                    </div>
+                    <div className='walahidk'>
+                        <div className={`jobdetails-lower-infos-content-grid jobdetails-lower-infos-content-email isemailavailable ${companyEmail === "" ? "" : 'hide'}`}>
+                            <div>
+                                <p>zhyarala4443@gmail.com</p>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-envelope jobdetails-email-i"></i>
+                            </div>
+                        </div>
+                        <div className={`jobdetails-lower-infos-content-grid optional-extra-info-container-content-whatssapp`}>
+                            <div>
+                                <a className='optional-extra-info-a' href="https://wa.me/+9647703227250/?text=http%3A%2F%2Flocalhost%3A3000%2Fjobs%2Fjobdetails%3Fjobid%3D676c81294aab377963316acd" target="_blank" rel="noreferrer"><p className='optional-extra-info-whatssapp-p'>لە وەتساپ نامە بنێرە</p></a>
+                            </div>
+                            <div>
+                                <i class="fa-brands fa-whatsapp jobdetails-whatsapp-i"></i>
                             </div>
                         </div>
                     </div>
@@ -421,14 +427,6 @@ const Jobdetails2 = () => {
                                 <i class="fa-solid fa-graduation-cap jobdetails-degreetype-i"></i>
                             </div>
                         </div>
-                        <div className={`optional-extra-info-container-content optional-extra-info-container-content-whatssapp`}>
-                            <div>
-                                <a className='optional-extra-info-a' href="https://wa.me/+9647703227250/?text=http%3A%2F%2Flocalhost%3A3000%2Fjobs%2Fjobdetails%3Fjobid%3D676c81294aab377963316acd" target="_blank" rel="noreferrer"><p className='optional-extra-info-whatssapp-p'>لە وەتساپ نامە بنێرە</p></a>
-                            </div>
-                            <div>
-                                <i class="fa-brands fa-whatsapp jobdetails-whatsapp-i"></i>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -462,9 +460,6 @@ We are currently holding open interviews for management positions every Monday 1
                     </div>
                     <hr />
                 </div>
-
-
-
 
                 <div>
                     {isOpen && (
@@ -529,6 +524,7 @@ We are currently holding open interviews for management positions every Monday 1
                         </div>
                     </div>
                 </div>
+
                 <div className='jobdetails-recommended-jobs-container'>
                     <div className='jobdetails-recommended-jobs-title'>
                         <h2>کاری پەیواندیدار</h2>
