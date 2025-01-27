@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaSpinner, FaExclamationCircle } from "react-icons/fa";
 import './css/jobdetails.css'
 
-const JobDetails = () => {
+const Jobdetails2 = () => {
     const navigate = useNavigate();
     const seachParams = new URLSearchParams(window.location.search);
     const jobId = seachParams.get('jobid');
@@ -344,97 +344,90 @@ const JobDetails = () => {
                     <i class="fa-regular fa-bookmark save-icon "></i>
                 </div>
 
-                <div className='jobdetails-upper-info'>
-                    <div className='jobdetails-bg-container'>
-                        <div className='img-placer'>
-                            <img className='jobdetails-img' src='https://via.placeholder.com/150/?text=Placeholder' alt="" />
-                        </div>
-                        <div className='job-title-container'>
-                            <h3 className='jobdetails-title'>{title}</h3>
-                        </div>
-                        <div className='jobdetails-info-container'>
-                            <div className='jobdetails-info-container-portiaon'>
-                                <p className='jobdetails-info'>{location}</p>
-                                <p className='jobdetails-info'>{formatDate(postedDate)}</p>
-                            </div>
-                            <div>
-                                <p className='jobdetails-info'>{company}</p>
-                            </div>
-                        </div>
-                        <div className='jobdetails-info-containerr'>
-                            <p className='jobdetails-info'>زمان : {langs}</p>
-                            <p className='jobdetails-info jobdetails-info-2'>  شەهادە  : {degree}</p>
-                        </div>
+                <div className='jobdetails-upper-background'>
+                    {/* for the bg or bg color  */}
+                </div>
 
-                        <div className='jobdetails-info-container jobdetails-info-container-2 like-dislike-view'>
-                            <div className='like-dislike-container'>
-                                <button
-                                    className={`like-button ${hasLiked ? "active" : ""}`}
-                                >
-                                    <i className={`fa${hasLiked ? "-solid" : "-regular"} fa-thumbs-up`}></i> {likes}
-                                </button>
 
-                                <button
-                                    className={`dislike-button ${hasDisliked ? "active" : ""}`}
-                                >
-                                    <i className={`fa${hasDisliked ? "-solid" : "-regular"} fa-thumbs-down`}></i> {dislikes}
-                                </button>
-                            </div>
-                            <div className='jobdetails-eye-icon'>
-                                <i class="fa-solid fa-eye "></i> {views}
-                            </div>
+                <div className='jobdetails-upper-infos' >
+                    <div className='jobdetails-infos-content'>
+                        <div className='jobdetails-upper-infos-content'>
+                            <h1>وەستای کارەبا</h1>
+                            <p>ڕيسوڵ باقی</p>
                         </div>
-                    </div>
-                    <div className='jobdetails-lower-info'>
-                        <div className='jobdetails-lower-info-container optional-extra-info-container-1'>
-                            <div className='jobdetails-lower-info-container-each'>
-                                <div className='jobdetails-lower-info-icon second-one-container'>
-                                    <i class="fa-solid fa-briefcase circle-icon first-one-icon"></i>
+                        <div className='jobdetails-lower-infos-content'>
+                            <div className='jobdetails-lower-infos-content-grid'>
+                                <div>
+                                    <i class="fa-regular fa-eye jobdetails-eye-icon"></i>
                                 </div>
-                                <div className='jobdetails-lower-info-text'>
-                                    <p className='jobdetails-lower-info-p'>ئەزموون</p>
-                                    <p className='jobdetails-lower-info-p2'>{experience}</p>
+                                <div>
+                                    <p>2000</p>
                                 </div>
                             </div>
-
-                            <div className='jobdetails-lower-info-container-each'>
-                                <div className='jobdetails-lower-info-icon first-one-container'>
-                                    <i class="fa-solid fa-user circle-icon first-one-icon"></i>
+                            <div className='jobdetails-lower-infos-content-grid'>
+                                <div>
+                                    <i class="fa-regular fa-clock jobdetails-clock-icon"></i>
                                 </div>
-                                <div className='jobdetails-lower-info-text'>
-                                    <p className='jobdetails-lower-info-p'>ڕەگەز</p>
-                                    <p className='jobdetails-lower-info-p2'>{gender}</p>
+                                <div>
+                                    <p>دوانزە ڕۆژ لەمەوپێش</p>
                                 </div>
                             </div>
-                            <div className='jobdetails-lower-info-container-each'>
-                                <div className='jobdetails-lower-info-icon third-one-container'>
-                                    <i class="fa-solid fa-phone-flip circle-icon first-one-icon"></i>
+                            <div className='jobdetails-lower-infos-content-grid'>
+                                <div>
+                                    <i class="fa-solid fa-location-dot jobdetails-location-icon"></i>
                                 </div>
-                                <div className='jobdetails-lower-info-text'>
-                                    <p className='jobdetails-lower-info-p'>ژ.مۆبایل</p>
-                                    <a className='jobdetails-lower-info-phone-num-a' href={`tel:${companyNumber}`}> <p className='jobdetails-lower-info-p2'>{formattedcompanyNumber}</p></a>
+                                <div>
+                                    <p>هەڵەبجەی</p>
+                                </div>
+                            </div>
+                            <div className={`jobdetails-lower-infos-content-grid isemailavailable ${companyEmail === "" ? "" : 'hide'}`}>
+                                <div>
+                                    <i class="fa-solid fa-envelope jobdetails-email-i"></i>
+                                </div>
+                                <div>
+                                    <p>: ئیمەیڵ</p>
+                                </div>
+                                <div>
+                                    <p>zhyarala4443@gmail.com</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className='optional-extra-info'>
-                    <div className='optional-extra-info-container'>
-                        <div>
-                            <p className='optional-extra-info-p'>موچە : {salary} <i class="fa-solid fa-dollar-sign jobdetails-salary-i"></i></p>
+                <div className='jobdetails-job-info-container'>
+                    <div className='jobdetails-job-info-content'>
+                        <div className='optional-extra-info-container-content'>
+                            <div>
+                                <p>موچە : 250 </p>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-dollar-sign jobdetails-salary-i"></i>
+                            </div>
                         </div>
-                        <div className={`isemailavailable ${jobtype === "" ? "hide" : ''}`}>
-                            <p className='optional-extra-info-p'>جۆری کار : {jobtype} <i class="fa-solid fa-dollar-sign jobdetails-salary-i"></i></p>
+                        <div className={`optional-extra-info-container-content isemailavailable ${jobtype === "" ? "" : 'hide'}`}>
+                            <div>
+                                <p>جۆری کار : ئێنڵاین </p>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-briefcase jobdetails-jobtype-i"></i>
+                            </div>
                         </div>
-                        <div className={`isemailavailable ${companyEmail === "" ? "hide" : ''}`}>
-                            <p className='optional-extra-info-p'>{companyEmail} : ئیمەیڵ <i class="fa-solid fa-envelope jobdetails-email-i"></i></p>
+                        <div className={`optional-extra-info-container-content isemailavailable ${degreetype === "" ? "" : 'hide'}`}>
+                            <div>
+                                <p>بواری بروانامە : ئایتی یان سی ئێس</p>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-graduation-cap jobdetails-degreetype-i"></i>
+                            </div>
                         </div>
-                        <div className={`isjobtypeavailable ${degreetype === "" ? "hide" : ''}`}>
-                            <p className='optional-extra-info-p'>بواری بروانامە : {degreetype} <i class="fa-solid fa-graduation-cap"></i></p>
-                        </div>
-                        <div>
-                            <a className='optional-extra-info-a' href="https://wa.me/+9647703227250/?text=http%3A%2F%2Flocalhost%3A3000%2Fjobs%2Fjobdetails%3Fjobid%3D676c81294aab377963316acd" target="_blank" rel="noreferrer"><p className='optional-extra-info-p'>لە وەتساپ نامە بنێرە <i class="fa-brands fa-whatsapp jobdetails-whatsapp-i"></i></p></a>
+                        <div className={`optional-extra-info-container-content optional-extra-info-container-content-whatssapp`}>
+                            <div>
+                                <a className='optional-extra-info-a' href="https://wa.me/+9647703227250/?text=http%3A%2F%2Flocalhost%3A3000%2Fjobs%2Fjobdetails%3Fjobid%3D676c81294aab377963316acd" target="_blank" rel="noreferrer"><p className='optional-extra-info-whatssapp-p'>لە وەتساپ نامە بنێرە</p></a>
+                            </div>
+                            <div>
+                                <i class="fa-brands fa-whatsapp jobdetails-whatsapp-i"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -633,4 +626,4 @@ const JobDetails = () => {
     )
 }
 
-export default JobDetails
+export default Jobdetails2;
