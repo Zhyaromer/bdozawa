@@ -366,21 +366,13 @@ const Jobdetails2 = () => {
                             </div>
                             <div className='jobdetails-lower-infos-content-grid'>
                                 <div>
-                                    <i class="fa-regular fa-clock jobdetails-clock-icon"></i>
-                                </div>
-                                <div>
-                                    <p>دوانزە ڕۆژ لەمەوپێش</p>
-                                </div>
-                            </div>
-                            <div className='jobdetails-lower-infos-content-grid'>
-                                <div>
                                     <i class="fa-solid fa-location-dot jobdetails-location-icon"></i>
                                 </div>
                                 <div>
                                     <p>هەڵەبجەی</p>
                                 </div>
                             </div>
-                            <div className={`jobdetails-lower-infos-content-grid isemailavailable ${companyEmail === "" ? "" : 'hide'}`}>
+                            <div className={`jobdetails-lower-infos-content-grid jobdetails-lower-infos-content-email isemailavailable ${companyEmail === "" ? "" : 'hide'}`}>
                                 <div>
                                     <i class="fa-solid fa-envelope jobdetails-email-i"></i>
                                 </div>
@@ -397,6 +389,14 @@ const Jobdetails2 = () => {
 
                 <div className='jobdetails-job-info-container'>
                     <div className='jobdetails-job-info-content'>
+                        <div className='optional-extra-info-container-content'>
+                            <div>
+                                <p>دوانزە ڕۆژ لەمەوپێش</p>
+                            </div>
+                            <div>
+                                <i class="fa-regular fa-clock jobdetails-clock-icon"></i>
+                            </div>
+                        </div>
                         <div className='optional-extra-info-container-content'>
                             <div>
                                 <p>موچە : 250 </p>
@@ -433,14 +433,28 @@ const Jobdetails2 = () => {
                 </div>
 
                 <div className='jobdetails-description-container'>
-                    <hr />
                     <div className='jobdetails-description-header'>
-                        <h3>دەربارەی ئەم کارە</h3>
+                        <h2>دەربارەی ئەم کارە</h2>
                     </div>
                     <div>
                         <p className={`jobdetails-description-p ${isEnglish ? "jobdetails-description-p-en" : "jobdetails-description-p-ku"}`}
                             dangerouslySetInnerHTML={{
-                                __html: `${description}`
+                                __html: `Full job description
+The Assistant Manager will be responsible for assisting in the oversight of gym operations to ensure exceptional “Judgement Free” member experience as well as a financially successful club.
+
+
+Essential Duties and Responsibilities
+
+Assist in recruiting, hiring, training and developing a high performing staff consisting of Member Service Representatives, Trainers and Custodians.
+Assist in maintaining a welcoming atmosphere for all members, prospective members and guests and ensuring staff follows superior customer service guidelines.
+Assist with Staff Management and provide backup support to Club Manager as needed
+Involved in all front desk related activities
+Assist in overseeing cleanliness and maintenance of facility.
+Assist in ordering of supplies using specific budget based on club requirements.
+Assist in tracking statistics and reports (weekly, monthly, and annually).
+Backup support for any employee who is absent.
+
+We are currently holding open interviews for management positions every Monday 10am-12pm at our Somerset Planet Fitness - 1135 Easton Avenue, Somerset, NJ 08873. Submit your online application so it is on file for the hiring manager, then come by our open house and meet our great team!`
                             }} style={{
                                 whiteSpace: 'pre-line',
                                 fontSize: '18px',
@@ -448,6 +462,9 @@ const Jobdetails2 = () => {
                     </div>
                     <hr />
                 </div>
+
+
+
 
                 <div>
                     {isOpen && (
@@ -514,7 +531,7 @@ const Jobdetails2 = () => {
                 </div>
                 <div className='jobdetails-recommended-jobs-container'>
                     <div className='jobdetails-recommended-jobs-title'>
-                        <h3>کاری پەیواندیدار</h3>
+                        <h2>کاری پەیواندیدار</h2>
                     </div>
 
                     <div className='jobdetails-recommendedjobs'>

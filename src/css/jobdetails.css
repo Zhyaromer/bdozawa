@@ -280,8 +280,13 @@ body {
     font-family: sans-serif;
 }
 
+.jobdetails-description-header{
+    margin-top: 50px;
+}
+
 .jobdetails-description-p {
-    padding: 0px 20px;
+    padding: 10px 20px;
+    padding-top: 25px;
 }
 
 .jobdetails-description-p-en {
@@ -446,9 +451,10 @@ hr {
 .jobdetails-recommended-jobs-title {
     text-align: center;
     color: rgb(45, 42, 42);
-    margin-top: 30px;
-    margin-bottom: 10px;
+    margin-top: 40px;
+    margin-bottom: 30px;
     font-family: sans-serif;
+    font-weight: bold;
 }
 
 .optional-extra-info-a {
@@ -494,6 +500,10 @@ hr {
     margin-bottom: -10px;
 }
 
+.jobdetails-lower-infos-content-email{
+    margin-top: -27px;
+}
+
 .isemailavailable.hide {
     display: none;
 }
@@ -511,6 +521,7 @@ hr {
     align-items: center;
     margin: 0px auto;
     margin-bottom: 30px;
+    margin-top: 30px;
     border-radius: 10px;
 }
 
@@ -542,6 +553,14 @@ hr {
     gap: 7px;
 }
 
+.jobdetails-lower-infos-content-grid p{
+    font-size: 19px;
+}
+
+.jobdetails-lower-infos-content-grid i{
+    font-size: 19px;
+}
+
 .jobdetails-lower-infos-content-grid>div {
     display: flex;
     align-items: center;
@@ -553,11 +572,11 @@ hr {
 }
 
 .jobdetails-upper-infos-content h1 {
-    font-size: 1.6rem;
+    font-size: 2rem;
 }
 
 .jobdetails-upper-infos-content p {
-    font-size: 18px;
+    font-size: 19px;
     margin-top: -10px;
     margin-bottom: -10px;
 }
@@ -596,7 +615,7 @@ hr {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 7px;
 }
 
 .optional-extra-info-container-content>div {
@@ -606,7 +625,7 @@ hr {
 
 .optional-extra-info-container-content p {
     font-size: 20px;
-    word-break: break-all;
+    margin-top: 15px;
 }
 
 .optional-extra-info-container-content i {
