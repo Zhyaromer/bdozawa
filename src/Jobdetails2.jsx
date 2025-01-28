@@ -5,6 +5,84 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaSpinner, FaExclamationCircle } from "react-icons/fa";
 import './css/jobdetails.css'
+import {
+    Briefcase, MapPin, Mail, Phone, Award,
+    DollarSign, Languages, Users, GraduationCap,
+    Book, Eye, Building2, AlertCircle, Info, Clock
+} from 'lucide-react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+
+const Card = ({ children, className = "" }) => (
+    <div className={`card ${className}`}>
+        {children}
+    </div>
+);
+
+const CardHeader = ({ children, className = "" }) => (
+    <div className={`card-header ${className}`}>
+        {children}
+    </div>
+);
+
+const CardContent = ({ children, className = "" }) => (
+    <div className={`card-body ${className}`}>
+        {children}
+    </div>
+);
+
+const IconWrapper = ({ icon, color = "#2ecc71", className = "" }) => (
+    <div
+        className={`rounded p-2 text-white ${className}`}
+        style={{ backgroundColor: color }}
+    >
+        {icon}
+    </div>
+);
+
+const Badge = ({ icon, text }) => (
+    <div className="badge bg-light bg-opacity-25 text-white d-flex align-items-center gap-2 py-2 px-3">
+        {icon}
+        <span className="fs-6">{text}</span>
+    </div>
+);
+
+const RequirementCard = ({ icon, title, value, color }) => (
+    <Card className="h-100 border">
+        <CardContent className="p-3">
+            <div className="d-flex gap-3">
+                <IconWrapper icon={icon} color={color} />
+                <div>
+                    <h3 className="text-muted small mb-1">{title}</h3>
+                    <p className="fw-semibold mb-0">{value}</p>
+                </div>
+            </div>
+        </CardContent>
+    </Card>
+);
+
+const ContactItem = ({ icon, value, color }) => (
+    <div className="card bg-light">
+        <div className="card-body p-3">
+            <div className="d-flex align-items-center gap-3">
+                <IconWrapper icon={icon} color={color} />
+                <span>{value}</span>
+            </div>
+        </div>
+    </div>
+);
+
+const Section = ({ icon, title, children, className = "" }) => (
+    <Card className={`shadow-sm ${className}`}>
+        <CardHeader className="d-flex align-items-center gap-3 bg-white border-bottom">
+            <IconWrapper icon={icon} />
+            <h2 className="h4 mb-0">{title}</h2>
+        </CardHeader>
+        <CardContent>
+            {children}
+        </CardContent>
+    </Card>
+);
 
 const Jobdetails2 = () => {
     const navigate = useNavigate();
@@ -12,10 +90,6 @@ const Jobdetails2 = () => {
     const jobId = seachParams.get('jobid');
     const [job, setJob] = useState(null);
     const [isSaved, setIsSaved] = useState(false);
-    const [likes, setLikes] = useState(0);
-    const [hasLiked, setHasLiked] = useState(false);
-    const [hasDisliked, setHasDisliked] = useState(false);
-    const [dislikes, setDisLikes] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isEnglish, setisEnglish] = useState(false);
@@ -134,152 +208,11 @@ const Jobdetails2 = () => {
             }
         };
 
-        const checkLikedStatus = async () => {
-            try {
-                const response = await axios.post("http://localhost:3500/likedjobs", { jobId }, { withCredentials: true });
-                const likes = response.data.likedjobs.map((like) => like);
-                if (likes.includes(jobId)) {
-                    setHasLiked(true);
-                } else {
-                    setHasLiked(false);
-                }
-            } catch (error) {
-                console.error("Error fetching liked jobs:", error);
-            }
-        }
-
-        const checkdisLikedStatus = async () => {
-            try {
-                const response = await axios.post("http://localhost:3500/dislikedjobs", { jobId }, { withCredentials: true });
-                const dislikes = response.data.dislikedjobs.map((dislike) => dislike);
-                if (dislikes.includes(jobId)) {
-                    setHasDisliked(true);
-                } else {
-                    setHasDisliked(false);
-                }
-            } catch (error) {
-                console.error("Error fetching liked jobs:", error);
-            }
-        }
-
         if (jobId) {
             fetchJobDetails();
             checkSavedStatus();
-            checkLikedStatus();
-            checkdisLikedStatus();
         }
     }, [jobId]);
-
-    const like = async () => {
-        try {
-            const res = await axios.post("http://localhost:3500/likedjobs", { jobId }, { withCredentials: true });
-            const likedJobs = res.data.likedjobs;
-
-            setHasLiked(likedJobs.includes(jobId)); // Update state based on response
-
-            setHasLiked((prevHasLiked) => {
-                if (!prevHasLiked) {
-                    // Like the job
-                    axios.post("http://localhost:3500/like", { jobId }, { withCredentials: true })
-                        .then((response) => {
-                            try {
-                                if (response.status === 200) {
-                                    toast.success('You liked the job', { transition: Slide });
-                                    setLikes(response.data.like);
-                                } else if (response.status === 404) {
-                                    toast.error(response.data.message || 'You must log in to like a job', { transition: Slide });
-                                }
-                            } catch (error) {
-                                console.error(error);
-                                toast.error('An error occurred while liking the job', { transition: Slide });
-                            }
-                        })
-                        .catch((error) => {
-                            console.error(error);
-                            toast.error('An error occurred while liking the job', { transition: Slide });
-                        })
-                    // Unselect dislike when liking a job
-                    setHasDisliked(false);  // Unselect dislike
-                    axios.post("http://localhost:3500/undislike", { jobId }, { withCredentials: true }) // Remove dislike
-                        .then((response) => {
-                            if (response.status === 200) {
-                                setDisLikes(response.data.dislike);
-                            } else if (response.status === 404) {
-                                toast.error(response.data.message || 'You must log in to like a job', { transition: Slide });
-                            }
-                        })
-                        .catch((error) => console.error(error));
-                } else {
-                    // Unlike the job
-                    axios.post("http://localhost:3500/unlike", { jobId }, { withCredentials: true })
-                        .then((response) => {
-                            if (response.status === 200) {
-                                setLikes(response.data.like);
-                            }
-                        })
-                        .catch((error) => console.error(error));
-                }
-                return !prevHasLiked;
-            });
-        } catch (error) {
-            console.error(error);
-            if (error.response.status === 401) {
-                toast.error('You must log in to like a job', { transition: Slide });
-            }
-        }
-    };
-
-    const disLike = async () => {
-        try {
-            const res = await axios.post("http://localhost:3500/dislikedjobs", { jobId }, { withCredentials: true });
-            const disLikedJobs = res.data.dislikedjobs;
-
-            setHasDisliked(disLikedJobs.includes(jobId)); // Update state based on response
-
-            setHasDisliked((prevHasDisliked) => {
-                if (!prevHasDisliked) {
-                    // Dislike the job
-                    axios.post("http://localhost:3500/dislike", { jobId }, { withCredentials: true })
-                        .then((response) => {
-                            if (response.status === 200) {
-                                toast.success('You disliked the job', { transition: Slide });
-                                setDisLikes(response.data.dislike);
-                            } else if (response.status === 401) {
-                                toast.error('You must log in to dislike a job', { transition: Slide });
-                            }
-                        })
-                        .catch((error) => {
-                            console.error(error);
-                            toast.error('An error occurred while disliking the job', { transition: Slide });
-                        })
-                    // Unselect like when disliking a job
-                    setHasLiked(false);  // Unselect like
-                    axios.post("http://localhost:3500/unlike", { jobId }, { withCredentials: true }) // Remove like
-                        .then((response) => {
-                            if (response.status === 200) {
-                                setLikes(response.data.like);
-                            }
-                        })
-                        .catch((error) => console.error(error));
-                } else {
-                    // Remove dislike
-                    axios.post("http://localhost:3500/undislike", { jobId }, { withCredentials: true })
-                        .then((response) => {
-                            if (response.status === 200) {
-                                setDisLikes(response.data.dislike);
-                            }
-                        })
-                        .catch((error) => console.error(error));
-                }
-                return !prevHasDisliked;
-            });
-        } catch (error) {
-            console.error(error);
-            if (error.response.status === 401) {
-                toast.error('You must log in to dislike a job', { transition: Slide });
-            }
-        }
-    };
 
     const unSaveJobs = async () => {
         try {
@@ -336,6 +269,18 @@ const Jobdetails2 = () => {
         navigate(-1);
     }
 
+    const requirements = [
+        { icon: <Award />, title: "ئەزموون", value: "شەش مانگ ئەزموون", color: "#f39c12" },
+        { icon: <GraduationCap />, title: "بڕوانامە", value: "بەکالۆریۆس", color: "#3498db" },
+        { icon: <Book />, title: "جۆری بڕوانامە", value: "پەرستاری", color: "#e74c3c" },
+        { icon: <Languages />, title: "زمانەکان", value: "کوردی، ئینگلیزی", color: "#9b59b6" }
+    ];
+
+    const contactInfo = [
+        { icon: <Mail />, value: "zhyaraland123@gmail.com", color: "#e74c3c" },
+        { icon: <Phone />, value: "7703227250", color: "#3498db" }
+    ];
+
     return (
         <div>
             <div className='jobdetails-container'>
@@ -348,165 +293,85 @@ const Jobdetails2 = () => {
                     {/* for the bg or bg color  */}
                 </div>
 
-                <div className='jobdetails-upper-infos' >
-                    <div className='jobdetails-infos-content'>
-                        <div className='jobdetails-upper-infos-content'>
-                            <h1>وەستای کارەبا</h1>
-                            <p>ڕيسوڵ باقی</p>
+                <div className="min-vh-100 py-4 px-3" dir="rtl" style={{ background: 'linear-gradient(135deg, rgba(46,204,113,0.1) 0%, rgba(39,174,96,0.1) 100%)' }}>
+                    <div className="container-xl">
+                        {/* Header Section */}
+                        <div className="card mb-4 overflow-hidden" style={{ background: 'linear-gradient(90deg, #2ecc71 0%, #27ae60 100%)' }}>
+                            <div className="px-4 py-2 d-flex justify-content-end gap-2" style={{ backgroundColor: 'rgba(0,0,0,0.1)' }}>
+                                <Badge icon={<Clock size={16} />} text="لەسەر کار" />
+                                <Badge icon={<Eye size={16} />} text="٩٢ بینراوە" />
+                            </div>
+
+                            <div className="card-body">
+                                <div className="d-flex flex-column flex-md-row gap-4">
+                                    <div className="d-flex align-items-center justify-content-center rounded p-3"
+                                        style={{
+                                            width: '80px',
+                                            height: '80px',
+                                            backgroundColor: 'rgba(255,255,255,0.2)',
+                                            backdropFilter: 'blur(8px)',
+                                            border: '4px solid rgba(255,255,255,0.3)'
+                                        }}>
+                                        <Building2 size={40} className="text-white" />
+                                    </div>
+
+                                    <div className="flex-grow-1">
+                                        <h1 className="custom-title text-white mb-2">وەستای کارەبا</h1>
+                                        <div className="text-white d-flex align-items-center gap-2 mb-3">
+                                            <Briefcase size={20} />
+                                            <span className="fs-2">رەسول</span>
+                                        </div>
+
+                                        <div className="d-flex flex-wrap gap-2">
+                                            <Badge icon={<MapPin size={18} />} text="هەڵەبجەی شەهید" />
+                                            <Badge icon={<DollarSign size={18} />} text="٥٠٠ دۆلار" />
+                                            <Badge icon={<Users size={18} />} text="هەردوو ڕەگەز" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className='jobdetails-lower-infos-content'>
-                            <div className='jobdetails-lower-infos-content-grid'>
-                                <div>
-                                    <p>2000</p>
+
+                        <div className="row g-4">
+                            <div className="col-lg-8">
+                                <div className="d-flex flex-column gap-4">
+                                    <Section icon={<AlertCircle size={24} />} title="وەسفی کار">
+                                        <p className="text-secondary description-text">
+                                            هەر ئیشێك بزانی بەسمانە بەس زیرک بێتی ئیتر گۆرانی بزانیطو سەوتی خۆس بەیتو کوردپەروەر بەیتو جلی کوردی بکات ئیتر ئەم جۆرە ستانە بکات
+                                        </p>
+                                    </Section>
+
+                                    <Section icon={<Info size={24} />} title="داواکارییەکانی کار">
+                                        <div className="row g-3">
+                                            {requirements.map((req, index) => (
+                                                <div className="col-sm-6" key={index}>
+                                                    <RequirementCard {...req} />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </Section>
                                 </div>
-                                <div>
-                                    <i class="fa-regular fa-eye jobdetails-eye-icon"></i>
-                                </div>
                             </div>
-                            <div className='jobdetails-lower-infos-content-grid'>
-                                <div>
-                                    <p>هەڵەبجەی</p>
-                                </div>
-                                <div>
-                                    <i class="fa-solid fa-location-dot jobdetails-location-icon"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='walahidk'>
-                        <div className={`jobdetails-lower-infos-content-grid jobdetails-lower-infos-content-email isemailavailable ${companyEmail === "" ? "" : 'hide'}`}>
-                            <div>
-                                <p>zhyarala4443@gmail.com</p>
-                            </div>
-                            <div>
-                                <i class="fa-solid fa-envelope jobdetails-email-i"></i>
-                            </div>
-                        </div>
-                        <div className={`jobdetails-lower-infos-content-grid optional-extra-info-container-content-whatssapp`}>
-                            <div>
-                                <a className='optional-extra-info-a' href="https://wa.me/+9647703227250/?text=http%3A%2F%2Flocalhost%3A3000%2Fjobs%2Fjobdetails%3Fjobid%3D676c81294aab377963316acd" target="_blank" rel="noreferrer"><p className='optional-extra-info-whatssapp-p'>لە وەتساپ نامە بنێرە</p></a>
-                            </div>
-                            <div>
-                                <i class="fa-brands fa-whatsapp jobdetails-whatsapp-i"></i>
+
+                            <div className="col-lg-4">
+                                <Section icon={<Phone size={24} />} title="زانیاری پەیوەندی">
+                                    <div className="d-flex flex-column gap-3">
+                                        {contactInfo.map((contact, index) => (
+                                            <ContactItem key={index} {...contact} />
+                                        ))}
+
+                                        <div className="pt-4 mt-3 border-top">
+                                            <p className="text-muted badge-text mb-0">
+                                                بڵاوکراوەتەوە لەلایەن: <span className="text-success fw-semibold">Zhyar omar</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </Section>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className='jobdetails-job-info-container'>
-                    <div className='jobdetails-job-info-content'>
-                        <div className='optional-extra-info-container-content'>
-                            <div>
-                                <p>دوانزە ڕۆژ لەمەوپێش</p>
-                            </div>
-                            <div>
-                                <i class="fa-regular fa-clock jobdetails-clock-icon"></i>
-                            </div>
-                        </div>
-                        <div className='optional-extra-info-container-content'>
-                            <div>
-                                <p>موچە : 250 </p>
-                            </div>
-                            <div>
-                                <i class="fa-solid fa-dollar-sign jobdetails-salary-i"></i>
-                            </div>
-                        </div>
-                        <div className={`optional-extra-info-container-content isemailavailable ${jobtype === "" ? "" : 'hide'}`}>
-                            <div>
-                                <p>جۆری کار : ئێنڵاین </p>
-                            </div>
-                            <div>
-                                <i class="fa-solid fa-briefcase jobdetails-jobtype-i"></i>
-                            </div>
-                        </div>
-                        <div className={`optional-extra-info-container-content isemailavailable ${degreetype === "" ? "" : 'hide'}`}>
-                            <div>
-                                <p>بواری بروانامە : ئایتی یان سی ئێس</p>
-                            </div>
-                            <div>
-                                <i class="fa-solid fa-graduation-cap jobdetails-degreetype-i"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='jobdetails-description-container'>
-                    <div className='jobdetails-description-header'>
-                        <h2>دەربارەی ئەم کارە</h2>
-                    </div>
-                    <div>
-                        <p className={`jobdetails-description-p ${isEnglish ? "jobdetails-description-p-en" : "jobdetails-description-p-ku"}`}
-                            dangerouslySetInnerHTML={{
-                                __html: `Full job description
-The Assistant Manager will be responsible for assisting in the oversight of gym operations to ensure exceptional “Judgement Free” member experience as well as a financially successful club.
-
-
-Essential Duties and Responsibilities
-
-Assist in recruiting, hiring, training and developing a high performing staff consisting of Member Service Representatives, Trainers and Custodians.
-Assist in maintaining a welcoming atmosphere for all members, prospective members and guests and ensuring staff follows superior customer service guidelines.
-Assist with Staff Management and provide backup support to Club Manager as needed
-Involved in all front desk related activities
-Assist in overseeing cleanliness and maintenance of facility.
-Assist in ordering of supplies using specific budget based on club requirements.
-Assist in tracking statistics and reports (weekly, monthly, and annually).
-Backup support for any employee who is absent.
-
-We are currently holding open interviews for management positions every Monday 10am-12pm at our Somerset Planet Fitness - 1135 Easton Avenue, Somerset, NJ 08873. Submit your online application so it is on file for the hiring manager, then come by our open house and meet our great team!`
-                            }} style={{
-                                whiteSpace: 'pre-line',
-                                fontSize: '18px',
-                            }} />
-                    </div>
-                    <hr />
-                </div>
-
-                <div>
-                    {isOpen && (
-                        <div className="popup-overlay">
-                            <div className="popup-content">
-                                <button className="close-btn" onClick={handleClose}>
-                                    <i className="fa-solid fa-xmark report-xmark"></i>
-                                </button>
-                                <br />
-                                <form>
-                                    <div className="form-group">
-                                        <label className="job-details-report-label" htmlFor="name">ناوی سیانیت بنوسە</label>
-                                        <input className="job-details-report-input" placeholder="ناوت لێرە بنوسە" type="text" id="name" required />
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="job-details-report-label" htmlFor="reason">هۆکاری ریپۆرت کردنەکەت</label>
-                                        <select id="reason" className="form-control job-details-report-dropdown" required>
-                                            <option value="">هۆکارێک هەلبژێرە</option>
-                                            <option value="Fake job">ئەم ئیشە ڕاست نیە</option>
-                                            <option value="already got an employment">کارمەندیان دەستکەوتووە</option>
-                                            <option value="Misleading Information">زانیاری چەواشەکارانە و هەڵە</option>
-                                            <option value="fake company">ئەم شوێنە بوونی نیە</option>
-                                            <option value="Duplicate Listing">ئیشی دووبارە</option>
-                                            <option value="Fake Employer">ئەم کەسە خاوەنی ئەم ئیشە نییە</option>
-                                            <option value="other">هیتر</option>
-                                        </select>
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="job-details-report-label" htmlFor="feedback">زانیاری ڕیپۆرت (ئارەزوومەندانەیە)</label>
-                                        <textarea
-                                            id="feedback"
-                                            className="form-control job-details-report-textarea"
-                                            rows="5"
-                                            placeholder="تکایە ئاگادارمان بکەرەوە بۆچی ئەم کارە ڕاپۆرت دەکەیت (بۆ نموونە، چەواشەکاری، فێڵکردن)، فیدباکەکانت یارمەتیدەرمانە بۆ باشترکردنی کوالیتی کارەکە بۆ هەمووان"
-                                            required
-                                        ></textarea>
-                                    </div>
-                                    <div className="form-group">
-                                        <button type="submit" className="btn btn-primary job-details-report-button">
-                                            ناردن
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    )}
-                </div>
                 <div className='optional-extra-info-container-2-container'>
                     <div className='optional-extra-info-container-2'>
                         <div>
@@ -582,6 +447,7 @@ We are currently holding open interviews for management positions every Monday 1
                     </div>
                     <ToastContainer position="top-center" />
                 </div>
+
                 <footer className='footer-main'>
                     <div className='footer-container'>
                         <div className='footer-main-div'>
